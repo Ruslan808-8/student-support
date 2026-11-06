@@ -12,6 +12,7 @@ import sys
 import json
 import secrets
 import time
+import threading
 import uuid
 import joblib
 from datetime import datetime, timedelta
@@ -69,6 +70,7 @@ metrics_data = {}
 
 # Global ticket counter (persisted from DB)
 ticket_counter = 100
+training_lock = threading.Lock()
 
 
 def load_artifacts():
@@ -100,6 +102,16 @@ def load_artifacts():
 
 
 load_artifacts()
+
+
+def get_live_metrics():
+    """Combine the fixed benchmark metrics with consented, labeled student examples."""
+    live_metrics = json.loads(json.dumps(metrics_data))
+    base_size = int(live_metrics.get("dataset", {}).get("total_samples", 293))
+    feedback_size = len(database.get_training_examples())
+    live_metrics.setdefault("dataset", {})["total_samples"] = base_size + feedback_size
+    live_metrics["dataset"]["verified_student_samples"] = feedback_size
+    return live_metrics
 
 
 CATEGORY_INFO = {
@@ -297,6 +309,7 @@ def index():
         "index.html",
         metrics=metrics_data,
         category_info=CATEGORY_INFO,
+        dataset_size=get_live_metrics()["dataset"]["total_samples"],
     )
 
 
@@ -334,7 +347,7 @@ def api_predict():
 
 @app.route("/api/metrics", methods=["GET"])
 def api_metrics():
-    return jsonify(metrics_data)
+    return jsonify(get_live_metrics())
 
 
 @app.route("/api/history", methods=["GET"])
@@ -360,6 +373,7 @@ def api_history_clear():
 @app.route("/api/feedback", methods=["POST"])
 def api_feedback():
     """Save student's correction for a ticket (for future model retraining)."""
+    global model_pipeline
     data = request.get_json(silent=True) or {}
     if not isinstance(data, dict):
         return jsonify({"error": "Некорректный формат запроса."}), 400
@@ -377,7 +391,24 @@ def api_feedback():
     student_id = get_student_id()
     if not database.save_feedback(student_id, ticket_id, correct_category):
         return jsonify({"error": "Обращение не найдено в вашей истории."}), 404
-    return jsonify({"status": "feedback_saved", "ticket_id": ticket_id, "correct_category": correct_category})
+
+    training_result = {"status": "not_consented"}
+    if database.ticket_is_training_opted_in(student_id, ticket_id):
+        import retrain_from_feedback
+
+        with training_lock:
+            training_result = retrain_from_feedback.retrain()
+            if training_result.get("candidate_promoted"):
+                model_pipeline = joblib.load(MODEL_PATH)
+
+    live_metrics = get_live_metrics()
+    return jsonify({
+        "status": "feedback_saved",
+        "ticket_id": ticket_id,
+        "correct_category": correct_category,
+        "dataset_size": live_metrics["dataset"]["total_samples"],
+        "training": training_result,
+    })
 
 
 @app.route("/api/stats", methods=["GET"])

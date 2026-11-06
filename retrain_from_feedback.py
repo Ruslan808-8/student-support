@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 """Train a candidate model from opt-in, user-labeled SQLite examples.
 
-Run manually with ``python retrain_from_feedback.py``. The production model is
-replaced only when the candidate does not regress on the original held-out set.
+The app calls ``retrain()`` after an opted-in ticket receives a verified label.
+The production model is replaced only when the candidate does not regress on
+the original held-out set. The script can also be run manually.
 """
 
 import json
 import os
 import re
-import sys
 from collections import Counter
 
 import joblib
@@ -95,7 +95,7 @@ def evaluate(y_true, y_pred):
     }
 
 
-def main():
+def retrain():
     database.init_db()
     if not os.path.exists(DATASET_PATH):
         raise FileNotFoundError(f"Missing base dataset: {DATASET_PATH}")
@@ -114,18 +114,15 @@ def main():
         x, y, test_size=0.2, random_state=42, stratify=y
     )
     examples, counts, total_feedback = collect_examples(x_test, x_train)
-    print("Opt-in labeled examples available by category:")
-    for category in CATEGORIES:
-        print(f"  {category}: {counts[category]}")
-
     missing = [cat for cat in CATEGORIES if counts[cat] < MIN_EXAMPLES_PER_CATEGORY]
     if missing:
-        required = ", ".join(missing)
-        print(
-            "Not enough examples to train safely. Need at least "
-            f"{MIN_EXAMPLES_PER_CATEGORY} per category; still need: {required}."
-        )
-        return 2
+        return {
+            "status": "collecting_examples",
+            "candidate_promoted": False,
+            "training_examples_used": len(examples),
+            "examples_by_category": dict(counts),
+            "minimum_per_category": MIN_EXAMPLES_PER_CATEGORY,
+        }
 
     baseline = make_pipeline()
     baseline.fit(x_train, y_train)
@@ -165,16 +162,23 @@ def main():
         temp_model_path = MODEL_PATH + ".candidate"
         joblib.dump(final_model, temp_model_path)
         os.replace(temp_model_path, MODEL_PATH)
-        print("Candidate passed the holdout check and replaced the production model.")
-    else:
-        print("Candidate did not pass the holdout check; production model was kept.")
 
     os.makedirs(os.path.dirname(REPORT_PATH), exist_ok=True)
     with open(REPORT_PATH, "w", encoding="utf-8") as report_file:
         json.dump(report, report_file, ensure_ascii=False, indent=2)
-    print(f"Retraining report saved to {REPORT_PATH}")
-    print("Restart the web app to load a newly promoted model.")
-    return 0
+    return {
+        "status": "model_updated" if accepted else "candidate_rejected",
+        "candidate_promoted": accepted,
+        "training_examples_used": len(examples),
+        "examples_by_category": dict(counts),
+        "evaluation": report["evaluation"],
+    }
+
+
+def main():
+    result = retrain()
+    print(json.dumps(result, ensure_ascii=False, indent=2))
+    return 0 if result["status"] in {"model_updated", "candidate_rejected"} else 2
 
 
 if __name__ == "__main__":

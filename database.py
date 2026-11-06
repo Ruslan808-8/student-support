@@ -165,6 +165,20 @@ def student_has_tickets(student_id: str) -> bool:
         conn.close()
 
 
+def ticket_is_training_opted_in(student_id: str, ticket_id: str) -> bool:
+    """Return whether this student's ticket was explicitly opted into training."""
+    conn = get_connection()
+    try:
+        row = conn.execute(
+            """SELECT training_opt_in FROM tickets
+               WHERE student_id = ? AND ticket_id = ? LIMIT 1""",
+            (student_id, ticket_id),
+        ).fetchone()
+        return bool(row and row["training_opt_in"])
+    finally:
+        conn.close()
+
+
 def save_feedback(student_id: str, ticket_id: str, correct_category: str) -> bool:
     """Save or update a label only when the ticket belongs to this student."""
     conn = get_connection()

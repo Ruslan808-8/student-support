@@ -237,7 +237,7 @@
                 <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
                     <div class="d-inline-flex gap-2 bg-white bg-opacity-10 p-2 rounded-3 border border-white border-opacity-25">
                         <div class="px-2 text-center">
-                            <div class="fw-bold fs-5 text-white">293</div>
+                            <div class="fw-bold fs-5 text-white" id="datasetCountHeader">{{ dataset_size }}</div>
                             <small class="text-white-50" style="font-size:0.7rem;">Датасет (RU/KK/EN)</small>
                         </div>
                         <div class="border-end border-white border-opacity-25"></div>
@@ -318,14 +318,14 @@
                                 <div class="form-check mb-3">
                                     <input class="form-check-input" type="checkbox" id="trainingOptIn">
                                     <label class="form-check-label small" for="trainingOptIn">
-                                        Разрешаю использовать это обращение для улучшения модели после моей оценки категории. В набор попадут только обращения с подтверждённой категорией.
+                                    Разрешаю использовать это обращение для обучения модели (необязательно).
                                     </label>
                                 </div>
                                 <div class="text-muted small mb-3">
-                                    Переобучение выполняется пакетно командой <code>python retrain_from_feedback.py</code> и только если качество модели не ухудшается.
+                                    Модель обновляется автоматически после подтверждения категории, если качество не ухудшается.
                                 </div>
                                 <div class="alert alert-light border py-2 px-3 mb-3 small">
-                                    Текст обращения хранится в базе SQLite и показывается в истории этого браузера. Не вводите пароли, ИИН и другие личные данные. Кнопка «Очистить» удаляет историю и оценки из базы; уже обученную модель она не меняет.
+                                    Обращение сохраняется в истории. Для обучения нужны согласие и подтверждённая категория. Не вводите личные данные.
                                 </div>
 
                                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -474,7 +474,7 @@
                                     </button>
                                 </div>
                                 <div id="feedbackSuccess" class="feedback-success d-none mt-2">
-                                    <i class="bi bi-check-circle-fill"></i> Спасибо! Подтверждённая категория сохранена.
+                                    <i class="bi bi-check-circle-fill"></i> <span id="feedbackStatusText">Спасибо! Подтверждённая категория сохранена.</span>
                                 </div>
                                 <div id="feedbackError" class="text-danger small d-none mt-2">Не удалось сохранить оценку. Попробуйте ещё раз.</div>
                             </div>
@@ -604,7 +604,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="metric-card custom-card">
-                            <div class="metric-val">293</div>
+                            <div class="metric-val" id="datasetCountMetric">{{ dataset_size }}</div>
                             <div class="metric-lbl">Деректер көлемі</div>
                         </div>
                     </div>
@@ -743,7 +743,7 @@
 
                             <h6 class="fw-bold text-primary">2. Деректер мен этика (Dataset & Safety)</h6>
                             <p class="small text-muted">
-                                Синтетикалық және ашық форматтағы 293 шынайы сұраныс жинақталды (133 қазақша, 132 орысша, 28 ағылшынша). Студенттердің құпия жеке мәліметтері (ЖСН, парольдер) деректерге қосылмаған, қауіпсіздік талаптары сақталған.
+                                Базалық деректер жиынтығында 293 мысал бар (133 қазақша, 132 орысша, 28 ағылшынша). Тексеріліп, оқытуға келісім берілген студенттік өтініштермен бірге ағымдағы көлем: <strong id="datasetCountReport">{{ dataset_size }}</strong>.
                             </p>
                         </div>
 
@@ -850,7 +850,27 @@
                 console.warn('Could not load history from DB:', err);
                 renderHistoryTable();
             }
+            refreshDatasetCount();
         });
+
+        function updateDatasetCount(count) {
+            ['datasetCountHeader', 'datasetCountMetric', 'datasetCountReport'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element && Number.isFinite(Number(count))) element.textContent = count;
+            });
+        }
+
+        async function refreshDatasetCount() {
+            try {
+                const response = await fetch('/api/metrics');
+                if (response.ok) {
+                    const metrics = await response.json();
+                    updateDatasetCount(metrics.dataset?.total_samples);
+                }
+            } catch (err) {
+                console.warn('Could not refresh dataset count:', err);
+            }
+        }
 
         function setQuery(text) {
             document.getElementById('queryText').value = text;
@@ -1024,6 +1044,8 @@
 
         async function sendFeedback(correctCategory) {
             if (!lastTicketId) return;
+            const feedbackButtons = Array.from(document.querySelectorAll('#feedbackButtons button'));
+            feedbackButtons.forEach(button => { button.disabled = true; });
 
             try {
                 const response = await fetch('/api/feedback', {
@@ -1035,12 +1057,24 @@
                     })
                 });
                 if (!response.ok) throw new Error('Feedback was rejected');
+                const data = await response.json();
+                updateDatasetCount(data.dataset_size);
+                const trainingStatus = data.training && data.training.status;
+                const statusMessages = {
+                    model_updated: 'Категория подтверждена, модель обновлена.',
+                    candidate_rejected: 'Категория записана; текущая версия модели сохранена.',
+                    collecting_examples: 'Оценка записана. Набор обучающих примеров пополняется.',
+                    not_consented: 'Оценка сохранена; без согласия она не используется для обучения.'
+                };
+                document.getElementById('feedbackStatusText').textContent =
+                    statusMessages[trainingStatus] || 'Спасибо! Категория сохранена.';
                 document.getElementById('feedbackButtons').classList.add('d-none');
                 document.getElementById('feedbackSuccess').classList.remove('d-none');
                 document.getElementById('feedbackError').classList.add('d-none');
             } catch (err) {
                 console.warn('Feedback API error:', err);
                 document.getElementById('feedbackError').classList.remove('d-none');
+                feedbackButtons.forEach(button => { button.disabled = false; });
             }
         }
 
