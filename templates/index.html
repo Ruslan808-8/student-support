@@ -168,6 +168,29 @@
             color: #166534;
         }
 
+        .feedback-section {
+            border-top: 1px dashed #e2e8f0;
+            padding-top: 0.75rem;
+            margin-top: 0.75rem;
+        }
+
+        .feedback-btn {
+            font-size: 0.78rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 1rem;
+        }
+
+        .feedback-success {
+            color: #059669;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .db-badge {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+        }
+
         footer {
             margin-top: auto;
             background: white;
@@ -189,6 +212,9 @@
                 <span class="badge badge-qairu text-uppercase">ICT1103 · QAIRU</span>
             </a>
             <div class="ms-auto d-flex align-items-center gap-2">
+                <span class="badge bg-info-subtle text-info border border-info-subtle db-badge d-flex align-items-center gap-1">
+                    <i class="bi bi-database-fill"></i> SQLite DB
+                </span>
                 <span class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1.5 d-flex align-items-center gap-1">
                     <span class="spinner-grow spinner-grow-sm text-success" style="width: 0.5rem; height: 0.5rem;"></span>
                     TF-IDF + LogReg Model Live
@@ -283,9 +309,23 @@
                                         id="queryText" 
                                         class="form-control" 
                                         rows="4" 
+                                        maxlength="2000"
                                         placeholder="Студент сұрағын осында жазыңыз... Мысалы: «LMS-те зертханалық бағасы көрінбей тұр» немесе «Где получить справку с места учебы?»" 
                                         required
                                         style="border-radius: 0.75rem; font-size: 0.95rem; resize: vertical;"></textarea>
+                                </div>
+
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="trainingOptIn">
+                                    <label class="form-check-label small" for="trainingOptIn">
+                                        Разрешаю использовать это обращение для улучшения модели после моей оценки категории. В набор попадут только обращения с подтверждённой категорией.
+                                    </label>
+                                </div>
+                                <div class="text-muted small mb-3">
+                                    Переобучение выполняется пакетно командой <code>python retrain_from_feedback.py</code> и только если качество модели не ухудшается.
+                                </div>
+                                <div class="alert alert-light border py-2 px-3 mb-3 small">
+                                    Текст обращения хранится в базе SQLite и показывается в истории этого браузера. Не вводите пароли, ИИН и другие личные данные. Кнопка «Очистить» удаляет историю и оценки из базы; уже обученную модель она не меняет.
                                 </div>
 
                                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -405,9 +445,38 @@
                             </div>
 
                             <!-- Routing Recommendation -->
-                            <div class="alert alert-info py-2 px-3 mb-0 small rounded-3">
+                            <div class="alert alert-info py-2 px-3 mb-3 small rounded-3">
                                 <i class="bi bi-signpost-2-fill me-1"></i>
                                 <strong>Маршрутизация:</strong> Сұраныс автоматты түрде жауапты бөлімнің жұмыс тақтасына бағытталды.
+                            </div>
+
+                            <!-- Feedback Section -->
+                            <div class="feedback-section" id="feedbackSection">
+                                <div class="d-flex align-items-center gap-2 mb-2">
+                                    <i class="bi bi-chat-square-heart text-muted"></i>
+                                    <small class="fw-bold text-muted">Жауап дұрыс па? / Ответ верный?</small>
+                                </div>
+                                <div id="feedbackButtons" class="d-flex flex-wrap gap-1">
+                                    <button class="btn btn-outline-success feedback-btn" onclick="sendFeedback(lastTicketCategory)">
+                                        <i class="bi bi-hand-thumbs-up-fill"></i> Дұрыс
+                                    </button>
+                                    <button class="btn btn-outline-primary feedback-btn" onclick="sendFeedback('academic')">
+                                        <i class="bi bi-mortarboard-fill"></i> Academic
+                                    </button>
+                                    <button class="btn btn-outline-success feedback-btn" onclick="sendFeedback('docs')">
+                                        <i class="bi bi-file-earmark-text-fill"></i> Docs
+                                    </button>
+                                    <button class="btn btn-outline-warning feedback-btn" onclick="sendFeedback('finance')">
+                                        <i class="bi bi-credit-card-fill"></i> Finance
+                                    </button>
+                                    <button class="btn btn-outline-danger feedback-btn" onclick="sendFeedback('tech_support')">
+                                        <i class="bi bi-hdd-network-fill"></i> Tech
+                                    </button>
+                                </div>
+                                <div id="feedbackSuccess" class="feedback-success d-none mt-2">
+                                    <i class="bi bi-check-circle-fill"></i> Спасибо! Подтверждённая категория сохранена.
+                                </div>
+                                <div id="feedbackError" class="text-danger small d-none mt-2">Не удалось сохранить оценку. Попробуйте ещё раз.</div>
                             </div>
                         </div>
                     </div>
@@ -698,9 +767,12 @@
                 <div class="custom-card p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h5 class="fw-bold mb-0">
-                            <i class="bi bi-clock-history text-primary me-2"></i>Өтініштер журналы (Session Audit Log)
+                            <i class="bi bi-clock-history text-primary me-2"></i>Өтініштер журналы (Persistent History)
                         </h5>
-                        <div class="d-flex gap-2">
+                        <div class="d-flex gap-2 align-items-center">
+                            <span class="badge bg-info-subtle text-info border db-badge">
+                                <i class="bi bi-cookie"></i> Cookie-based
+                            </span>
                             <button class="btn btn-outline-primary btn-sm" onclick="exportHistoryCSV()">
                                 <i class="bi bi-download"></i> CSV Экспорт
                             </button>
@@ -709,6 +781,10 @@
                             </button>
                         </div>
                     </div>
+                    <p class="text-muted small mb-3">
+                        <i class="bi bi-info-circle me-1"></i>
+                        Обращения сохраняются в SQLite и привязаны к подписанному cookie этого браузера. Кнопка «Очистить» удалит историю и оценки для обучения.
+                    </p>
                     <div class="table-responsive">
                         <table class="table table-hover align-middle small" id="historyTable">
                             <thead class="table-light">
@@ -725,7 +801,7 @@
                             <tbody id="historyTableBody">
                                 <tr>
                                     <td colspan="7" class="text-center text-muted py-4">
-                                        Әзірге өтініштер тіркелмеген. Сынау үшін бірнеше сұрақ енгізіңіз!
+                                        <span class="spinner-border spinner-border-sm me-1"></span> Жүктелуде... / Загрузка...
                                     </td>
                                 </tr>
                             </tbody>
@@ -745,7 +821,7 @@
                     <strong>student-support</strong> · QAIRU (2026–2027) · ICT1103
                 </div>
                 <div class="text-muted small">
-                    TF-IDF Vectorizer + Logistic Regression · REST API: <code>/api/predict</code>
+                    TF-IDF Vectorizer + Logistic Regression · REST API: <code>/api/predict</code> · SQLite + Cookies
                 </div>
             </div>
         </div>
@@ -757,6 +833,24 @@
     <!-- Custom Frontend JavaScript -->
     <script>
         let sessionTickets = [];
+        let lastTicketId = null;  // Track last classified ticket for feedback
+        let lastTicketCategory = null;
+
+        // On page load: fetch history from DB (cookie-scoped)
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const res = await fetch('/api/history');
+                if (res.ok) {
+                    const data = await res.json();
+                    sessionTickets = data.tickets || [];
+                    document.getElementById('historyCount').innerText = sessionTickets.length;
+                    renderHistoryTable();
+                }
+            } catch (err) {
+                console.warn('Could not load history from DB:', err);
+                renderHistoryTable();
+            }
+        });
 
         function setQuery(text) {
             document.getElementById('queryText').value = text;
@@ -781,7 +875,10 @@
                 const response = await fetch('/api/predict', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ text: query })
+                    body: JSON.stringify({
+                        text: query,
+                        training_opt_in: document.getElementById('trainingOptIn').checked
+                    })
                 });
 
                 if (!response.ok) {
@@ -791,6 +888,14 @@
                 const data = await response.json();
                 displayResult(data);
                 addTicketToHistory(data);
+                lastTicketId = data.id;
+                lastTicketCategory = data.category;
+                document.getElementById('trainingOptIn').checked = false;
+
+                // Reset feedback UI
+                document.getElementById('feedbackButtons').classList.remove('d-none');
+                document.getElementById('feedbackSuccess').classList.add('d-none');
+                document.getElementById('feedbackError').classList.add('d-none');
             } catch (err) {
                 alert('Өтінішті өңдеу кезінде қате орын алды: ' + err.message);
             } finally {
@@ -852,29 +957,91 @@
 
         function renderHistoryTable() {
             const tbody = document.getElementById('historyTableBody');
+            tbody.replaceChildren();
             if (sessionTickets.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="text-center text-muted py-4">Журнал бос.</td></tr>`;
+                const row = document.createElement('tr');
+                const cell = document.createElement('td');
+                cell.colSpan = 7;
+                cell.className = 'text-center text-muted py-4';
+                cell.textContent = 'Журнал пуст. Введите обращение, чтобы начать.';
+                row.appendChild(cell);
+                tbody.appendChild(row);
                 return;
             }
 
-            tbody.innerHTML = sessionTickets.map(t => `
-                <tr>
-                    <td class="fw-bold">${t.id}</td>
-                    <td class="text-muted">${t.timestamp}</td>
-                    <td style="max-width: 280px;" class="text-truncate" title="${t.text}">${t.text}</td>
-                    <td><span class="badge bg-${t.badge}">${t.category}</span></td>
-                    <td><span class="badge bg-${t.priority_badge}">${t.priority}</span></td>
-                    <td class="fw-bold">${t.confidence}%</td>
-                    <td><span class="badge bg-light text-dark border">${t.language.toUpperCase()}</span></td>
-                </tr>
-            `).join('');
+            sessionTickets.forEach(t => {
+                const badgeClass = {academic:'primary', docs:'success', finance:'warning', tech_support:'danger'}[t.category] || 'secondary';
+                const priorityBadge = {high:'danger', medium:'info', low:'secondary'}[t.priority] || 'secondary';
+                const row = document.createElement('tr');
+                const addCell = (value, className = '') => {
+                    const cell = document.createElement('td');
+                    cell.className = className;
+                    cell.textContent = value == null ? '' : String(value);
+                    row.appendChild(cell);
+                    return cell;
+                };
+                addCell(t.id, 'fw-bold');
+                addCell(t.timestamp, 'text-muted');
+                const textCell = addCell(t.text);
+                textCell.style.maxWidth = '280px';
+                textCell.classList.add('text-truncate');
+                textCell.title = t.text || '';
+                const categoryCell = addCell('');
+                const categoryBadge = document.createElement('span');
+                categoryBadge.className = `badge bg-${badgeClass}`;
+                categoryBadge.textContent = t.category;
+                categoryCell.appendChild(categoryBadge);
+                const priorityCell = addCell('');
+                const priorityBadgeElement = document.createElement('span');
+                priorityBadgeElement.className = `badge bg-${priorityBadge}`;
+                priorityBadgeElement.textContent = t.priority;
+                priorityCell.appendChild(priorityBadgeElement);
+                addCell(`${t.confidence}%`, 'fw-bold');
+                const languageCell = addCell('');
+                const languageBadge = document.createElement('span');
+                languageBadge.className = 'badge bg-light text-dark border';
+                languageBadge.textContent = String(t.language || '').toUpperCase();
+                languageCell.appendChild(languageBadge);
+                tbody.appendChild(row);
+            });
         }
 
-        function clearHistory() {
+        async function clearHistory() {
+            if (!confirm('Барлық тарихты өшіру керек пе? / Удалить всю историю?')) return;
             sessionTickets = [];
+            lastTicketId = null;
+            lastTicketCategory = null;
+            document.getElementById('feedbackButtons').classList.add('d-none');
+            document.getElementById('feedbackSuccess').classList.add('d-none');
             document.getElementById('historyCount').innerText = 0;
             renderHistoryTable();
-            fetch('/api/history/clear', { method: 'POST' });
+            try {
+                await fetch('/api/history/clear', { method: 'POST' });
+            } catch (err) {
+                console.warn('Clear history API error:', err);
+            }
+        }
+
+        async function sendFeedback(correctCategory) {
+            if (!lastTicketId) return;
+
+            try {
+                const response = await fetch('/api/feedback', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        ticket_id: lastTicketId,
+                        correct_category: correctCategory
+                    })
+                });
+                if (!response.ok) throw new Error('Feedback was rejected');
+                document.getElementById('feedbackButtons').classList.add('d-none');
+                document.getElementById('feedbackSuccess').classList.remove('d-none');
+                document.getElementById('feedbackError').classList.add('d-none');
+            } catch (err) {
+                console.warn('Feedback API error:', err);
+                document.getElementById('feedbackError').classList.remove('d-none');
+            }
         }
 
         function exportHistoryCSV() {
@@ -882,10 +1049,15 @@
                 alert('Журнал бос, экспорттайтын дерек жоқ.');
                 return;
             }
+            const csvField = value => {
+                let safeValue = String(value == null ? '' : value);
+                if (/^[=+\-@]/.test(safeValue)) safeValue = "'" + safeValue;
+                return '"' + safeValue.replace(/"/g, '""') + '"';
+            };
             let csv = "ID,Timestamp,Text,Category,Priority,Confidence,Language\n";
             sessionTickets.forEach(t => {
-                const escapedText = '"' + t.text.replace(/"/g, '""') + '"';
-                csv += `${t.id},${t.timestamp},${escapedText},${t.category},${t.priority},${t.confidence}%,${t.language}\n`;
+                csv += [t.id, t.timestamp, t.text, t.category, t.priority,
+                    `${t.confidence}%`, t.language].map(csvField).join(',') + '\n';
             });
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const url = URL.createObjectURL(blob);
