@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Student Desk · Сортировщик обращений (ICT1103 QAIRU)</title>
+    <title>student-support · Сервис поддержки студентов (ICT1103 QAIRU)</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -168,23 +168,6 @@
             color: #166534;
         }
 
-        .code-box {
-            background: #0f172a;
-            color: #e2e8f0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            border-radius: 0.75rem;
-            padding: 1rem;
-            overflow-x: auto;
-        }
-
-        .lang-badge {
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 0.25rem 0.6rem;
-            border-radius: 1rem;
-        }
-
         footer {
             margin-top: auto;
             background: white;
@@ -201,27 +184,15 @@
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0f172a;">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="#">
-                <i class="bi bi-robot text-primary fs-4"></i>
-                <span>Smart Student Desk</span>
+                <i class="bi bi-headset text-primary fs-4"></i>
+                <span>student-support</span>
                 <span class="badge badge-qairu text-uppercase">ICT1103 · QAIRU</span>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navContent">
-                <ul class="navbar-nav ms-auto align-items-center gap-2">
-                    <li class="nav-item">
-                        <span class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1.5 d-flex align-items-center gap-1">
-                            <span class="spinner-grow spinner-grow-sm text-success" style="width: 0.5rem; height: 0.5rem;"></span>
-                            TF-IDF + LogReg Model Live
-                        </span>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-sm btn-outline-light d-flex align-items-center gap-1" href="#rubricModal" data-bs-toggle="modal">
-                            <i class="bi bi-file-earmark-check"></i> 30 Балл Критерийлері
-                        </a>
-                    </li>
-                </ul>
+            <div class="ms-auto d-flex align-items-center gap-2">
+                <span class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1.5 d-flex align-items-center gap-1">
+                    <span class="spinner-grow spinner-grow-sm text-success" style="width: 0.5rem; height: 0.5rem;"></span>
+                    TF-IDF + LogReg Model Live
+                </span>
             </div>
         </div>
     </nav>
@@ -231,8 +202,8 @@
         <div class="container position-relative">
             <div class="row align-items-center">
                 <div class="col-lg-8">
-                    <span class="badge bg-white text-primary fw-bold px-3 py-1 mb-2">7-я неделя: NLP & Текст · Топтық Жоба</span>
-                    <h1 class="display-6 fw-bold mb-2">Сортировщик обращений студентов</h1>
+                    <span class="badge bg-white text-primary fw-bold px-3 py-1 mb-2">NLP & Текст · Студенттік сервис</span>
+                    <h1 class="display-6 fw-bold mb-2">student-support</h1>
                     <p class="lead mb-0 text-white-50 fs-6">
                         Автоматическая классификация студенческих заявок по 4 направлениям (Деканат, СҚКО/ЦОС, Финансы, IT Helpdesk) с определением приоритета и маршрутизацией.
                     </p>
@@ -281,7 +252,7 @@
             </li>
             <li class="nav-item">
                 <button class="nav-link d-flex align-items-center gap-2" data-bs-toggle="pill" data-bs-target="#tab-report">
-                    <i class="bi bi-journal-text"></i> Есеп (Отчет) & Жеке үлес
+                    <i class="bi bi-journal-text"></i> Жоба туралы (About)
                 </button>
             </li>
             <li class="nav-item">
@@ -362,7 +333,7 @@
                     <!-- Right Column: Result Card -->
                     <div class="col-lg-5">
                         <div id="resultPlaceholder" class="custom-card p-4 text-center h-100 d-flex flex-column justify-content-center align-items-center text-muted">
-                            <i class="bi bi-arrow-left-circle display-4 mb-2 text-primary opacity-50"></i>
+                            <i class="bi bi-headset display-4 mb-2 text-primary opacity-50"></i>
                             <h6 class="fw-bold">Нәтиже осында шығады</h6>
                             <p class="small mb-0">Сол жақтағы формаға сұрақ жазыңыз немесе мысал батырмасын басыңыз.</p>
                         </div>
@@ -436,7 +407,7 @@
                             <!-- Routing Recommendation -->
                             <div class="alert alert-info py-2 px-3 mb-0 small rounded-3">
                                 <i class="bi bi-signpost-2-fill me-1"></i>
-                                <strong>Маршрутизация:</strong> Сұраныс автоматты түрде жауапты бөлімнің канбан тақтасына бағытталды.
+                                <strong>Маршрутизация:</strong> Сұраныс автоматты түрде жауапты бөлімнің жұмыс тақтасына бағытталды.
                             </div>
                         </div>
                     </div>
@@ -683,14 +654,14 @@
                 </div>
             </div>
 
-            <!-- TAB 4: REPORT & TEAM CONTRIBUTIONS -->
+            <!-- TAB 4: REPORT -->
             <div class="tab-pane fade" id="tab-report" role="tabpanel">
                 <div class="custom-card p-4 mb-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h5 class="fw-bold mb-0">
                             <i class="bi bi-file-earmark-text text-primary me-2"></i>Жобаның Қысқа Есебі (Project Executive Report)
                         </h5>
-                        <span class="badge bg-primary-subtle text-primary border">2-аралық бақылау (Midterm 2)</span>
+                        <span class="badge bg-primary-subtle text-primary border">student-support</span>
                     </div>
 
                     <div class="row g-4">
@@ -718,68 +689,6 @@
                                 Stratified 80/20 train/test бөлінісінде 84.75% дәлдік және 0.846 F1 көрсеткішіне қол жеткізілді. 3 негізгі тексеру кейсі 100% сәтті орындалды.
                             </p>
                         </div>
-                    </div>
-
-                    <!-- Team Contribution Table -->
-                    <hr class="my-4">
-                    <h5 class="fw-bold mb-3 text-dark">
-                        <i class="bi bi-people-fill text-success me-2"></i>Команда құрамы және жеке үлес журналы (Team Contribution)
-                    </h5>
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover align-middle small">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Студент (Аты-жөні)</th>
-                                    <th>Атқарған рөлі</th>
-                                    <th>Орындалған нақты жұмыс</th>
-                                    <th>Тексерілетін дәлел (Файл / Функция)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="fw-bold">Студент 1 (Team Lead)</td>
-                                    <td>Жоба архитектурасы & ML</td>
-                                    <td>TF-IDF векторлау, FeatureUnion және Logistic Regression моделін баптау</td>
-                                    <td><code>train_model.py</code>, <code>build_vectorizer()</code></td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold">Студент 2</td>
-                                    <td>Деректер сарапшысы</td>
-                                    <td>Синтетикалық 293 үштілді датасетті жинақтау, тазалау, теңгерімдеу</td>
-                                    <td><code>data/dataset.csv</code>, <code>build_dataset.py</code></td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold">Студент 3</td>
-                                    <td>Backend & API әзірлеуші</td>
-                                    <td>Flask REST API, маршрутизация және басымдық (priority) алгоритмі</td>
-                                    <td><code>app.py</code>, <code>/api/predict</code></td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold">Студент 4</td>
-                                    <td>Frontend & UI әзірлеуші</td>
-                                    <td>Интерактивті веб-интерфейс, нәтижелер карточкасы және матрица кестесі</td>
-                                    <td><code>templates/index.html</code>, <code>static/app.js</code></td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold">Студент 5</td>
-                                    <td>Тестілеу & QA сарапшысы</td>
-                                    <td>3 тест-кейсті тексеру, қате жағдайды (Error case) және шектеулерді талдау</td>
-                                    <td><code>models/metrics.json</code>, Error Case Test</td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold">Студент 6</td>
-                                    <td>Құжаттама & Презентация</td>
-                                    <td>README нұсқаулығы, слайд мазмұны және деплой нұсқаулығын дайындау</td>
-                                    <td><code>README.md</code>, <code>presentation_slides.md</code></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- AI Usage Declaration -->
-                    <div class="alert alert-secondary p-3 mt-3 rounded-3 small">
-                        <strong>Жасанды Интеллект Декларациясы (AI-3 деңгейі):</strong><br>
-                        Жобаны дайындау барысында Antigravity / Gemini көмекшісі синтетикалық өтініш үлгілерін құрастыруға және веб-код интерфейсін оңтайландыруға қолданылды. Барлық таңдалған алгоритмдер, деректерді тексеру, қателерді талдау және тест нәтижелері команда мүшелерімен жеке тексеріліп, негізделді. Қорғау кезінде генеративті ЖИ қолданылмайды (AI-0).
                     </div>
                 </div>
             </div>
@@ -828,71 +737,12 @@
         </div>
     </main>
 
-    <!-- Rubric Modal -->
-    <div class="modal fade" id="rubricModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content" style="border-radius: 1rem;">
-                <div class="modal-header bg-dark text-white">
-                    <h5 class="modal-title fw-bold">
-                        <i class="bi bi-award-fill text-warning me-2"></i>ICT1103 Бағалау Критерийлері (30 балл)
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body small">
-                    <div class="table-responsive">
-                        <table class="table table-bordered align-middle">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Критерий</th>
-                                    <th>Макс балл</th>
-                                    <th>Біздің жобада орындалуы</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>1. Мәселе, пайдаланушы және пән тақырыбы</strong></td>
-                                    <td><span class="badge bg-primary">3 балл</span></td>
-                                    <td>Деканат пен техподдержканың жүктемесін азайту, студент өтініштерін автоматты сұрыптау толық жазылған.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>2. Деректер, дереккөздер және қауіпсіздік</strong></td>
-                                    <td><span class="badge bg-primary">3 балл</span></td>
-                                    <td>293 үштілді синтетикалық жазба, қауіпсіздік пен этика сақталған, жеке құпия дерек жоқ.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>3. Жұмыс істейтін прототип және әдістің негізділігі</strong></td>
-                                    <td><span class="badge bg-primary">7 балл</span></td>
-                                    <td>TF-IDF + Logistic Regression, Naive Bayes және Linear SVM салыстыруы, жұмыс істеп тұрған веб-интерфейс & REST API.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>4. Нәтижені тексеру, сапаны түсіндіру және шектеулер</strong></td>
-                                    <td><span class="badge bg-primary">5 балл</span></td>
-                                    <td>Accuracy (84.8%), F1 (0.846), 4x4 қателер матрицасы, 3 тест-кейс, қате жағдайды және шектеулерді талдау.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>5. Құжаттама және қайта іске қосу</strong></td>
-                                    <td><span class="badge bg-primary">2 балл</span></td>
-                                    <td>Қадамдық нұсқаулық, requirements.txt, есеп және слайдтар дайын.</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>6. Дәлелденген жеке үлес & жеке қорғау</strong></td>
-                                    <td><span class="badge bg-primary">10 балл</span></td>
-                                    <td>Әр студенттің жеке үлес кестесі және код бөліктері негізделген.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Footer -->
     <footer>
         <div class="container text-center">
             <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
                 <div>
-                    <strong>Smart Student Desk</strong> · QAIRU (2026–2027) · ICT1103 Топтық жоба
+                    <strong>student-support</strong> · QAIRU (2026–2027) · ICT1103
                 </div>
                 <div class="text-muted small">
                     TF-IDF Vectorizer + Logistic Regression · REST API: <code>/api/predict</code>
@@ -1041,7 +891,7 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `student_desk_tickets_${Date.now()}.csv`;
+            a.download = `student_support_tickets_${Date.now()}.csv`;
             a.click();
         }
     </script>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Smart Student Desk - Web Application & REST API (Flask)
+student-support - Web Application & REST API (Flask)
 Course: ICT1103 · QAIRU · 2026–2027 (Midterm 2: Group Project)
 Classifies student requests into 4 departments using TF-IDF + Logistic Regression,
 determines priority, SLA, department routing, and surfaces analytics & confusion matrix.
@@ -256,12 +256,12 @@ def api_history_clear():
 def health():
     return jsonify({
         "status": "healthy",
-        "service": "Smart Student Desk",
+        "service": "student-support",
         "model_loaded": model_pipeline is not None,
         "timestamp": datetime.now().isoformat()
     })
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    print(f"[*] Starting Smart Student Desk Server on http://0.0.0.0:{port}")
+    print(f"[*] Starting student-support Server on http://0.0.0.0:{port}")
     app.run(host="0.0.0.0", port=port, debug=False)

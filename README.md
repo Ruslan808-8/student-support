@@ -1,9 +1,8 @@
-# 🎓 Smart Student Desk: Сортировщик обращений студентов (NLP & Текст)
+# 🎧 student-support: Сортировщик обращений студентов (NLP & Текст)
 
 **Курс:** ICT1103 · QAIRU · 2026–2027  
 **Бақылау кезеңі:** 2-аралық бақылау (Midterm 2): Топтық жоба  
 **Тақырып бағыты:** 7-апта: Мәтінді өңдеу және табиғи тілді өңдеу (NLP)  
-**Команда:** 4–6 студент (Жеке үлес кестесі төменде көрсетілген)  
 
 ---
 
@@ -130,50 +129,21 @@ python app.py
 ### А нұсқасы: Render.com арқылы тегін 24/7 жариялау (Ұсынылады):
 1. Осы папкадағы кодты өз GitHub репозиторийіңізге жүктеңіз:
    ```bash
-   git init
    git add .
-   git commit -m "Smart Student Desk initial release"
-   git branch -M main
-   git remote add origin https://github.com/<your-username>/smart-student-desk.git
-   git push -u origin main
+   git commit -m "Update student-support project"
+   git push origin main
    ```
 2. **https://render.com** сайтына кіріп, **New -> Web Service** батырмасын басыңыз.
-3. GitHub репозиторийіңізді таңдаңыз:
+3. GitHub репозиторийіңізді (`student-support`) таңдаңыз:
    * **Runtime:** `Python 3`
    * **Build Command:** `pip install -r requirements.txt && python train_model.py`
    * **Start Command:** `python app.py`
-4. **Deploy Web Service** басыңыз. 2 минутта сізге университетке көрсетуге болатын дайын сілтеме беріледі:  
-   `https://smart-student-desk.onrender.com`
+4. **Deploy Web Service** басыңыз. 2 минутта дайын сілтеме беріледі:  
+   `https://student-support.onrender.com`
 
-### Б нұсқасы: Қорғау кезінде лезде тікелей сілтеме ашу (Cloudflare / LocalTunnel):
+### Б нұсқасы: Қорғау кезінде лезде тікелей сілтеме ашу (LocalTunnel):
 Компьютеріңізде жұмыс істеп тұрған серверді интернетке ашу үшін:
 ```bash
 npx localtunnel --port 5000
 ```
-Сілтеме автоматты түрде пайда болады және комиссияға смартфоннан да ашып көрсетуге болады!
-
----
-
-## 👥 7. Команда құрамы және жеке үлес журналы (Team Contributions)
-
-Силлабус талаптарына (5 баллдық жеке үлес) сәйкес әр студенттің нақты атқарған қызметі:
-
-| № | Студент (Аты-жөні) | Рөлі | Атқарған нақты қызметі | Тексерілетін дәлел (Код / Файл) |
-|---|---|---|---|---|
-| 1 | **Студент 1 (Team Lead)** | ML Engineer | TF-IDF векторлау, FeatureUnion және Logistic Regression моделін баптау | [`train_model.py`](train_model.py), `build_vectorizer()` |
-| 2 | **Студент 2** | Data Specialist | 293 үлгіден тұратын үштілді синтетикалық датасетті жинау және тазалау | [`data/dataset.csv`](data/dataset.csv), [`data/build_dataset.py`](data/build_dataset.py) |
-| 3 | **Студент 3** | Backend Developer | Flask веб-сервері, `/api/predict` REST API және басымдық (Priority) алгоритмі | [`app.py`](app.py), `determine_priority()` |
-| 4 | **Студент 4** | Frontend Developer | Bootstrap 5 негізіндегі мобильді веб-интерфейс, нәтижелер карточкасы | [`templates/index.html`](templates/index.html) |
-| 5 | **Студент 5** | QA & Evaluation | 3 тест-кейсті тексеру, қате жағдайын (Error case) және шектеулерді талдау | [`test_app.py`](test_app.py), [`models/metrics.json`](models/metrics.json) |
-| 6 | **Студент 6** | Documentation | Жоба есебі (Report), README және қорғауға арналған 7 слайд тезисі | [`README.md`](README.md), [`presentation_slides.md`](presentation_slides.md) |
-
----
-
-## 🤖 8. Жасанды Интеллект Қолдану Декларациясы (AI Declaration)
-
-* **Деңгейі:** **AI-3 (ЖИ-мен бірлесіп жұмыс істеу)**
-* **Құралдар:** Google DeepMind Gemini / Antigravity көмекшісі.
-* **Мақсаты:** Синтетикалық студенттік өтініштердің сөздік қорын байыту, веб-дизайн компоненттерін үйлестіру.
-* **Алынған бөліктер:** Базалық HTML карточкалары және мәтін үлгілері.
-* **Жеке тексеру:** Датасеттің балансы қолмен тексерілді, барлық ML метрикалар мен 4x4 матрица `scikit-learn` арқылы нөлден есептелді, қате жағдайы мен жүйе шектеулері дербес талданды.
-* **Қорғау тәртібі:** **AI-0** (Қорғау сабағында генеративті ЖИ қолданылмайды, әр қатысушы өз сұрағына жеке жауап береді).
+Сілтеме автоматты түрде пайда болады және оны смартфоннан да ашып көрсетуге болады.
