@@ -15,83 +15,106 @@
 
     <style>
         /* =========================================================
-           MODERN THEME VARIABLES & AURORA GRADIENTS
+           VIBRANT CYBER-GLASS PALETTE & TEXTURES
            ========================================================= */
         :root {
             --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
 
-            /* Category Identity Colors */
-            --cat-academic: #3b82f6;
-            --cat-academic-glow: rgba(59, 130, 246, 0.45);
-            --cat-docs: #10b981;
-            --cat-docs-glow: rgba(16, 185, 129, 0.45);
-            --cat-finance: #f59e0b;
-            --cat-finance-glow: rgba(245, 158, 11, 0.45);
-            --cat-tech: #ef4444;
-            --cat-tech-glow: rgba(239, 68, 68, 0.45);
+            /* Vibrant Department Colors with High Contrast */
+            --cat-academic: #38bdf8;        /* Sky Blue */
+            --cat-academic-dark: #0284c7;
+            --cat-academic-glow: rgba(56, 189, 248, 0.4);
+
+            --cat-docs: #34d399;            /* Mint Emerald */
+            --cat-docs-dark: #059669;
+            --cat-docs-glow: rgba(52, 211, 153, 0.4);
+
+            --cat-finance: #fbbf24;         /* Radiant Amber */
+            --cat-finance-dark: #d97706;
+            --cat-finance-glow: rgba(251, 191, 36, 0.4);
+
+            --cat-tech: #fb7185;            /* Rose Crimson */
+            --cat-tech-dark: #e11d48;
+            --cat-tech-glow: rgba(251, 113, 133, 0.4);
 
             /* Transitions */
-            --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            --transition-bounce: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --transition-smooth: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-bounce: all 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        /* Dark Mode (Default) */
+        /* Dark Mode (Default: Deep Tech Obsidian) */
         [data-theme="dark"] {
-            --bg-base: #090d16;
-            --bg-elevated: rgba(17, 24, 39, 0.72);
-            --bg-card: rgba(15, 23, 42, 0.78);
-            --bg-card-hover: rgba(30, 41, 59, 0.85);
-            --bg-input: rgba(15, 23, 42, 0.9);
-            --border-glass: rgba(255, 255, 255, 0.08);
-            --border-glass-hover: rgba(255, 255, 255, 0.18);
-            --border-glow: rgba(59, 130, 246, 0.3);
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --nav-bg: rgba(9, 13, 22, 0.82);
-            --hero-gradient: linear-gradient(135deg, rgba(30, 58, 138, 0.35) 0%, rgba(88, 28, 135, 0.25) 50%, rgba(15, 23, 42, 0.6) 100%);
-            --aurora-1: rgba(59, 130, 246, 0.15);
-            --aurora-2: rgba(168, 85, 247, 0.12);
-            --aurora-3: rgba(16, 185, 129, 0.1);
-            --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.05);
-            --card-shadow-hover: 0 20px 40px -12px rgba(0, 0, 0, 0.7), 0 0 20px rgba(59, 130, 246, 0.2);
-            --sample-pill-bg: rgba(30, 41, 59, 0.7);
-            --sample-pill-border: rgba(255, 255, 255, 0.08);
-            --sample-pill-hover: rgba(59, 130, 246, 0.18);
-            --table-hover-bg: rgba(30, 41, 59, 0.5);
+            --bg-base: #060911;
+            --bg-elevated: rgba(15, 23, 42, 0.7);
+            --bg-card: rgba(13, 20, 36, 0.65);
+            --bg-card-solid: #0d1424;
+            --bg-card-hover: rgba(26, 38, 66, 0.85);
+            --bg-input: rgba(10, 15, 29, 0.85);
+
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --border-glass-hover: rgba(255, 255, 255, 0.22);
+            --border-glow: rgba(56, 189, 248, 0.35);
+
+            --text-title: #ffffff;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #8492a6;
+
+            --nav-bg: rgba(6, 9, 17, 0.78);
+            --hero-gradient: linear-gradient(135deg, rgba(14, 34, 77, 0.4) 0%, rgba(49, 16, 82, 0.35) 50%, rgba(6, 9, 17, 0.7) 100%);
+
+            --aurora-1: rgba(56, 189, 248, 0.16);
+            --aurora-2: rgba(168, 85, 247, 0.14);
+            --aurora-3: rgba(52, 211, 153, 0.12);
+
+            --card-shadow: 0 12px 35px -8px rgba(0, 0, 0, 0.55), 0 0 1px 1px rgba(255, 255, 255, 0.08);
+            --card-shadow-hover: 0 20px 45px -10px rgba(0, 0, 0, 0.75), 0 0 25px rgba(56, 189, 248, 0.2);
+
+            --grid-dot-color: rgba(255, 255, 255, 0.05);
+            --sample-chip-bg: rgba(20, 30, 52, 0.7);
+            --sample-chip-border: rgba(255, 255, 255, 0.1);
+            --sample-chip-hover: rgba(56, 189, 248, 0.2);
             --kbd-bg: rgba(255, 255, 255, 0.1);
         }
 
-        /* Light Mode */
+        /* Light Mode (Crisp Cyber Silver) */
         [data-theme="light"] {
             --bg-base: #f8fafc;
-            --bg-elevated: rgba(255, 255, 255, 0.88);
-            --bg-card: rgba(255, 255, 255, 0.92);
+            --bg-elevated: rgba(255, 255, 255, 0.85);
+            --bg-card: rgba(255, 255, 255, 0.88);
+            --bg-card-solid: #ffffff;
             --bg-card-hover: #ffffff;
             --bg-input: #ffffff;
-            --border-glass: rgba(226, 232, 240, 0.9);
-            --border-glass-hover: rgba(203, 213, 225, 1);
-            --border-glow: rgba(37, 99, 235, 0.3);
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
+
+            --border-glass: rgba(203, 213, 225, 0.8);
+            --border-glass-hover: rgba(148, 163, 184, 0.9);
+            --border-glow: rgba(2, 132, 199, 0.3);
+
+            --text-title: #0f172a;
+            --text-primary: #1e293b;
+            --text-secondary: #334155;
             --text-muted: #64748b;
-            --nav-bg: rgba(255, 255, 255, 0.85);
-            --hero-gradient: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
-            --aurora-1: rgba(59, 130, 246, 0.08);
-            --aurora-2: rgba(168, 85, 247, 0.06);
-            --aurora-3: rgba(16, 185, 129, 0.05);
-            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 0 1px 1px rgba(0, 0, 0, 0.04);
-            --card-shadow-hover: 0 20px 35px -8px rgba(37, 99, 235, 0.12), 0 0 1px 1px rgba(37, 99, 235, 0.2);
-            --sample-pill-bg: #f1f5f9;
-            --sample-pill-border: #e2e8f0;
-            --sample-pill-hover: #e0e7ff;
-            --table-hover-bg: #f1f5f9;
+
+            --nav-bg: rgba(255, 255, 255, 0.82);
+            --hero-gradient: linear-gradient(135deg, #0284c7 0%, #2563eb 50%, #4f46e5 100%);
+
+            --aurora-1: rgba(2, 132, 199, 0.1);
+            --aurora-2: rgba(147, 51, 234, 0.08);
+            --aurora-3: rgba(16, 185, 129, 0.08);
+
+            --card-shadow: 0 10px 30px -6px rgba(0, 0, 0, 0.07), 0 0 1px 1px rgba(0, 0, 0, 0.05);
+            --card-shadow-hover: 0 20px 40px -8px rgba(2, 132, 199, 0.15), 0 0 1px 1px rgba(2, 132, 199, 0.25);
+
+            --grid-dot-color: rgba(0, 0, 0, 0.04);
+            --sample-chip-bg: #f1f5f9;
+            --sample-chip-border: #cbd5e1;
+            --sample-chip-hover: #e0f2fe;
             --kbd-bg: #e2e8f0;
         }
 
         /* =========================================================
-           GLOBAL RESET & LAYOUT
+           GLOBAL STYLES & TEXTURED CANVAS
            ========================================================= */
         * {
             box-sizing: border-box;
@@ -100,6 +123,9 @@
         body {
             font-family: var(--font-main);
             background-color: var(--bg-base);
+            /* Cyber dot-grid texture */
+            background-image: radial-gradient(var(--grid-dot-color) 1.5px, transparent 1.5px);
+            background-size: 28px 28px;
             color: var(--text-primary);
             min-height: 100vh;
             display: flex;
@@ -109,50 +135,50 @@
             transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        /* Ambient Background Mesh Blobs */
+        /* Ambient Glowing Orbs */
         .ambient-glow {
             position: fixed;
             border-radius: 50%;
-            filter: blur(120px);
+            filter: blur(140px);
             pointer-events: none;
             z-index: 0;
-            opacity: 0.65;
+            opacity: 0.7;
             transition: opacity 0.5s ease;
         }
         .glow-1 {
-            width: 500px;
-            height: 500px;
-            top: -150px;
+            width: 550px;
+            height: 550px;
+            top: -160px;
             right: -100px;
             background: var(--aurora-1);
         }
         .glow-2 {
-            width: 450px;
-            height: 450px;
-            bottom: 10%;
-            left: -150px;
+            width: 480px;
+            height: 480px;
+            bottom: 8%;
+            left: -140px;
             background: var(--aurora-2);
         }
         .glow-3 {
-            width: 350px;
-            height: 350px;
-            top: 45%;
-            right: 25%;
+            width: 400px;
+            height: 400px;
+            top: 40%;
+            right: 20%;
             background: var(--aurora-3);
         }
 
         /* =========================================================
-           NAVBAR (GLASSMORPHIC)
+           NAVBAR (SEMI-TRANSPARENT FROSTED GLASS)
            ========================================================= */
         .navbar-custom {
             background: var(--nav-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
             border-bottom: 1px solid var(--border-glass);
             position: sticky;
             top: 0;
             z-index: 1000;
-            padding: 0.8rem 0;
+            padding: 0.85rem 0;
             transition: var(--transition-smooth);
         }
 
@@ -160,45 +186,27 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 2.6rem;
-            height: 2.6rem;
-            border-radius: 0.75rem;
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            width: 2.7rem;
+            height: 2.7rem;
+            border-radius: 0.8rem;
+            background: linear-gradient(135deg, #0ea5e9 0%, #8b5cf6 100%);
             color: #ffffff;
-            font-size: 1.25rem;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            font-size: 1.3rem;
+            box-shadow: 0 4px 18px rgba(14, 165, 233, 0.45);
             position: relative;
             overflow: hidden;
         }
 
-        .brand-logo::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(60deg, transparent, rgba(255,255,255,0.3), transparent);
-            transform: rotate(30deg);
-            animation: logoShine 6s infinite;
-        }
-
-        @keyframes logoShine {
-            0% { transform: translate(-100%, -100%) rotate(30deg); }
-            20% { transform: translate(100%, 100%) rotate(30deg); }
-            100% { transform: translate(100%, 100%) rotate(30deg); }
-        }
-
         .navbar-brand-text {
             font-weight: 800;
-            font-size: 1.2rem;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #60a5fa 0%, #c084fc 100%);
+            font-size: 1.25rem;
+            letter-spacing: -0.6px;
+            background: linear-gradient(135deg, #38bdf8 0%, #c084fc 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         [data-theme="light"] .navbar-brand-text {
-            background: linear-gradient(135deg, #1e40af 0%, #6b21a8 100%);
+            background: linear-gradient(135deg, #0284c7 0%, #7c3aed 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -208,8 +216,8 @@
             border: 1px solid var(--border-glass);
             color: var(--text-secondary);
             font-size: 0.72rem;
-            font-weight: 600;
-            padding: 0.25rem 0.6rem;
+            font-weight: 700;
+            padding: 0.25rem 0.65rem;
             border-radius: 2rem;
             letter-spacing: 0.5px;
         }
@@ -233,9 +241,9 @@
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
             color: var(--text-secondary);
-            width: 2.3rem;
-            height: 2.3rem;
-            border-radius: 0.65rem;
+            width: 2.35rem;
+            height: 2.35rem;
+            border-radius: 0.7rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -244,13 +252,13 @@
         }
 
         .theme-toggle-btn:hover, .audio-toggle-btn:hover {
-            color: var(--text-primary);
+            color: var(--text-title);
             border-color: var(--border-glass-hover);
             transform: translateY(-2px);
         }
 
         /* =========================================================
-           HERO SECTION WITH INTERACTIVE PARTICLES CANVAS
+           HERO SECTION WITH INTERACTIVE PARTICLES
            ========================================================= */
         .hero-banner {
             position: relative;
@@ -286,44 +294,45 @@
         }
 
         .hero-title {
-            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-size: clamp(2.1rem, 4.2vw, 3.4rem);
             font-weight: 800;
-            letter-spacing: -1px;
+            letter-spacing: -1.2px;
             line-height: 1.15;
-            margin-bottom: 0.75rem;
+            color: #ffffff;
+            margin-bottom: 0.8rem;
         }
 
         .hero-subtitle {
-            font-size: 1.05rem;
-            line-height: 1.6;
+            font-size: 1.08rem;
+            line-height: 1.65;
             color: var(--text-secondary);
-            max-width: 620px;
+            max-width: 640px;
         }
         [data-theme="light"] .hero-subtitle {
-            color: rgba(255, 255, 255, 0.85);
+            color: rgba(255, 255, 255, 0.9);
         }
 
-        /* Hero Glass Metric Counter Cards */
+        /* Hero Glass Metric Boxes */
         .hero-metric-box {
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 1rem;
-            padding: 0.85rem 1.4rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 1.1rem;
+            padding: 0.9rem 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
             transition: var(--transition-bounce);
         }
 
         .hero-metric-box:hover {
             transform: translateY(-4px) scale(1.02);
-            border-color: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.25);
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 16px 35px rgba(56, 189, 248, 0.25);
         }
 
         .hero-metric-number {
             font-family: var(--font-mono);
-            font-size: 1.75rem;
+            font-size: 1.85rem;
             font-weight: 800;
             line-height: 1.1;
             color: #ffffff;
@@ -332,29 +341,29 @@
         .hero-metric-label {
             font-size: 0.72rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 600;
+            letter-spacing: 0.6px;
+            color: rgba(255, 255, 255, 0.75);
+            font-weight: 700;
         }
 
         /* =========================================================
-           NAV TABS (MODERN PILLS WITH GLOW)
+           NAVIGATION PILLS
            ========================================================= */
         .custom-pills {
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
-            border-radius: 1.1rem;
-            padding: 0.4rem;
-            backdrop-filter: blur(16px);
+            border-radius: 1.2rem;
+            padding: 0.45rem;
+            backdrop-filter: blur(24px);
             display: inline-flex;
             box-shadow: var(--card-shadow);
         }
 
         .custom-pills .nav-link {
-            border-radius: 0.8rem;
-            padding: 0.65rem 1.25rem;
-            font-weight: 600;
-            font-size: 0.9rem;
+            border-radius: 0.85rem;
+            padding: 0.7rem 1.35rem;
+            font-weight: 700;
+            font-size: 0.92rem;
             color: var(--text-secondary);
             transition: var(--transition-smooth);
             border: none;
@@ -364,25 +373,25 @@
         }
 
         .custom-pills .nav-link:hover {
-            color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-title);
+            background: rgba(255, 255, 255, 0.06);
         }
 
         .custom-pills .nav-link.active {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
             color: #ffffff;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.45);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
         }
 
         /* =========================================================
-           GLASS CARDS & INTERACTIVE CONTAINERS
+           GLASS CARDS & DETAIL PANELS
            ========================================================= */
         .glass-card {
             background: var(--bg-card);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
             border: 1px solid var(--border-glass);
-            border-radius: 1.25rem;
+            border-radius: 1.35rem;
             box-shadow: var(--card-shadow);
             transition: var(--transition-smooth);
             position: relative;
@@ -395,7 +404,6 @@
             box-shadow: var(--card-shadow-hover);
         }
 
-        /* Shimmer border highlight */
         .glass-card::before {
             content: '';
             position: absolute;
@@ -403,14 +411,36 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             pointer-events: none;
         }
 
-        /* Textarea Container with Live Counters */
+        /* Top AI Pipeline Architecture Status Bar */
+        .pipeline-status-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            align-items: center;
+            padding: 0.75rem 1.25rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 1rem;
+            border: 1px solid var(--border-glass);
+            font-size: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pipeline-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        /* Expanded Input Textarea */
         .textarea-wrapper {
             position: relative;
-            border-radius: 1rem;
+            border-radius: 1.15rem;
             background: var(--bg-input);
             border: 1.5px solid var(--border-glass);
             transition: var(--transition-smooth);
@@ -418,8 +448,8 @@
         }
 
         .textarea-wrapper:focus-within {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2);
         }
 
         .custom-textarea {
@@ -427,12 +457,13 @@
             background: transparent;
             border: none;
             outline: none;
-            color: var(--text-primary);
+            color: var(--text-title);
             font-family: var(--font-main);
-            font-size: 0.98rem;
-            padding: 1rem 1.2rem;
+            font-size: 1.05rem;
+            padding: 1.25rem 1.4rem;
             resize: vertical;
-            min-height: 120px;
+            min-height: 145px;
+            line-height: 1.6;
         }
 
         .custom-textarea::placeholder {
@@ -443,82 +474,77 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.5rem 1rem 0.65rem;
-            background: rgba(0, 0, 0, 0.03);
+            padding: 0.65rem 1.25rem;
+            background: rgba(0, 0, 0, 0.04);
             border-top: 1px solid var(--border-glass);
         }
         [data-theme="dark"] .textarea-footer {
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.25);
         }
 
         .hotkey-badge {
             font-family: var(--font-mono);
-            font-size: 0.72rem;
+            font-size: 0.75rem;
             background: var(--kbd-bg);
-            border-radius: 0.35rem;
-            padding: 0.2rem 0.45rem;
+            border-radius: 0.4rem;
+            padding: 0.25rem 0.5rem;
             color: var(--text-secondary);
+            font-weight: 600;
         }
 
         .char-counter {
             font-family: var(--font-mono);
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             color: var(--text-muted);
         }
 
-        /* Glowing Primary Button */
+        /* Modern Gradient Primary Button */
         .btn-modern-primary {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
             color: #ffffff;
             border: none;
-            border-radius: 0.85rem;
+            border-radius: 0.95rem;
             font-weight: 700;
-            padding: 0.75rem 1.6rem;
-            font-size: 0.95rem;
-            box-shadow: 0 4px 18px rgba(59, 130, 246, 0.35);
+            padding: 0.85rem 1.8rem;
+            font-size: 1rem;
+            box-shadow: 0 6px 22px rgba(2, 132, 199, 0.4);
             transition: var(--transition-bounce);
-            position: relative;
-            overflow: hidden;
         }
 
         .btn-modern-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+            box-shadow: 0 10px 28px rgba(2, 132, 199, 0.55);
             color: #ffffff;
-        }
-
-        .btn-modern-primary:active {
-            transform: translateY(0);
         }
 
         /* Preset Chips */
         .preset-chip {
-            background: var(--sample-pill-bg);
-            border: 1px solid var(--sample-pill-border);
-            color: var(--text-secondary);
-            font-size: 0.82rem;
-            font-weight: 500;
+            background: var(--sample-chip-bg);
+            border: 1px solid var(--sample-chip-border);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            font-weight: 600;
             border-radius: 2rem;
-            padding: 0.45rem 0.9rem;
+            padding: 0.5rem 1.1rem;
             cursor: pointer;
             transition: var(--transition-smooth);
             display: inline-flex;
             align-items: center;
-            gap: 0.45rem;
+            gap: 0.55rem;
         }
 
         .preset-chip:hover {
-            background: var(--sample-pill-hover);
-            color: var(--text-primary);
-            border-color: rgba(59, 130, 246, 0.4);
+            background: var(--sample-chip-hover);
+            color: var(--text-title);
+            border-color: rgba(56, 189, 248, 0.45);
             transform: translateY(-2px);
         }
 
         /* =========================================================
-           RESULT CARD & NEON DYNAMIC GLOW
+           RESULT CARD & NEON DYNAMIC ACCENTS
            ========================================================= */
         .result-card-container {
-            border-radius: 1.25rem;
+            border-radius: 1.35rem;
             position: relative;
             transition: var(--transition-smooth);
         }
@@ -541,15 +567,14 @@
         }
 
         @keyframes resultPop {
-            0% { transform: scale(0.96) translateY(8px); opacity: 0; }
+            0% { transform: scale(0.96) translateY(10px); opacity: 0; }
             100% { transform: scale(1) translateY(0); opacity: 1; }
         }
 
         .animate-result {
-            animation: resultPop 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: resultPop 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* Sparkle / Confetti Canvas */
         #confettiCanvas {
             position: absolute;
             top: 0;
@@ -562,8 +587,8 @@
 
         /* Probability Bars */
         .prob-bar-container {
-            height: 7px;
-            border-radius: 4px;
+            height: 8px;
+            border-radius: 5px;
             background: rgba(255, 255, 255, 0.08);
             overflow: hidden;
         }
@@ -573,106 +598,141 @@
 
         .prob-bar-fill {
             height: 100%;
-            border-radius: 4px;
-            transition: width 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border-radius: 5px;
+            transition: width 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         /* Feedback Section */
         .feedback-section-box {
             background: rgba(0, 0, 0, 0.03);
             border: 1px dashed var(--border-glass);
-            border-radius: 1rem;
-            padding: 0.9rem;
+            border-radius: 1.1rem;
+            padding: 1rem;
         }
         [data-theme="dark"] .feedback-section-box {
-            background: rgba(0, 0, 0, 0.25);
+            background: rgba(0, 0, 0, 0.3);
         }
 
         .feedback-btn {
-            font-size: 0.78rem;
-            font-weight: 600;
+            font-size: 0.8rem;
+            font-weight: 700;
             border-radius: 1.5rem;
-            padding: 0.3rem 0.75rem;
+            padding: 0.35rem 0.85rem;
             transition: var(--transition-smooth);
-        }
-
-        .feedback-btn:hover {
-            transform: translateY(-2px);
         }
 
         /* =========================================================
-           TEST CASES & ERROR CASE VISUALS
+           FIRST PAGE DEPARTMENT REFERENCE CARDS (Rich Details)
            ========================================================= */
-        .test-case-card {
-            border-radius: 1rem;
+        .dept-overview-card {
+            border-radius: 1.15rem;
             border: 1px solid var(--border-glass);
             padding: 1.25rem;
-            background: var(--bg-card);
-            transition: var(--transition-smooth);
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(16px);
+            transition: var(--transition-bounce);
             height: 100%;
-            display: flex;
-            flex-direction: column;
+            position: relative;
+            overflow: hidden;
         }
 
-        .test-case-card:hover {
-            transform: translateY(-4px);
+        .dept-overview-card:hover {
+            transform: translateY(-5px);
             border-color: var(--border-glass-hover);
             box-shadow: var(--card-shadow-hover);
         }
 
-        .run-test-btn {
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.25);
-            color: #60a5fa;
-            font-size: 0.78rem;
-            font-weight: 600;
-            border-radius: 0.6rem;
-            padding: 0.35rem 0.75rem;
-            transition: var(--transition-smooth);
-            cursor: pointer;
+        .dept-icon-circle {
+            width: 2.8rem;
+            height: 2.8rem;
+            border-radius: 0.85rem;
             display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
-        }
-
-        .run-test-btn:hover {
-            background: #3b82f6;
-            color: #ffffff;
-            border-color: #3b82f6;
-            transform: translateY(-1px);
-        }
-
-        /* Conflict Visualizer for Error Case */
-        .conflict-bar-wrapper {
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 0.75rem;
-            padding: 0.85rem;
-            border: 1px solid var(--border-glass);
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 0.85rem;
         }
 
         /* =========================================================
-           BENCHMARK & 4x4 MATRIX
+           "ЖОБА ТУРАЛЫ" (ABOUT SECTION) - HIGH CONTRAST & CLARITY
            ========================================================= */
+        .about-topic-card {
+            border-radius: 1.25rem;
+            padding: 1.6rem;
+            height: 100%;
+            border: 1px solid;
+            transition: var(--transition-bounce);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .about-topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+        }
+
+        .about-card-academic {
+            background: linear-gradient(145deg, rgba(14, 165, 233, 0.12) 0%, rgba(2, 132, 199, 0.04) 100%);
+            border-color: rgba(56, 189, 248, 0.35);
+        }
+        .about-card-docs {
+            background: linear-gradient(145deg, rgba(16, 185, 129, 0.12) 0%, rgba(5, 150, 105, 0.04) 100%);
+            border-color: rgba(52, 211, 153, 0.35);
+        }
+        .about-card-finance {
+            background: linear-gradient(145deg, rgba(245, 158, 11, 0.12) 0%, rgba(217, 119, 6, 0.04) 100%);
+            border-color: rgba(251, 191, 36, 0.35);
+        }
+        .about-card-tech {
+            background: linear-gradient(145deg, rgba(244, 63, 94, 0.12) 0%, rgba(225, 29, 72, 0.04) 100%);
+            border-color: rgba(251, 113, 133, 0.35);
+        }
+
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.9rem 1.2rem;
+            border-radius: 0.95rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+        }
+
+        .workflow-num {
+            width: 2.2rem;
+            height: 2.2rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+            color: #ffffff;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+        }
+
+        /* Matrix 4x4 Cells */
         .matrix-table {
             border-collapse: separate;
-            border-spacing: 4px;
+            border-spacing: 5px;
         }
 
         .matrix-cell {
-            padding: 0.75rem 0.5rem;
+            padding: 0.85rem 0.5rem;
             text-align: center;
-            border-radius: 0.5rem;
+            border-radius: 0.6rem;
             font-family: var(--font-mono);
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 700;
             transition: var(--transition-smooth);
-            cursor: pointer;
         }
 
         .matrix-diag {
-            background: rgba(16, 185, 129, 0.18) !important;
-            border: 1px solid rgba(16, 185, 129, 0.4) !important;
-            color: #10b981 !important;
+            background: rgba(52, 211, 153, 0.22) !important;
+            border: 1px solid rgba(52, 211, 153, 0.5) !important;
+            color: #34d399 !important;
         }
 
         .matrix-off {
@@ -684,44 +744,41 @@
         .matrix-cell:hover {
             transform: scale(1.08);
             z-index: 2;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        /* =========================================================
-           HISTORY LOG WITH INSTANT SEARCH & FILTER
-           ========================================================= */
+        /* History Filter Chips */
         .filter-chip {
             background: var(--bg-card);
             border: 1px solid var(--border-glass);
             color: var(--text-secondary);
-            font-size: 0.78rem;
-            font-weight: 600;
+            font-size: 0.82rem;
+            font-weight: 700;
             border-radius: 2rem;
-            padding: 0.3rem 0.75rem;
+            padding: 0.35rem 0.9rem;
             cursor: pointer;
             transition: var(--transition-smooth);
         }
 
         .filter-chip.active, .filter-chip:hover {
-            background: #3b82f6;
+            background: #0284c7;
             color: #ffffff;
-            border-color: #3b82f6;
+            border-color: #0284c7;
         }
 
         .search-input {
             background: var(--bg-input);
             border: 1px solid var(--border-glass);
-            color: var(--text-primary);
-            border-radius: 0.75rem;
-            font-size: 0.85rem;
-            padding: 0.4rem 0.85rem 0.4rem 2.2rem;
+            color: var(--text-title);
+            border-radius: 0.85rem;
+            font-size: 0.88rem;
+            padding: 0.45rem 0.95rem 0.45rem 2.3rem;
             outline: none;
             transition: var(--transition-smooth);
         }
 
         .search-input:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
         }
 
         /* Floating Toasts */
@@ -737,17 +794,17 @@
 
         .custom-toast {
             background: var(--bg-elevated);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(24px);
             border: 1px solid var(--border-glass);
-            border-radius: 1rem;
-            padding: 0.75rem 1.2rem;
-            color: var(--text-primary);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-radius: 1.1rem;
+            padding: 0.85rem 1.35rem;
+            color: var(--text-title);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            font-size: 0.88rem;
+            gap: 0.85rem;
+            font-size: 0.92rem;
+            font-weight: 600;
             animation: toastSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -761,16 +818,16 @@
             margin-top: auto;
             background: var(--nav-bg);
             border-top: 1px solid var(--border-glass);
-            padding: 1.8rem 0;
-            font-size: 0.85rem;
+            padding: 2rem 0;
+            font-size: 0.88rem;
             color: var(--text-muted);
-            backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
         }
     </style>
 </head>
 <body>
 
-    <!-- Ambient Mesh Gradients in Background -->
+    <!-- Ambient Neon Mesh Orbs -->
     <div class="ambient-glow glow-1"></div>
     <div class="ambient-glow glow-2"></div>
     <div class="ambient-glow glow-3"></div>
@@ -787,16 +844,16 @@
                 </span>
                 <div>
                     <span class="navbar-brand-text">student-support</span>
-                    <span class="badge badge-qairu-pill ms-1.5 d-none d-sm-inline-block">ICT1103 · QAIRU</span>
+                    <span class="badge badge-qairu-pill ms-2 d-none d-sm-inline-block">ICT1103 · QAIRU</span>
                 </div>
             </a>
 
-            <!-- Right Controls: Status & Theme/Audio Switches -->
+            <!-- Right Controls -->
             <div class="d-flex align-items-center gap-2">
-                <!-- Live Status Pill -->
-                <div class="d-none d-md-flex align-items-center gap-2 px-3 py-1.5 rounded-pill" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.25);">
+                <!-- Status Badge -->
+                <div class="d-none d-md-flex align-items-center gap-2 px-3 py-1.5 rounded-pill" style="background: rgba(52, 211, 153, 0.12); border: 1px solid rgba(52, 211, 153, 0.3);">
                     <span class="pulse-dot"></span>
-                    <span style="font-size: 0.78rem; font-weight: 600; color: #10b981;">TF-IDF + LogReg Live</span>
+                    <span style="font-size: 0.8rem; font-weight: 700; color: #34d399;">TF-IDF + LogReg Live</span>
                 </div>
 
                 <!-- Web Audio Sound Toggle -->
@@ -818,29 +875,29 @@
         <div class="container hero-content">
             <div class="row align-items-center g-4">
                 <div class="col-lg-7">
-                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill mb-3 hero-interactive" style="background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3);">
-                        <i class="bi bi-stars text-primary"></i>
-                        <span style="font-size: 0.8rem; font-weight: 700; color: #60a5fa;">Intelligent Student Desk · NLP & Текст</span>
+                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-pill mb-3 hero-interactive" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35);">
+                        <i class="bi bi-stars" style="color: #38bdf8;"></i>
+                        <span style="font-size: 0.82rem; font-weight: 800; color: #38bdf8; letter-spacing: 0.4px;">NextGen Intelligent Student Desk · NLP</span>
                     </div>
                     <h1 class="hero-title">student-support</h1>
                     <p class="hero-subtitle mb-0">
-                        Студенттік өтініштерді 4 негізгі бағытқа лезде (&lt;1мс) автоматты классификациялау, басымдықты (SLA) анықтау және тиісті бөлімге маршрутизациялау.
+                        Студенттік өтініштерді еркін мәтін бойынша талдап, тиісті 4 бөлімге лезде (&lt;1мс) жіктейтін, SLA мерзімін және басымдықты анықтайтын онлайн сервис.
                     </p>
                 </div>
 
-                <!-- Dynamic Counter Stats -->
+                <!-- Live Animated Metric Boxes -->
                 <div class="col-lg-5 hero-interactive">
                     <div class="d-flex flex-wrap gap-2.5 justify-content-lg-end">
-                        <div class="hero-metric-box text-center flex-fill" style="min-width: 110px;">
+                        <div class="hero-metric-box text-center flex-fill" style="min-width: 115px;">
                             <div class="hero-metric-number" id="datasetCountHeader" data-target="{{ dataset_size }}">0</div>
-                            <div class="hero-metric-label">Датасет (RU/KK/EN)</div>
+                            <div class="hero-metric-label">Деректер көлемі</div>
                         </div>
-                        <div class="hero-metric-box text-center flex-fill" style="min-width: 110px;">
+                        <div class="hero-metric-box text-center flex-fill" style="min-width: 115px;">
                             <div class="hero-metric-number" id="accMetricHeader" data-target="84.8">0%</div>
                             <div class="hero-metric-label">Test Accuracy</div>
                         </div>
-                        <div class="hero-metric-box text-center flex-fill" style="min-width: 110px;">
-                            <div class="hero-metric-number" id="latencyMetricHeader">0.21ms</div>
+                        <div class="hero-metric-box text-center flex-fill" style="min-width: 115px;">
+                            <div class="hero-metric-number font-monospace" id="latencyMetricHeader">0.21ms</div>
                             <div class="hero-metric-label">Inference Speed</div>
                         </div>
                     </div>
@@ -849,7 +906,7 @@
         </div>
     </header>
 
-    <!-- Main Workspace Container -->
+    <!-- Main Workspace -->
     <main class="container my-4 flex-grow-1 position-relative" style="z-index: 2;">
 
         <!-- Modern Nav Tabs -->
@@ -857,7 +914,7 @@
             <ul class="nav custom-pills" id="mainTabs" role="tablist">
                 <li class="nav-item">
                     <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-classifier" onclick="playSoftClick()">
-                        <i class="bi bi-chat-left-dots-fill"></i> Классификатор
+                        <i class="bi bi-chat-left-dots-fill"></i> Онлайн Классификатор
                     </button>
                 </li>
                 <li class="nav-item">
@@ -881,19 +938,45 @@
         <div class="tab-content" id="mainTabContent">
 
             <!-- =========================================================
-                 TAB 1: CLASSIFIER (Interactive Input & Result)
+                 TAB 1: EXPANDED CLASSIFIER & DETAILED PANELS
                  ========================================================= -->
             <div class="tab-pane fade show active" id="tab-classifier" role="tabpanel">
-                <div class="row g-4">
+
+                <!-- AI Pipeline Architecture Status Bar -->
+                <div class="pipeline-status-bar">
+                    <div class="pipeline-badge">
+                        <i class="bi bi-lightning-charge-fill text-warning"></i>
+                        <span>Latency: <strong>&lt;0.25 ms</strong></span>
+                    </div>
+                    <span class="text-muted d-none d-sm-inline">|</span>
+                    <div class="pipeline-badge">
+                        <i class="bi bi-translate text-info"></i>
+                        <span>Multilingual: <strong>Қазақша / Русский / English</strong></span>
+                    </div>
+                    <span class="text-muted d-none d-sm-inline">|</span>
+                    <div class="pipeline-badge">
+                        <i class="bi bi-cpu-fill text-primary"></i>
+                        <span>Model: <strong>TF-IDF (Word + Char_wb 3-5) + LogReg</strong></span>
+                    </div>
+                    <span class="text-muted d-none d-sm-inline">|</span>
+                    <div class="pipeline-badge">
+                        <i class="bi bi-shield-lock-fill text-success"></i>
+                        <span>Қауіпсіздік: <strong>ЖСН/Құпиясөзсіз (No PII)</strong></span>
+                    </div>
+                </div>
+
+                <div class="row g-4 mb-4">
                     <!-- Left Column: Input Form -->
                     <div class="col-lg-7">
                         <div class="glass-card p-4 h-100">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h5 class="fw-bold mb-0 d-flex align-items-center gap-2">
-                                    <i class="bi bi-pencil-square text-primary"></i>
-                                    <span>Студент өтінішін енгізу</span>
+                                <h5 class="fw-bold mb-0 d-flex align-items-center gap-2" style="color: var(--text-title);">
+                                    <i class="bi bi-pencil-square" style="color: var(--cat-academic);"></i>
+                                    <span>Студенттің өтінішін енгізу</span>
                                 </h5>
-                                <span class="badge bg-secondary-subtle text-secondary border">3 тілде: KK / RU / EN</span>
+                                <span class="badge border" style="background: rgba(56, 189, 248, 0.1); color: var(--cat-academic); border-color: rgba(56, 189, 248, 0.3) !important;">
+                                    Real-Time Inference
+                                </span>
                             </div>
 
                             <form id="classifyForm" onsubmit="event.preventDefault(); submitQuery();">
@@ -902,13 +985,13 @@
                                         id="queryText" 
                                         class="custom-textarea" 
                                         rows="4" 
-                                        placeholder="Студент сұрағын жазыңыз... Мысалы: «LMS-те зертханалық бағасы көрінбей тұр» немесе «Где получить справку с места учебы?»" 
+                                        placeholder="Студенттің сұрағын жазыңыз немесе көшіріп қойыңыз... Мысалы: «LMS жүйесінде зертханалық жұмысымның бағасы көрінбейді» немесе «Где я могу заказать транскрипт с печатью?»" 
                                         required
                                         oninput="updateCharCount()"></textarea>
                                     <div class="textarea-footer">
                                         <div class="d-flex align-items-center gap-2">
                                             <span class="hotkey-badge"><i class="bi bi-command"></i> Ctrl + ↵</span>
-                                            <small class="text-muted d-none d-sm-inline" style="font-size: 0.72rem;">жылдам жіберу</small>
+                                            <small class="text-muted d-none d-sm-inline" style="font-size: 0.75rem;">пернесімен жылдам жіберу</small>
                                         </div>
                                         <div class="char-counter">
                                             <span id="charCount">0</span> таңба
@@ -919,7 +1002,7 @@
                                 <!-- Learning with consent checkbox -->
                                 <div class="form-check mb-3">
                                     <input class="form-check-input" type="checkbox" id="trainingOptIn">
-                                    <label class="form-check-label text-muted small" for="trainingOptIn">
+                                    <label class="form-check-label small" for="trainingOptIn" style="color: var(--text-secondary);">
                                         <i class="bi bi-shield-check text-success me-1"></i>
                                         Деректер базасында болашақ қайта оқыту (Active Learning) үшін сақтауға келісемін
                                     </label>
@@ -936,45 +1019,47 @@
                                 </div>
                             </form>
 
-                            <!-- Quick Preset Samples with Department Badges -->
+                            <!-- Quick Preset Samples with Vivid Chips -->
                             <div class="mt-4 pt-3 border-top" style="border-color: var(--border-glass) !important;">
-                                <div class="d-flex justify-content-between align-items-center mb-2.5">
-                                    <small class="text-uppercase fw-bold text-muted" style="font-size:0.75rem; letter-spacing: 0.5px;">
-                                        <i class="bi bi-lightning-charge-fill text-warning me-1"></i>Жылдам сынау мысалдары (Кликните для ввода):
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <small class="text-uppercase fw-bold" style="font-size:0.75rem; letter-spacing: 0.6px; color: var(--text-muted);">
+                                        <i class="bi bi-lightning-charge-fill text-warning me-1"></i>Жылдам сынау мысалдары (Кликните для авто-толтыру):
                                     </small>
                                 </div>
                                 <div class="d-flex flex-wrap gap-2">
                                     <button class="preset-chip" onclick="setQuery('Не отображается оценка за лабораторную работу в LMS')">
-                                        <i class="bi bi-mortarboard-fill text-primary"></i> Оценка за лабу в LMS <span class="badge bg-primary-subtle text-primary border" style="font-size:0.65rem;">Academic</span>
+                                        <i class="bi bi-mortarboard-fill text-info"></i> Оценка за лабу в LMS <span class="badge border" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3) !important;">Academic</span>
                                     </button>
                                     <button class="preset-chip" onclick="setQuery('Система тестирования зависла во время прохождения экзамена')">
-                                        <i class="bi bi-hdd-network-fill text-danger"></i> Тест завис на экзамене <span class="badge bg-danger-subtle text-danger border" style="font-size:0.65rem;">Tech</span>
+                                        <i class="bi bi-hdd-network-fill text-danger"></i> Тест завис на экзамене <span class="badge border" style="background: rgba(251, 113, 133, 0.15); color: #fb7185; border-color: rgba(251, 113, 133, 0.3) !important;">Tech</span>
                                     </button>
                                     <button class="preset-chip" onclick="setQuery('Где я могу получить справку с места учебы для Egov?')">
-                                        <i class="bi bi-file-earmark-text-fill text-success"></i> Справка для Egov <span class="badge bg-success-subtle text-success border" style="font-size:0.65rem;">Docs</span>
+                                        <i class="bi bi-file-earmark-text-fill text-success"></i> Справка для Egov <span class="badge border" style="background: rgba(52, 211, 153, 0.15); color: #34d399; border-color: rgba(52, 211, 153, 0.3) !important;">Docs</span>
                                     </button>
                                     <button class="preset-chip" onclick="setQuery('Kaspi арқылы ақша ұсталды, бірақ LMS-те төлем көрінбей тұр.')">
-                                        <i class="bi bi-credit-card-fill text-warning"></i> Kaspi төлемі түспеді <span class="badge bg-warning-subtle text-warning border" style="font-size:0.65rem;">Finance</span>
+                                        <i class="bi bi-credit-card-fill text-warning"></i> Kaspi төлемі түспеді <span class="badge border" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border-color: rgba(251, 191, 36, 0.3) !important;">Finance</span>
                                     </button>
                                     <button class="preset-chip" onclick="setQuery('How can I order an official academic transcript with university stamp?')">
-                                        <i class="bi bi-translate text-info"></i> Official Transcript (EN) <span class="badge bg-info-subtle text-info border" style="font-size:0.65rem;">Docs</span>
+                                        <i class="bi bi-translate text-primary"></i> Official Transcript (EN) <span class="badge border" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3) !important;">Docs</span>
                                     </button>
-                                    <button class="preset-chip border-warning-subtle bg-warning-subtle text-warning" onclick="setQuery('Не могу оплатить повторный курс из-за ошибки на сайте')">
-                                        <i class="bi bi-exclamation-triangle-fill"></i> Error Case (Оплата vs Ошибка)
+                                    <button class="preset-chip border-warning-subtle" onclick="setQuery('Не могу оплатить повторный курс из-за ошибки на сайте')">
+                                        <i class="bi bi-exclamation-triangle-fill text-warning"></i> Error Case (Оплата vs Ошибка)
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right Column: Result Card with Neon Glow & Sparkles -->
+                    <!-- Right Column: Result Card with Dynamic Glow -->
                     <div class="col-lg-5">
-                        <div id="resultPlaceholder" class="glass-card p-4 text-center h-100 d-flex flex-column justify-content-center align-items-center text-muted">
-                            <div class="mb-3 p-3 rounded-circle" style="background: rgba(59, 130, 246, 0.1); width: 4.5rem; height: 4.5rem; display: flex; align-items: center; justify-content: center;">
-                                <i class="bi bi-headset fs-1 text-primary"></i>
+                        <div id="resultPlaceholder" class="glass-card p-4 text-center h-100 d-flex flex-column justify-content-center align-items-center">
+                            <div class="mb-3 p-3 rounded-circle" style="background: rgba(56, 189, 248, 0.12); width: 4.8rem; height: 4.8rem; display: flex; align-items: center; justify-content: center;">
+                                <i class="bi bi-headset fs-1" style="color: #38bdf8;"></i>
                             </div>
-                            <h6 class="fw-bold mb-1">Нәтиже осында шығады</h6>
-                            <p class="small text-muted mb-0" style="max-width: 280px;">Сол жақтағы формаға сұрақ жазыңыз немесе жылдам мысалдардың бірін таңдаңыз.</p>
+                            <h5 class="fw-bold mb-1" style="color: var(--text-title);">Нәтиже осында шығады</h5>
+                            <p class="small mb-0" style="color: var(--text-muted); max-width: 290px;">
+                                Сол жақтағы формаға сұрақ жазыңыз немесе дайын мысалдардың бірін таңдаңыз.
+                            </p>
                         </div>
 
                         <!-- Real Classification Result Card (Initially hidden) -->
@@ -983,90 +1068,90 @@
 
                             <div class="d-flex justify-content-between align-items-start mb-2">
                                 <div class="d-flex align-items-center gap-1.5">
-                                    <span id="resBadge" class="badge bg-primary px-2.5 py-1 text-uppercase fw-bold" style="letter-spacing:0.5px;"></span>
+                                    <span id="resBadge" class="badge bg-primary px-3 py-1.5 text-uppercase fw-bold" style="letter-spacing:0.6px; font-size: 0.8rem;"></span>
                                     <span id="resLang" class="badge bg-secondary-subtle text-secondary border"></span>
                                 </div>
                                 <div class="d-flex align-items-center gap-2">
-                                    <button class="btn btn-sm btn-outline-secondary py-0 px-2" title="Нәтижені көшіру (Copy Ticket Summary)" onclick="copyResultSummary()">
+                                    <button class="btn btn-sm btn-outline-secondary py-0.5 px-2.5" title="Нәтижені көшіру (Copy Ticket Summary)" onclick="copyResultSummary()">
                                         <i class="bi bi-clipboard"></i>
                                     </button>
-                                    <small class="text-muted font-monospace" id="resLatency" style="font-size:0.75rem;"></small>
+                                    <small class="font-monospace text-muted" id="resLatency" style="font-size:0.78rem;"></small>
                                 </div>
                             </div>
 
-                            <h4 id="resCategoryName" class="fw-bold mt-2 mb-1"></h4>
-                            <p id="resDept" class="text-muted small mb-3"></p>
+                            <h4 id="resCategoryName" class="fw-bold mt-2.5 mb-1" style="color: var(--text-title);"></h4>
+                            <p id="resDept" class="small mb-3" style="color: var(--text-secondary);"></p>
 
-                            <!-- Priority & SLA Box -->
-                            <div class="p-3 rounded-3 mb-3 border" style="background: rgba(0, 0, 0, 0.04); border-color: var(--border-glass) !important;">
-                                <div class="d-flex justify-content-between align-items-center mb-1">
-                                    <span class="small fw-bold text-muted">Приоритет:</span>
+                            <!-- Priority & SLA Box with Clear Contrast -->
+                            <div class="p-3 rounded-3 mb-3 border" style="background: rgba(0, 0, 0, 0.2); border-color: var(--border-glass) !important;">
+                                <div class="d-flex justify-content-between align-items-center mb-1.5">
+                                    <span class="small fw-bold" style="color: var(--text-muted);">Приоритет:</span>
                                     <span id="resPriority" class="badge bg-danger"></span>
                                 </div>
-                                <div class="small text-secondary mb-2" id="resPriorityReason"></div>
+                                <div class="small mb-2" id="resPriorityReason" style="color: var(--text-secondary);"></div>
                                 <div class="d-flex justify-content-between align-items-center pt-2 border-top" style="border-color: var(--border-glass) !important;">
-                                    <span class="small fw-bold text-muted">Нормативтік SLA:</span>
-                                    <span id="resSla" class="small fw-bold"></span>
+                                    <span class="small fw-bold" style="color: var(--text-muted);">Нормативтік SLA:</span>
+                                    <span id="resSla" class="small fw-bold font-monospace" style="color: var(--text-title);"></span>
                                 </div>
                             </div>
 
-                            <!-- Confidence Bars -->
-                            <h6 class="small fw-bold text-uppercase text-muted mb-2.5" style="letter-spacing: 0.5px;">
+                            <!-- Confidence Bars with Vivid Colors -->
+                            <h6 class="small fw-bold text-uppercase mb-2.5" style="letter-spacing: 0.6px; color: var(--text-muted);">
                                 Ықтималдық үлесі (Confidence distribution):
                             </h6>
                             <div class="d-flex flex-column gap-2.5 mb-3">
                                 <div>
                                     <div class="d-flex justify-content-between small mb-1">
-                                        <span><i class="bi bi-mortarboard-fill text-primary me-1"></i> Академикалық (Деканат)</span>
-                                        <span id="probAcademic" class="fw-bold font-monospace">0%</span>
+                                        <span style="color: var(--text-secondary);"><i class="bi bi-mortarboard-fill me-1" style="color: var(--cat-academic);"></i> Академикалық (Деканат)</span>
+                                        <span id="probAcademic" class="fw-bold font-monospace" style="color: var(--cat-academic);">0%</span>
                                     </div>
                                     <div class="prob-bar-container">
-                                        <div id="barAcademic" class="prob-bar-fill bg-primary" style="width: 0%"></div>
+                                        <div id="barAcademic" class="prob-bar-fill" style="width: 0%; background: var(--cat-academic);"></div>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="d-flex justify-content-between small mb-1">
-                                        <span><i class="bi bi-file-earmark-text-fill text-success me-1"></i> Құжаттар / ЦОС</span>
-                                        <span id="probDocs" class="fw-bold font-monospace">0%</span>
+                                        <span style="color: var(--text-secondary);"><i class="bi bi-file-earmark-text-fill me-1" style="color: var(--cat-docs);"></i> Құжаттар / ЦОС</span>
+                                        <span id="probDocs" class="fw-bold font-monospace" style="color: var(--cat-docs);">0%</span>
                                     </div>
                                     <div class="prob-bar-container">
-                                        <div id="barDocs" class="prob-bar-fill bg-success" style="width: 0%"></div>
+                                        <div id="barDocs" class="prob-bar-fill" style="width: 0%; background: var(--cat-docs);"></div>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="d-flex justify-content-between small mb-1">
-                                        <span><i class="bi bi-credit-card-fill text-warning me-1"></i> Қаржы / Бухгалтерия</span>
-                                        <span id="probFinance" class="fw-bold font-monospace">0%</span>
+                                        <span style="color: var(--text-secondary);"><i class="bi bi-credit-card-fill me-1" style="color: var(--cat-finance);"></i> Қаржы / Бухгалтерия</span>
+                                        <span id="probFinance" class="fw-bold font-monospace" style="color: var(--cat-finance);">0%</span>
                                     </div>
                                     <div class="prob-bar-container">
-                                        <div id="barFinance" class="prob-bar-fill bg-warning" style="width: 0%"></div>
+                                        <div id="barFinance" class="prob-bar-fill" style="width: 0%; background: var(--cat-finance);"></div>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="d-flex justify-content-between small mb-1">
-                                        <span><i class="bi bi-hdd-network-fill text-danger me-1"></i> IT Helpdesk / Техподдержка</span>
-                                        <span id="probTech" class="fw-bold font-monospace">0%</span>
+                                        <span style="color: var(--text-secondary);"><i class="bi bi-hdd-network-fill me-1" style="color: var(--cat-tech);"></i> IT Helpdesk / Техподдержка</span>
+                                        <span id="probTech" class="fw-bold font-monospace" style="color: var(--cat-tech);">0%</span>
                                     </div>
                                     <div class="prob-bar-container">
-                                        <div id="barTech" class="prob-bar-fill bg-danger" style="width: 0%"></div>
+                                        <div id="barTech" class="prob-bar-fill" style="width: 0%; background: var(--cat-tech);"></div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Feedback Section (Active Learning) -->
+                            <!-- Feedback Section -->
                             <div class="feedback-section-box mt-3" id="feedbackSection">
                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                     <div class="d-flex align-items-center gap-1.5">
-                                        <i class="bi bi-chat-square-heart text-primary"></i>
-                                        <small class="fw-bold">Бағыт дұрыс таңдалды ма? / Верно?</small>
+                                        <i class="bi bi-chat-square-heart" style="color: var(--cat-academic);"></i>
+                                        <small class="fw-bold" style="color: var(--text-title);">Бағыт дұрыс таңдалды ма? / Верно?</small>
                                     </div>
-                                    <small class="text-muted" style="font-size:0.7rem;">Feedback</small>
+                                    <small class="text-muted" style="font-size:0.75rem;">Active Learning</small>
                                 </div>
                                 <div id="feedbackButtons" class="d-flex flex-wrap gap-1">
                                     <button class="btn btn-outline-success feedback-btn" onclick="sendFeedback(lastTicketCategory)">
                                         <i class="bi bi-check2"></i> Иә (Дұрыс)
                                     </button>
-                                    <button class="btn btn-outline-primary feedback-btn" onclick="sendFeedback('academic')">
+                                    <button class="btn btn-outline-info feedback-btn" onclick="sendFeedback('academic')">
                                         Academic
                                     </button>
                                     <button class="btn btn-outline-success feedback-btn" onclick="sendFeedback('docs')">
@@ -1090,6 +1175,59 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- NEW: 4 Department Overview Cards (Expands the first page with rich details!) -->
+                <div class="row g-3 mb-2">
+                    <div class="col-md-3">
+                        <div class="dept-overview-card" style="border-top: 3px solid var(--cat-academic);">
+                            <div class="dept-icon-circle" style="background: rgba(56, 189, 248, 0.15); color: var(--cat-academic);">
+                                <i class="bi bi-mortarboard-fill"></i>
+                            </div>
+                            <h6 class="fw-bold mb-1" style="color: var(--text-title);">1. Деканат / Эдвайзер</h6>
+                            <span class="badge mb-2 font-monospace" style="background: rgba(56, 189, 248, 0.15); color: var(--cat-academic); font-size:0.72rem;">SLA: 12-24 сағат</span>
+                            <p class="small mb-0" style="color: var(--text-secondary); font-size: 0.82rem; line-height: 1.5;">
+                                Бағалардың LMS-те көрінуі, силлабустар, сабақ және емтихан кестесі, топ ауыстыру.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="dept-overview-card" style="border-top: 3px solid var(--cat-docs);">
+                            <div class="dept-icon-circle" style="background: rgba(52, 211, 153, 0.15); color: var(--cat-docs);">
+                                <i class="bi bi-file-earmark-text-fill"></i>
+                            </div>
+                            <h6 class="fw-bold mb-1" style="color: var(--text-title);">2. ЦОС / СҚКО</h6>
+                            <span class="badge mb-2 font-monospace" style="background: rgba(52, 211, 153, 0.15); color: var(--cat-docs); font-size:0.72rem;">SLA: 24-48 сағат</span>
+                            <p class="small mb-0" style="color: var(--text-secondary); font-size: 0.82rem; line-height: 1.5;">
+                                Ресми транскрипттер, оқу орнынан анықтамалар, 26-нысан (военкомат), студенттік билет.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="dept-overview-card" style="border-top: 3px solid var(--cat-finance);">
+                            <div class="dept-icon-circle" style="background: rgba(251, 191, 36, 0.15); color: var(--cat-finance);">
+                                <i class="bi bi-credit-card-fill"></i>
+                            </div>
+                            <h6 class="fw-bold mb-1" style="color: var(--text-title);">3. Қаржы & Бухгалтерия</h6>
+                            <span class="badge mb-2 font-monospace" style="background: rgba(251, 191, 36, 0.15); color: var(--cat-finance); font-size:0.72rem;">SLA: 24 сағат</span>
+                            <p class="small mb-0" style="color: var(--text-secondary); font-size: 0.82rem; line-height: 1.5;">
+                                Kaspi түбіртектері, оқу ақысын бөліп төлеу, шәкіртақы, оқу жеңілдіктері мен сверка.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="dept-overview-card" style="border-top: 3px solid var(--cat-tech);">
+                            <div class="dept-icon-circle" style="background: rgba(251, 113, 133, 0.15); color: var(--cat-tech);">
+                                <i class="bi bi-hdd-network-fill"></i>
+                            </div>
+                            <h6 class="fw-bold mb-1" style="color: var(--text-title);">4. IT Helpdesk L1</h6>
+                            <span class="badge mb-2 font-monospace" style="background: rgba(251, 113, 133, 0.15); color: var(--cat-tech); font-size:0.72rem;">SLA: 2-4 сағат (Жедел)</span>
+                            <p class="small mb-0" style="color: var(--text-secondary); font-size: 0.82rem; line-height: 1.5;">
+                                Авторизация, корпоративтік пошта паролін қалпына келтіру, LMS қателері, кампус Wi-Fi.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <!-- =========================================================
@@ -1098,29 +1236,29 @@
             <div class="tab-pane fade" id="tab-testcases" role="tabpanel">
                 <div class="glass-card p-4 mb-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold mb-0 d-flex align-items-center gap-2">
+                        <h5 class="fw-bold mb-0 d-flex align-items-center gap-2" style="color: var(--text-title);">
                             <i class="bi bi-check2-square text-success"></i>
                             <span>Міндетті 3 Тексеру Мысалы (Mandatory Test Cases)</span>
                         </h5>
                         <span class="badge bg-success-subtle text-success border">100% Passed</span>
                     </div>
-                    <p class="text-muted small">
+                    <p class="small" style="color: var(--text-secondary);">
                         Тапсырма талаптарына сәйкес дайындалған сынақ кейстері. Түймені басып, онлайн тестілеуге болады:
                     </p>
 
                     <div class="row g-3">
                         <!-- Case 1 -->
                         <div class="col-md-4">
-                            <div class="test-case-card">
+                            <div class="about-topic-card about-card-academic">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <span class="badge bg-primary">1-Тест: Оқу мәселесі</span>
                                     <span class="badge bg-success-subtle text-success border"><i class="bi bi-check-lg"></i> PASSED</span>
                                 </div>
-                                <h6 class="fw-bold mb-1">«Не отображается оценка за лабораторную работу в LMS»</h6>
-                                <p class="small text-muted mb-3">Студенттің оқу жүйесіндегі бағасын тексеру сұрағы.</p>
-                                <div class="mt-auto pt-2 border-top d-flex justify-content-between align-items-center" style="border-color: var(--border-glass) !important;">
-                                    <small class="text-muted">Болжам: <strong>Academic</strong></small>
-                                    <button class="run-test-btn" onclick="runTestCase('Не отображается оценка за лабораторную работу в LMS')">
+                                <h6 class="fw-bold mb-1" style="color: var(--text-title);">«Не отображается оценка за лабораторную работу в LMS»</h6>
+                                <p class="small mb-3" style="color: var(--text-secondary);">Студенттің оқу жүйесіндегі бағасын тексеру сұрағы.</p>
+                                <div class="mt-auto pt-2 border-top d-flex justify-content-between align-items-center" style="border-color: rgba(255,255,255,0.1) !important;">
+                                    <small style="color: var(--text-muted);">Болжам: <strong style="color: var(--cat-academic);">Academic</strong></small>
+                                    <button class="btn btn-sm btn-outline-info" onclick="runTestCase('Не отображается оценка за лабораторную работу в LMS')">
                                         <i class="bi bi-play-fill"></i> Сынап көру
                                     </button>
                                 </div>
@@ -1129,16 +1267,16 @@
 
                         <!-- Case 2 -->
                         <div class="col-md-4">
-                            <div class="test-case-card">
+                            <div class="about-topic-card about-card-tech">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <span class="badge bg-danger">2-Тест: Техникалық қате</span>
                                     <span class="badge bg-success-subtle text-success border"><i class="bi bi-check-lg"></i> PASSED</span>
                                 </div>
-                                <h6 class="fw-bold mb-1">«Система тестирования зависла во время прохождения экзамена»</h6>
-                                <p class="small text-muted mb-3">Емтихан кезінде бағдарламаның қатып қалуы.</p>
-                                <div class="mt-auto pt-2 border-top d-flex justify-content-between align-items-center" style="border-color: var(--border-glass) !important;">
-                                    <small class="text-muted">Болжам: <strong>Tech Support</strong></small>
-                                    <button class="run-test-btn" onclick="runTestCase('Система тестирования зависла во время прохождения экзамена')">
+                                <h6 class="fw-bold mb-1" style="color: var(--text-title);">«Система тестирования зависла во время прохождения экзамена»</h6>
+                                <p class="small mb-3" style="color: var(--text-secondary);">Емтихан кезінде бағдарламаның қатып қалуы.</p>
+                                <div class="mt-auto pt-2 border-top d-flex justify-content-between align-items-center" style="border-color: rgba(255,255,255,0.1) !important;">
+                                    <small style="color: var(--text-muted);">Болжам: <strong style="color: var(--cat-tech);">Tech Support</strong></small>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="runTestCase('Система тестирования зависла во время прохождения экзамена')">
                                         <i class="bi bi-play-fill"></i> Сынап көру
                                     </button>
                                 </div>
@@ -1147,16 +1285,16 @@
 
                         <!-- Case 3 -->
                         <div class="col-md-4">
-                            <div class="test-case-card">
+                            <div class="about-topic-card about-card-docs">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <span class="badge bg-success">3-Тест: Анықтама алу</span>
                                     <span class="badge bg-success-subtle text-success border"><i class="bi bi-check-lg"></i> PASSED</span>
                                 </div>
-                                <h6 class="fw-bold mb-1">«Где я могу получить справку с места учебы для Egov?»</h6>
-                                <p class="small text-muted mb-3">Мемлекеттік мекемелерге ресми құжат сұрату.</p>
-                                <div class="mt-auto pt-2 border-top d-flex justify-content-between align-items-center" style="border-color: var(--border-glass) !important;">
-                                    <small class="text-muted">Болжам: <strong>Docs (ЦОС)</strong></small>
-                                    <button class="run-test-btn" onclick="runTestCase('Где я могу получить справку с места учебы для Egov?')">
+                                <h6 class="fw-bold mb-1" style="color: var(--text-title);">«Где я могу получить справку с места учебы для Egov?»</h6>
+                                <p class="small mb-3" style="color: var(--text-secondary);">Мемлекеттік мекемелерге ресми құжат сұрату.</p>
+                                <div class="mt-auto pt-2 border-top d-flex justify-content-between align-items-center" style="border-color: rgba(255,255,255,0.1) !important;">
+                                    <small style="color: var(--text-muted);">Болжам: <strong style="color: var(--cat-docs);">Docs (ЦОС)</strong></small>
+                                    <button class="btn btn-sm btn-outline-success" onclick="runTestCase('Где я могу получить справку с места учебы для Egov?')">
                                         <i class="bi bi-play-fill"></i> Сынап көру
                                     </button>
                                 </div>
@@ -1165,54 +1303,57 @@
                     </div>
                 </div>
 
-                <!-- Error Case & Limitations Analysis -->
+                <!-- Error Case Breakdown -->
                 <div class="row g-4">
                     <div class="col-lg-6">
-                        <div class="glass-card p-4 h-100" style="border-left: 4px solid #f59e0b !important;">
+                        <div class="glass-card p-4 h-100" style="border-left: 4px solid var(--cat-finance) !important;">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <h5 class="fw-bold mb-0 text-warning d-flex align-items-center gap-2">
                                     <i class="bi bi-exclamation-triangle-fill"></i>
                                     <span>Қате жағдайды талдау (Error Case)</span>
                                 </h5>
-                                <button class="run-test-btn" onclick="runTestCase('Не могу оплатить повторный курс из-за ошибки на сайте')">
+                                <button class="btn btn-sm btn-outline-warning" onclick="runTestCase('Не могу оплатить повторный курс из-за ошибки на сайте')">
                                     <i class="bi bi-play-fill"></i> Тексеру
                                 </button>
                             </div>
-                            <div class="p-3 rounded-3 my-2 border" style="background: rgba(245, 158, 11, 0.08); border-color: rgba(245, 158, 11, 0.25) !important;">
-                                <strong>Мәтін:</strong> <em>«Не могу оплатить повторный курс из-за ошибки на сайте»</em>
+                            <div class="p-3 rounded-3 my-2 border" style="background: rgba(251, 191, 36, 0.1); border-color: rgba(251, 191, 36, 0.3) !important;">
+                                <strong style="color: var(--text-title);">Мәтін:</strong> <em style="color: var(--text-primary);">«Не могу оплатить повторный курс из-за ошибки на сайте»</em>
                             </div>
-                            <div class="conflict-bar-wrapper my-3">
-                                <div class="d-flex justify-content-between small mb-1">
-                                    <span class="text-warning fw-bold">Қаржы маркері («оплатить»): 35.1%</span>
-                                    <span class="text-danger fw-bold">Техникалық маркер («ошибка»): 24.7%</span>
+                            <div class="p-3 rounded-3 my-3 border" style="background: rgba(0, 0, 0, 0.25); border-color: var(--border-glass) !important;">
+                                <div class="d-flex justify-content-between small mb-1.5 font-monospace">
+                                    <span style="color: var(--cat-finance); font-weight: 700;">«оплатить» (Қаржы): 35.1%</span>
+                                    <span style="color: var(--cat-tech); font-weight: 700;">«ошибка» (IT): 24.7%</span>
                                 </div>
-                                <div class="progress" style="height: 10px; background: rgba(255,255,255,0.08);">
-                                    <div class="progress-bar bg-warning" style="width: 58.7%">35.1%</div>
-                                    <div class="progress-bar bg-danger" style="width: 41.3%">24.7%</div>
+                                <div class="progress" style="height: 12px; background: rgba(255,255,255,0.08);">
+                                    <div class="progress-bar bg-warning font-monospace small" style="width: 58.7%">35.1%</div>
+                                    <div class="progress-bar bg-danger font-monospace small" style="width: 41.3%">24.7%</div>
                                 </div>
                             </div>
-                            <ul class="small text-muted ps-3 mb-0">
-                                <li><strong>Себебі:</strong> Сұраныста бір мезетте екі санаттың маркері қатар келген. TF-IDF сөздігінде «оплатить» салмағы басым түскен.</li>
-                                <li><strong>Шешімі:</strong> Multi-label classification (өтінішті әрі IT, әрі Бухгалтерияға жолдау) немесе жүйелік қате фильтрі.</li>
+                            <ul class="small ps-3 mb-0" style="color: var(--text-secondary); line-height: 1.6;">
+                                <li><strong>Себебі:</strong> Сұраныста бір мезетте екі санаттың маркері қатар келген. TF-IDF сөздігінде «оплатить» сөзінің жиілігі басым түскен.</li>
+                                <li><strong>Шешімі:</strong> Multi-label classification (өтінішті бір уақытта әрі IT, әрі Бухгалтерияға жолдау) немесе қате маркеріне арнайы фильтр қою.</li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="col-lg-6">
-                        <div class="glass-card p-4 h-100" style="border-left: 4px solid #64748b !important;">
-                            <h5 class="fw-bold mb-3 d-flex align-items-center gap-2">
-                                <i class="bi bi-cone-striped text-secondary"></i>
+                        <div class="glass-card p-4 h-100" style="border-left: 4px solid var(--cat-academic) !important;">
+                            <h5 class="fw-bold mb-3 d-flex align-items-center gap-2" style="color: var(--text-title);">
+                                <i class="bi bi-cone-striped" style="color: var(--cat-academic);"></i>
                                 <span>Жүйелік шектеулер (Model Limitations)</span>
                             </h5>
                             <div class="d-flex flex-column gap-2.5">
-                                <div class="p-2.5 rounded border small" style="background: rgba(0,0,0,0.02); border-color: var(--border-glass) !important;">
-                                    <strong>1. Сленг пен опечаткалар:</strong> Студенттік жаргон («препод», «скиньте», «бағам түспеді») TF-IDF сөздігінде танылмай қалуы мүмкін.
+                                <div class="p-3 rounded-3 border small" style="background: rgba(0,0,0,0.15); border-color: var(--border-glass) !important;">
+                                    <strong style="color: var(--cat-academic);">1. Сленг пен опечаткалар:</strong>
+                                    <div style="color: var(--text-secondary);">Студенттік бейресми сөздер («препод», «скиньте», «бағам түспеді») TF-IDF сөздігіне ілінбей қалуы мүмкін.</div>
                                 </div>
-                                <div class="p-2.5 rounded border small" style="background: rgba(0,0,0,0.02); border-color: var(--border-glass) !important;">
-                                    <strong>2. Тым қысқа өтініштер:</strong> «Бағам жоқ», «Қашан?», «Сәлеметсіз бе» секілді 1-2 сөздік өтініштерде ақпарат жеткіліксіз.
+                                <div class="p-3 rounded-3 border small" style="background: rgba(0,0,0,0.15); border-color: var(--border-glass) !important;">
+                                    <strong style="color: var(--cat-finance);">2. Тым қысқа өтініштер:</strong>
+                                    <div style="color: var(--text-secondary);">«Бағам жоқ», «Қашан?», «Сәлеметсіз бе» секілді 1-2 сөздік сұрақтарда мағыналық белгілер жеткіліксіз.</div>
                                 </div>
-                                <div class="p-2.5 rounded border small" style="background: rgba(0,0,0,0.02); border-color: var(--border-glass) !important;">
-                                    <strong>3. Терең семантика:</strong> n-gram статистикалық моделі мәтіннің контекстік байланысын Transformer моделі сияқты терең сезінбейді.
+                                <div class="p-3 rounded-3 border small" style="background: rgba(0,0,0,0.15); border-color: var(--border-glass) !important;">
+                                    <strong style="color: var(--cat-tech);">3. Терең семантикалық түсінік:</strong>
+                                    <div style="color: var(--text-secondary);">Модель n-gram статистикасына сүйенеді, сөздердің терең контекстік байланысын толық талдамайды.</div>
                                 </div>
                             </div>
                         </div>
@@ -1225,40 +1366,39 @@
                  ========================================================= -->
             <div class="tab-pane fade" id="tab-metrics" role="tabpanel">
                 <div class="row g-4">
-                    <!-- Metric Cards Row -->
                     <div class="col-6 col-md-3">
                         <div class="glass-card p-3 text-center">
-                            <div class="hero-metric-number text-primary">84.8%</div>
+                            <div class="hero-metric-number font-monospace" style="color: var(--cat-academic);">84.8%</div>
                             <div class="hero-metric-label">Test Accuracy</div>
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="glass-card p-3 text-center">
-                            <div class="hero-metric-number text-success">0.846</div>
+                            <div class="hero-metric-number font-monospace" style="color: var(--cat-docs);">0.846</div>
                             <div class="hero-metric-label">Macro F1-Score</div>
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="glass-card p-3 text-center">
-                            <div class="hero-metric-number text-warning" id="datasetCountMetric">{{ dataset_size }}</div>
+                            <div class="hero-metric-number font-monospace" style="color: var(--cat-finance);" id="datasetCountMetric">{{ dataset_size }}</div>
                             <div class="hero-metric-label">Деректер көлемі</div>
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="glass-card p-3 text-center">
-                            <div class="hero-metric-number text-info">0.21 ms</div>
+                            <div class="hero-metric-number font-monospace" style="color: var(--cat-tech);">0.21 ms</div>
                             <div class="hero-metric-label">Inference Latency</div>
                         </div>
                     </div>
 
-                    <!-- 4x4 Confusion Matrix with Heatmap Cells -->
+                    <!-- 4x4 Confusion Matrix with Distinct Heatmap -->
                     <div class="col-lg-6">
                         <div class="glass-card p-4 h-100">
-                            <h5 class="fw-bold mb-2 d-flex align-items-center gap-2">
-                                <i class="bi bi-grid-3x3 text-primary"></i>
+                            <h5 class="fw-bold mb-2 d-flex align-items-center gap-2" style="color: var(--text-title);">
+                                <i class="bi bi-grid-3x3" style="color: var(--cat-academic);"></i>
                                 <span>4x4 Қателер матрицасы (Confusion Matrix)</span>
                             </h5>
-                            <p class="text-muted small mb-3">
+                            <p class="small mb-3" style="color: var(--text-secondary);">
                                 Тестілік 59 мысал бойынша нақты (True) және болжанған (Predicted) кластар:
                             </p>
                             <div class="table-responsive">
@@ -1266,10 +1406,10 @@
                                     <thead>
                                         <tr>
                                             <th class="small text-muted">True \ Pred</th>
-                                            <th class="small text-primary text-center">Academic</th>
-                                            <th class="small text-success text-center">Docs</th>
-                                            <th class="small text-warning text-center">Finance</th>
-                                            <th class="small text-danger text-center">Tech</th>
+                                            <th class="small text-center" style="color: var(--cat-academic);">Academic</th>
+                                            <th class="small text-center" style="color: var(--cat-docs);">Docs</th>
+                                            <th class="small text-center" style="color: var(--cat-finance);">Finance</th>
+                                            <th class="small text-center" style="color: var(--cat-tech);">Tech</th>
                                         </tr>
                                     </thead>
                                     <tbody id="cmBody">
@@ -1304,7 +1444,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <small class="text-muted d-block mt-2">
+                            <small class="d-block mt-2" style="color: var(--text-muted);">
                                 <i class="bi bi-info-circle me-1"></i> Жасыл диагональдағы ұяшықтар — дәл табылған өтініштер (50/59 = 84.75%).
                             </small>
                         </div>
@@ -1313,12 +1453,12 @@
                     <!-- Model Comparison Benchmark -->
                     <div class="col-lg-6">
                         <div class="glass-card p-4 h-100">
-                            <h5 class="fw-bold mb-2 d-flex align-items-center gap-2">
-                                <i class="bi bi-bar-chart-line text-success"></i>
+                            <h5 class="fw-bold mb-2 d-flex align-items-center gap-2" style="color: var(--text-title);">
+                                <i class="bi bi-bar-chart-line" style="color: var(--cat-docs);"></i>
                                 <span>Модельдерді салыстыру (Benchmark)</span>
                             </h5>
-                            <p class="text-muted small mb-3">
-                                3 баламалы классификатор нәтижесі (Word 1-2 + Char_wb 3-5):
+                            <p class="small mb-3" style="color: var(--text-secondary);">
+                                Баламалы классификаторлар арасындағы сынақ нәтижелері:
                             </p>
                             <div class="table-responsive">
                                 <table class="table align-middle small">
@@ -1331,30 +1471,30 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr style="background: rgba(59, 130, 246, 0.12); font-weight: 700;">
-                                            <td class="text-primary"><i class="bi bi-check-circle-fill me-1"></i> Logistic Regression</td>
-                                            <td>84.75%</td>
-                                            <td>0.8463</td>
-                                            <td>0.21 ms</td>
+                                        <tr style="background: rgba(56, 189, 248, 0.15); font-weight: 700;">
+                                            <td style="color: var(--cat-academic);"><i class="bi bi-check-circle-fill me-1"></i> Logistic Regression</td>
+                                            <td class="font-monospace">84.75%</td>
+                                            <td class="font-monospace">0.8463</td>
+                                            <td class="font-monospace">0.21 ms</td>
                                         </tr>
                                         <tr>
-                                            <td>Multinomial Naive Bayes</td>
-                                            <td>83.05%</td>
-                                            <td>0.8288</td>
-                                            <td>0.21 ms</td>
+                                            <td style="color: var(--text-secondary);">Multinomial Naive Bayes</td>
+                                            <td class="font-monospace">83.05%</td>
+                                            <td class="font-monospace">0.8288</td>
+                                            <td class="font-monospace">0.21 ms</td>
                                         </tr>
                                         <tr>
-                                            <td>Linear SVM (LinearSVC)</td>
-                                            <td>84.75%</td>
-                                            <td>0.8436</td>
-                                            <td>0.21 ms</td>
+                                            <td style="color: var(--text-secondary);">Linear SVM (LinearSVC)</td>
+                                            <td class="font-monospace">84.75%</td>
+                                            <td class="font-monospace">0.8436</td>
+                                            <td class="font-monospace">0.21 ms</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="p-3 rounded-3 mt-3 border small" style="background: rgba(0,0,0,0.02); border-color: var(--border-glass) !important;">
-                                <strong>Неге Logistic Regression таңдалды?</strong><br>
-                                Дәлдікпен (84.8%) бірге калибрленген ықтималдықтарды (predict_proba) береді, бұл сенімділік төмен болғанда модераторға бағыттауға мүмкіндік береді.
+                            <div class="p-3 rounded-3 mt-3 border small" style="background: rgba(0,0,0,0.15); border-color: var(--border-glass) !important; color: var(--text-secondary); line-height: 1.6;">
+                                <strong style="color: var(--text-title);">Неге Logistic Regression таңдалды?</strong><br>
+                                Жоғары дәлдікпен (84.8%) бірге калибрленген сенімділік үлестірімін (predict_proba) береді, бұл күмәнді өтініштерді адам-модераторға бағыттауға мүмкіндік береді.
                             </div>
                         </div>
                     </div>
@@ -1368,14 +1508,14 @@
                 <div class="glass-card p-4">
                     <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
                         <div>
-                            <h5 class="fw-bold mb-1 d-flex align-items-center gap-2">
-                                <i class="bi bi-clock-history text-primary"></i>
+                            <h5 class="fw-bold mb-1 d-flex align-items-center gap-2" style="color: var(--text-title);">
+                                <i class="bi bi-clock-history" style="color: var(--cat-academic);"></i>
                                 <span>Өтініштер тарихы (SQLite + Cookies)</span>
                             </h5>
-                            <small class="text-muted">Браузерді жапсаңыз да жеке өтініштеріңіз сақталады.</small>
+                            <small style="color: var(--text-muted);">Браузерді жапсаңыз да жеке өтініштеріңіз сақталады.</small>
                         </div>
                         <div class="d-flex gap-2 align-items-center">
-                            <button class="btn btn-outline-primary btn-sm" onclick="exportHistoryCSV()">
+                            <button class="btn btn-outline-info btn-sm" onclick="exportHistoryCSV()">
                                 <i class="bi bi-download"></i> CSV Экспорт
                             </button>
                             <button class="btn btn-outline-danger btn-sm" onclick="clearHistory()">
@@ -1387,7 +1527,7 @@
                     <!-- Search & Filter Controls -->
                     <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 pt-2 border-top" style="border-color: var(--border-glass) !important;">
                         <div class="d-flex flex-wrap gap-1.5 align-items-center">
-                            <small class="text-muted me-1 fw-bold">Фильтр:</small>
+                            <small class="me-1 fw-bold" style="color: var(--text-muted);">Сүзгі:</small>
                             <span class="filter-chip active" onclick="filterHistory('all', this)">Барлығы</span>
                             <span class="filter-chip" onclick="filterHistory('academic', this)">Academic</span>
                             <span class="filter-chip" onclick="filterHistory('docs', this)">Docs</span>
@@ -1427,30 +1567,122 @@
 
         </div>
 
-        <!-- Project About Section -->
+        <!-- =========================================================
+             "ЖОБА ТУРАЛЫ" (ABOUT SECTION) - HIGH CONTRAST & CLEAR COLOR SEPARATION
+             ========================================================= -->
         <section class="glass-card p-4 my-4" id="about">
-            <span class="badge bg-primary-subtle text-primary border mb-2">Жоба туралы · About</span>
-            <h4 class="fw-bold mb-2">Студенттік өтініштерді интеллектуалды бағыттау</h4>
-            <p class="text-muted small mb-4">
-                <strong>student-support</strong> деканат, ЦОС, бухгалтерия және IT-қолдау бөлімдерінің күнделікті жүктемесін жеңілдетеді. 293 шынайы сұраныс негізінде жасалған NLP моделі мәтінді талдап, жауапты бөлімді анықтайды.
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="badge border" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3) !important;">
+                    Жоба туралы · Executive Architecture
+                </span>
+                <span class="small font-monospace" style="color: var(--text-muted);">QAIRU · ICT1103 (2026–2027)</span>
+            </div>
+
+            <h3 class="fw-bold mb-2" style="color: var(--text-title);">Студенттік өтініштерді интеллектуалды бағыттау жүйесі</h3>
+            <p class="mb-4" style="color: var(--text-secondary); max-width: 820px; line-height: 1.65;">
+                <strong>student-support</strong> студенттер деканаты, СҚКО, бухгалтерия және IT-қолдау бөлімдеріне түсетін күнделікті жүздеген еркін мәтіндік сұраныстарды автоматты өңдеуге арналған. Қолмен сұрыптау 2-3 күнге созылса, біздің жүйе шешімді <strong>0.2 миллисекундта</strong> қабылдайды.
             </p>
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <div class="p-3 rounded-3 border h-100" style="background: rgba(0,0,0,0.02); border-color: var(--border-glass) !important;">
-                        <strong class="text-primary d-block mb-1"><i class="bi bi-mortarboard me-1"></i> Оқу және құжаттар</strong>
-                        <span class="text-muted small">Бағалар, транскрипт, емтихан кестесі, әскери 26-анықтама.</span>
+
+            <!-- 4 Distinct Color-Coded Department Cards -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-3">
+                    <div class="about-topic-card about-card-academic">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <span class="p-2 rounded-3" style="background: rgba(56, 189, 248, 0.2); color: var(--cat-academic);">
+                                <i class="bi bi-mortarboard-fill fs-5"></i>
+                            </span>
+                            <strong style="color: var(--text-title);">Оқу мәселелері</strong>
+                        </div>
+                        <span class="badge mb-2 font-monospace" style="background: rgba(56, 189, 248, 0.15); color: var(--cat-academic); width: fit-content;">Деканат & Эдвайзер</span>
+                        <p class="small mb-0" style="color: var(--text-secondary); line-height: 1.55;">
+                            LMS жүйесіндегі бағалар, силлабустар, аралық бақылау, пәнді қайта есептеу және топ ауыстыру.
+                        </p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="p-3 rounded-3 border h-100" style="background: rgba(0,0,0,0.02); border-color: var(--border-glass) !important;">
-                        <strong class="text-warning d-block mb-1"><i class="bi bi-credit-card me-1"></i> Төлемдер мен қаржы</strong>
-                        <span class="text-muted small">Kaspi төлемдері, оқу ақысын бөліп төлеу, стипендия, жеңілдіктер.</span>
+
+                <div class="col-md-3">
+                    <div class="about-topic-card about-card-docs">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <span class="p-2 rounded-3" style="background: rgba(52, 211, 153, 0.2); color: var(--cat-docs);">
+                                <i class="bi bi-file-earmark-text-fill fs-5"></i>
+                            </span>
+                            <strong style="color: var(--text-title);">Құжаттар мен анықтама</strong>
+                        </div>
+                        <span class="badge mb-2 font-monospace" style="background: rgba(52, 211, 153, 0.15); color: var(--cat-docs); width: fit-content;">СҚКО / ЦОС</span>
+                        <p class="small mb-0" style="color: var(--text-secondary); line-height: 1.55;">
+                            Оқу орнынан ресми анықтама, транскрипт, 26-нысан (военкомат), студенттік билет дубликаты.
+                        </p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="p-3 rounded-3 border h-100" style="background: rgba(0,0,0,0.02); border-color: var(--border-glass) !important;">
-                        <strong class="text-danger d-block mb-1"><i class="bi bi-hdd-network me-1"></i> Техникалық қолдау</strong>
-                        <span class="text-muted small">LMS қателері, пошта паролін қайта орнату, кампус Wi-Fi жүйесі.</span>
+
+                <div class="col-md-3">
+                    <div class="about-topic-card about-card-finance">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <span class="p-2 rounded-3" style="background: rgba(251, 191, 36, 0.2); color: var(--cat-finance);">
+                                <i class="bi bi-credit-card-fill fs-5"></i>
+                            </span>
+                            <strong style="color: var(--text-title);">Қаржы және төлемдер</strong>
+                        </div>
+                        <span class="badge mb-2 font-monospace" style="background: rgba(251, 191, 36, 0.15); color: var(--cat-finance); width: fit-content;">Бухгалтерия</span>
+                        <p class="small mb-0" style="color: var(--text-secondary); line-height: 1.55;">
+                            Kaspi төлемдерінің түсуі, оқу ақысын бөліп төлеу кестесі, шәкіртақы, ректорлық жеңілдіктер.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="about-topic-card about-card-tech">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <span class="p-2 rounded-3" style="background: rgba(251, 113, 133, 0.2); color: var(--cat-tech);">
+                                <i class="bi bi-hdd-network-fill fs-5"></i>
+                            </span>
+                            <strong style="color: var(--text-title);">Техникалық көмек</strong>
+                        </div>
+                        <span class="badge mb-2 font-monospace" style="background: rgba(251, 113, 133, 0.15); color: var(--cat-tech); width: fit-content;">IT Helpdesk</span>
+                        <p class="small mb-0" style="color: var(--text-secondary); line-height: 1.55;">
+                            LMS 500 қателері, кампус Wi-Fi, корпоративтік пошта құпиясөзі, турникет картасының жұмысы.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step-by-Step Architecture Pipeline -->
+            <h6 class="fw-bold mb-3" style="color: var(--text-title);"><i class="bi bi-diagram-3-fill me-1 text-primary"></i> Жүйенің жұмыс алгоритмі (End-to-End Pipeline)</h6>
+            <div class="row g-2">
+                <div class="col-md-3">
+                    <div class="workflow-step">
+                        <div class="workflow-num">1</div>
+                        <div>
+                            <strong class="d-block" style="color: var(--text-title); font-size: 0.88rem;">Тексттік өтініш</strong>
+                            <small style="color: var(--text-muted);">Студент сұрағы (RU/KK/EN)</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="workflow-step">
+                        <div class="workflow-num">2</div>
+                        <div>
+                            <strong class="d-block" style="color: var(--text-title); font-size: 0.88rem;">TF-IDF Вектор</strong>
+                            <small style="color: var(--text-muted);">Word 1-2 + Char_wb 3-5</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="workflow-step">
+                        <div class="workflow-num">3</div>
+                        <div>
+                            <strong class="d-block" style="color: var(--text-title); font-size: 0.88rem;">LogReg Инференс</strong>
+                            <small style="color: var(--text-muted);">84.8% дәлдік &lt;0.25мс</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="workflow-step">
+                        <div class="workflow-num">4</div>
+                        <div>
+                            <strong class="d-block" style="color: var(--text-title); font-size: 0.88rem;">SLA & Маршрут</strong>
+                            <small style="color: var(--text-muted);">Бөлімге тикет жолдау</small>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1462,9 +1694,9 @@
         <div class="container text-center">
             <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
                 <div>
-                    <strong>student-support</strong> · QAIRU (2026–2027) · ICT1103 Group Project
+                    <strong style="color: var(--text-title);">student-support</strong> · QAIRU (2026–2027) · ICT1103 Group Project
                 </div>
-                <div class="text-muted font-monospace small">
+                <div class="font-monospace small" style="color: var(--text-muted);">
                     TF-IDF + Logistic Regression · REST API: <code>/api/predict</code> · SQLite Active Learning
                 </div>
             </div>
@@ -1488,7 +1720,7 @@
         let audioCtx = null;
 
         /* =========================================================
-           WEB AUDIO SYNTHESIZER (Modern Micro-Interactions)
+           WEB AUDIO SYNTHESIZER (Micro-Interactions)
            ========================================================= */
         function getAudioContext() {
             if (!audioCtx) {
@@ -1509,8 +1741,8 @@
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(600, ctx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.04);
+                osc.frequency.setValueAtTime(650, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(320, ctx.currentTime + 0.04);
                 gain.gain.setValueAtTime(0.04, ctx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
                 osc.connect(gain);
@@ -1588,7 +1820,7 @@
         const canvas = document.getElementById('particlesCanvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        let mouse = { x: null, y: null, radius: 120 };
+        let mouse = { x: null, y: null, radius: 130 };
 
         function resizeCanvas() {
             if (!canvas) return;
@@ -1601,16 +1833,13 @@
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
                 this.size = Math.random() * 2 + 1;
-                this.baseX = this.x;
-                this.baseY = this.y;
-                this.density = Math.random() * 15 + 5;
                 this.vx = (Math.random() - 0.5) * 0.7;
                 this.vy = (Math.random() - 0.5) * 0.7;
             }
 
             draw() {
                 const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-                ctx.fillStyle = isDark ? 'rgba(96, 165, 250, 0.75)' : 'rgba(255, 255, 255, 0.85)';
+                ctx.fillStyle = isDark ? 'rgba(56, 189, 248, 0.8)' : 'rgba(255, 255, 255, 0.9)';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.closePath();
@@ -1624,17 +1853,14 @@
                 if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
                 if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
 
-                // Mouse interaction
                 if (mouse.x !== null) {
                     const dx = mouse.x - this.x;
                     const dy = mouse.y - this.y;
                     const distance = Math.hypot(dx, dy);
                     if (distance < mouse.radius) {
-                        const forceDirectionX = dx / distance;
-                        const forceDirectionY = dy / distance;
                         const force = (mouse.radius - distance) / mouse.radius;
-                        this.x -= forceDirectionX * force * 3;
-                        this.y -= forceDirectionY * force * 3;
+                        this.x -= (dx / distance) * force * 3;
+                        this.y -= (dy / distance) * force * 3;
                     }
                 }
             }
@@ -1643,7 +1869,7 @@
         function initParticles() {
             resizeCanvas();
             particles = [];
-            const count = Math.floor((canvas.width * canvas.height) / 14000) || 40;
+            const count = Math.floor((canvas.width * canvas.height) / 14000) || 45;
             for (let i = 0; i < count; i++) {
                 particles.push(new Particle());
             }
@@ -1654,11 +1880,11 @@
             for (let a = 0; a < particles.length; a++) {
                 for (let b = a + 1; b < particles.length; b++) {
                     const dist = Math.hypot(particles[a].x - particles[b].x, particles[a].y - particles[b].y);
-                    if (dist < 90) {
-                        const opacity = 1 - dist / 90;
+                    if (dist < 95) {
+                        const opacity = 1 - dist / 95;
                         ctx.strokeStyle = isDark
-                            ? `rgba(59, 130, 246, ${opacity * 0.25})`
-                            : `rgba(255, 255, 255, ${opacity * 0.25})`;
+                            ? `rgba(56, 189, 248, ${opacity * 0.28})`
+                            : `rgba(255, 255, 255, ${opacity * 0.28})`;
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particles[a].x, particles[a].y);
@@ -1696,7 +1922,7 @@
         });
 
         /* =========================================================
-           PARTICLE BURST / CELEBRATION EFFECT (Confetti on Result)
+           PARTICLE BURST CELEBRATION (Confetti on Result)
            ========================================================= */
         const confettiCanvas = document.getElementById('confettiCanvas');
         const cCtx = confettiCanvas.getContext('2d');
@@ -1708,11 +1934,11 @@
             burstParticles = [];
 
             const colors = {
-                academic: ['#3b82f6', '#60a5fa', '#93c5fd'],
-                docs: ['#10b981', '#34d399', '#6ee7b7'],
-                finance: ['#f59e0b', '#fbbf24', '#fde68a'],
-                tech_support: ['#ef4444', '#f87171', '#fca5a5']
-            }[category] || ['#3b82f6', '#8b5cf6', '#ffffff'];
+                academic: ['#38bdf8', '#0284c7', '#93c5fd'],
+                docs: ['#34d399', '#059669', '#6ee7b7'],
+                finance: ['#fbbf24', '#d97706', '#fef08a'],
+                tech_support: ['#fb7185', '#e11d48', '#fecdd3']
+            }[category] || ['#38bdf8', '#8b5cf6', '#ffffff'];
 
             for (let i = 0; i < 45; i++) {
                 const angle = Math.random() * Math.PI * 2;
@@ -1740,7 +1966,7 @@
                     active = true;
                     p.x += p.vx;
                     p.y += p.vy;
-                    p.vy += 0.1; // gravity
+                    p.vy += 0.1;
                     p.alpha -= p.decay;
 
                     cCtx.save();
@@ -1757,7 +1983,7 @@
         }
 
         /* =========================================================
-           HERO STAT COUNTER ROLLING ANIMATION
+           HERO STAT ROLLING COUNTERS
            ========================================================= */
         function animateValue(id, start, end, duration, isFloat = false, suffix = '') {
             const obj = document.getElementById(id);
@@ -1783,7 +2009,7 @@
         }
 
         /* =========================================================
-           CHARACTER COUNTER & HOTKEY LISTENERS
+           CHARACTER COUNTER & HOTKEYS
            ========================================================= */
         function updateCharCount() {
             const text = document.getElementById('queryText').value;
@@ -1798,18 +2024,18 @@
         });
 
         /* =========================================================
-           TOAST SYSTEM
+           TOAST NOTIFICATIONS
            ========================================================= */
         function showToast(message, icon = 'bi-check2-circle') {
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
             toast.className = 'custom-toast';
-            toast.innerHTML = `<i class="bi ${icon} text-primary fs-5"></i><span>${message}</span>`;
+            toast.innerHTML = `<i class="bi ${icon}" style="color: var(--cat-academic); font-size: 1.2rem;"></i><span>${message}</span>`;
             container.appendChild(toast);
             setTimeout(() => {
                 toast.style.transition = 'all 0.4s ease';
                 toast.style.opacity = '0';
-                toast.style.transform = 'translateY(10px)';
+                toast.style.transform = 'translateY(12px)';
                 setTimeout(() => toast.remove(), 400);
             }, 3000);
         }
@@ -1832,7 +2058,6 @@
         }
 
         function runTestCase(text) {
-            // Switch to Classifier Tab
             const triggerEl = document.querySelector('#mainTabs button[data-bs-target="#tab-classifier"]');
             const tab = bootstrap.Tab.getOrCreateInstance(triggerEl);
             tab.show();
@@ -1866,11 +2091,9 @@
                 lastTicketCategory = data.category;
                 document.getElementById('trainingOptIn').checked = false;
 
-                // Sparkle particles & Chime
                 triggerSparkleBurst(data.category);
                 playSuccessChime();
 
-                // Reset feedback UI
                 document.getElementById('feedbackButtons').classList.remove('d-none');
                 document.getElementById('feedbackSuccess').classList.add('d-none');
                 document.getElementById('feedbackError').classList.add('d-none');
@@ -1887,22 +2110,19 @@
             const card = document.getElementById('resultCard');
             card.classList.remove('d-none');
             card.classList.remove('animate-result');
-            void card.offsetWidth; // trigger reflow
+            void card.offsetWidth;
             card.classList.add('animate-result');
 
-            // Category Details
             document.getElementById('resCategoryName').innerText = (data.category_name_kk || '') + ' / ' + (data.category_name_ru || '');
             document.getElementById('resDept').innerText = `Жауапты бөлім: ${data.department_kk} (${data.department_ru})`;
 
             const badge = document.getElementById('resBadge');
             badge.innerText = data.category.toUpperCase();
-            badge.className = `badge bg-${data.badge} px-2.5 py-1 text-uppercase fw-bold`;
+            badge.className = `badge bg-${data.badge} px-3 py-1.5 text-uppercase fw-bold`;
 
-            // Language
             const langLabels = { kk: '🇰🇿 Қазақша', ru: '🇷🇺 Русский', en: '🇬🇧 English' };
             document.getElementById('resLang').innerText = langLabels[data.language] || data.language.toUpperCase();
 
-            // Latency & Priority
             document.getElementById('resLatency').innerText = `Latency: ${data.latency_ms} ms`;
             const pBadge = document.getElementById('resPriority');
             pBadge.innerText = data.priority_label;
@@ -1910,14 +2130,12 @@
             document.getElementById('resPriorityReason').innerText = data.priority_reason;
             document.getElementById('resSla').innerText = data.sla;
 
-            // Animate Confidence Bars
             const probs = data.probabilities || {};
             updateProbBar('Academic', probs.academic || 0);
             updateProbBar('Docs', probs.docs || 0);
             updateProbBar('Finance', probs.finance || 0);
             updateProbBar('Tech', probs.tech_support || 0);
 
-            // Dynamic Neon Glow Accent
             card.className = `glass-card result-card-container p-4 h-100 animate-result ${data.category}`;
         }
 
@@ -1970,7 +2188,7 @@
         }
 
         /* =========================================================
-           HISTORY & FILTERING ENGINE
+           HISTORY & FILTER ENGINE
            ========================================================= */
         function addTicketToHistory(ticket) {
             sessionTickets.unshift(ticket);
@@ -2023,7 +2241,7 @@
                 row.style.borderBottom = '1px solid var(--border-glass)';
 
                 row.innerHTML = `
-                    <td class="font-monospace fw-bold text-primary">${t.id}</td>
+                    <td class="font-monospace fw-bold text-info">${t.id}</td>
                     <td class="text-muted" style="white-space:nowrap;">${t.timestamp}</td>
                     <td style="max-width: 260px;" class="text-truncate" title="${t.text.replace(/"/g, '&quot;')}">${t.text}</td>
                     <td><span class="badge bg-${badgeClass}">${t.category}</span></td>
@@ -2074,7 +2292,7 @@
         }
 
         /* =========================================================
-           INITIALIZATION ON DOM LOAD
+           INITIALIZATION
            ========================================================= */
         document.addEventListener('DOMContentLoaded', async () => {
             initTheme();
@@ -2083,7 +2301,6 @@
             animateParticles();
             runHeroCounters();
 
-            // Fetch history from server (cookie-scoped)
             try {
                 const res = await fetch('/api/history');
                 if (res.ok) {
