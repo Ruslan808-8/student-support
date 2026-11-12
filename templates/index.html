@@ -258,7 +258,7 @@
         }
 
         /* =========================================================
-           HERO SECTION WITH INTERACTIVE PARTICLES
+           HERO SECTION
            ========================================================= */
         .hero-banner {
             position: relative;
@@ -271,16 +271,6 @@
 
         [data-theme="light"] .hero-banner {
             color: #ffffff;
-        }
-
-        #particlesCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: auto;
-            z-index: 1;
         }
 
         .hero-content {
@@ -935,7 +925,6 @@
         .hero-banner {
             background: var(--hero-gradient); padding: clamp(2.6rem,6vw,4.5rem) 0;
         }
-        #particlesCanvas { display: none; }
         .hero-title { font-size: clamp(2.25rem,5vw,3.6rem); font-weight: 700; letter-spacing: -.055em; }
         .hero-subtitle { color: #aeb9ca; font-size: 1rem; max-width: 620px; }
         .hero-metric-box {
@@ -1041,7 +1030,7 @@
         html { scroll-behavior: smooth; }
         body { background:var(--bg-base); color:var(--text-primary); letter-spacing:-.015em; }
         body::before { content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.65;background:radial-gradient(circle at 14% 18%,rgba(255,255,255,.9),transparent 30%),radial-gradient(circle at 82% 52%,rgba(219,234,254,.62),transparent 34%); }
-        .ambient-glow { display:block;z-index:0;opacity:.55;filter:blur(100px);animation:drift 24s ease-in-out infinite alternate;transform:translate3d(var(--parallax-x,0),var(--parallax-y,0),0); }
+        .ambient-glow { display:block;z-index:0;opacity:.55;filter:blur(100px);animation:drift 24s ease-in-out infinite alternate; }
         .glow-1 { background:rgba(96,165,250,.26); }.glow-2 { background:rgba(191,219,254,.46);animation-delay:-8s; }.glow-3 { background:rgba(219,234,254,.75);animation-delay:-15s; }
         @keyframes drift { from { translate:-12px -8px; } to { translate:18px 16px; } }
         .navbar-custom { background:var(--nav-bg);border-color:var(--border-glass); }
@@ -1058,7 +1047,7 @@
         .pipeline-status-bar { background:rgba(255,255,255,.65);border-radius:16px; }
         .textarea-wrapper { border-radius:18px; }.textarea-wrapper:focus-within,.search-input:focus { border-color:#60a5fa;box-shadow:0 0 0 4px rgba(96,165,250,.15); }
         .btn-modern-primary { background:linear-gradient(135deg,#3b82f6,#2563eb);border-radius:14px;box-shadow:0 8px 20px rgba(59,130,246,.2); }
-        .btn-modern-primary:hover { background:linear-gradient(135deg,#2563eb,#1d4ed8);box-shadow:0 12px 28px rgba(59,130,246,.28); }.btn-modern-primary:active,.cursor-press { scale:.97; }
+        .btn-modern-primary:hover { background:linear-gradient(135deg,#2563eb,#1d4ed8);box-shadow:0 12px 28px rgba(59,130,246,.28); }.btn-modern-primary:active { scale:.98; }
         .preset-chip,.filter-chip { border-radius:12px; }.filter-chip.active,.filter-chip:hover { background:#3b82f6;border-color:#3b82f6; }
         .hero-banner,.navbar-custom,footer { position:relative;z-index:1; }.custom-pills,.glass-card,.pipeline-status-bar { backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px); }
         .examples-wrap { border-top:1px solid var(--border-glass);padding-top:12px; }
@@ -1069,12 +1058,80 @@
         .examples-panel { display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows 360ms cubic-bezier(.2,.7,.2,1),opacity 260ms ease; }
         .examples-panel.is-open { grid-template-rows:1fr;opacity:1; }.examples-panel-inner { overflow:hidden;padding-top:0;transition:padding 360ms ease; }.examples-panel.is-open .examples-panel-inner { padding-top:10px; }
         .reveal-item { opacity:0;transform:translateY(16px);transition:opacity 500ms ease,transform 500ms cubic-bezier(.2,.7,.2,1); }.reveal-item.is-visible { opacity:1;transform:translateY(0); }
-        .cursor-dot,.cursor-ring { position:fixed;left:0;top:0;z-index:10000;pointer-events:none;border-radius:50%;opacity:0; }
-        .cursor-dot { width:6px;height:6px;background:#2563eb;margin:-3px 0 0 -3px; }.cursor-ring { width:34px;height:34px;border:1px solid rgba(59,130,246,.5);background:rgba(96,165,250,.08);margin:-17px 0 0 -17px;transition:width 180ms ease,height 180ms ease,margin 180ms ease,background 180ms ease,border-color 180ms ease; }
-        .cursor-ring.is-hover { width:48px;height:48px;margin:-24px 0 0 -24px;background:rgba(96,165,250,.16);border-color:rgba(37,99,235,.7); }
-        @media (pointer:fine) and (prefers-reduced-motion:no-preference) { body,button,a { cursor:none; }.cursor-dot,.cursor-ring { opacity:1; } input,textarea { cursor:text; } }
         @media (max-width:767.98px) { .hero-banner { padding:2.5rem 0; }.glass-card,.dept-overview-card,.about-topic-card { border-radius:18px; } }
         @media (prefers-reduced-motion:reduce) { .ambient-glow { animation:none; }.reveal-item { opacity:1;transform:none; } }
+
+        /* Refined responsive design system */
+        :root {
+            --space-1: .5rem; --space-2: 1rem; --space-3: 1.5rem; --space-4: 2rem; --space-5: 3rem;
+            --radius-card: 22px; --radius-control: 14px;
+            --bg-base: #f5f9ff; --bg-card: rgba(255,255,255,.82); --bg-input: #fff;
+            --text-title: #0f172a; --text-primary: #17243a; --text-secondary: #475569; --text-muted: #64748b;
+            --blue: #3b82f6; --blue-bright: #60a5fa; --border-glass: rgba(148,177,219,.26);
+            --card-shadow: 0 8px 28px rgba(48,83,133,.055); --card-shadow-hover: 0 12px 30px rgba(48,83,133,.09);
+        }
+        html { scroll-behavior:smooth; scroll-padding-top:1rem; }
+        body { min-height:100vh; min-height:100svh; min-height:100dvh; background:#f5f9ff; color:#17243a; }
+        body::before { opacity:.45; background:radial-gradient(ellipse at 16% 8%,rgba(255,255,255,.95),transparent 30%),radial-gradient(ellipse at 82% 28%,rgba(220,235,255,.72),transparent 36%); }
+        .ambient-glow { z-index:0; opacity:.36; filter:blur(110px); animation:soft-drift 32s ease-in-out infinite alternate; }
+        .glow-1 { background:rgba(96,165,250,.22); }.glow-2 { background:rgba(191,219,254,.32); }.glow-3 { background:rgba(219,234,254,.45); }
+        @keyframes soft-drift { from { transform:translate3d(0,-8px,0) scale(.98); } to { transform:translate3d(0,12px,0) scale(1.02); } }
+        .navbar-custom { padding:.65rem 0; background:rgba(255,255,255,.82); border-color:var(--border-glass); }
+        .navbar .container { padding-inline:max(1rem,env(safe-area-inset-left)); }
+        .brand-logo { width:2.5rem;height:2.5rem;border-radius:14px;background:linear-gradient(145deg,#60a5fa,#3b82f6);box-shadow:none; }
+        .navbar-brand-text { color:#0f172a;background:none;-webkit-text-fill-color:currentColor; }
+        .theme-toggle-btn,.audio-toggle-btn { width:44px;height:44px;border-radius:12px;color:#475569;background:rgba(255,255,255,.7); }
+        .hero-banner { overflow:hidden; padding:clamp(2.2rem,7vw,4.5rem) 0 clamp(2rem,5vw,3.25rem); border:0; background:linear-gradient(135deg,#fff 0%,#f2f8ff 52%,#e8f2ff 100%); }
+        .hero-banner::after { content:'';position:absolute;width:clamp(15rem,38vw,34rem);aspect-ratio:1;right:-10%;top:-65%;border-radius:50%;background:radial-gradient(circle,rgba(147,197,253,.36),rgba(219,234,254,.08) 62%,transparent 72%);filter:blur(12px);pointer-events:none; }
+        .hero-content { position:relative;z-index:1;pointer-events:auto; }.hero-copy { max-width:780px;animation:hero-enter 520ms cubic-bezier(.2,.7,.2,1) both; }
+        @keyframes hero-enter { from { opacity:0;transform:translateY(12px); } to { opacity:1;transform:translateY(0); } }
+        .hero-title { margin:0 0 .65rem;font-size:clamp(2.6rem,7vw,5rem);line-height:.98;font-weight:750;letter-spacing:-.07em;color:#0f172a; }
+        .hero-subtitle { margin:0 0 1.4rem;max-width:60ch;color:#52627a;font-size:clamp(1rem,1.5vw,1.15rem);line-height:1.5;animation:hero-enter 520ms 80ms cubic-bezier(.2,.7,.2,1) both; }
+        .hero-break { display:none; }
+        .hero-cta { display:inline-flex;align-items:center;justify-content:center;gap:.65rem;min-height:48px;padding:.75rem 1.15rem;border:0;border-radius:14px;background:#3b82f6;color:#fff;font:650 .95rem var(--font-main);box-shadow:0 6px 16px rgba(59,130,246,.16);transition:transform 180ms ease,background-color 180ms ease,box-shadow 180ms ease;animation:hero-enter 520ms 150ms cubic-bezier(.2,.7,.2,1) both; }
+        .hero-cta:hover { transform:translateY(-2px);background:#2563eb;box-shadow:0 9px 20px rgba(59,130,246,.2);color:#fff; }.hero-cta:active { transform:scale(.98); }
+        .hero-cta:focus-visible,button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible { outline:3px solid rgba(59,130,246,.48);outline-offset:3px; }
+        main.container { width:min(100% - 2rem,1320px);margin-top:1.25rem!important;padding-inline:0; }
+        .custom-pills { max-width:100%;flex-wrap:wrap;justify-content:center;border-radius:16px;padding:5px;gap:2px;background:rgba(255,255,255,.82);box-shadow:0 4px 16px rgba(48,83,133,.04); }
+        .custom-pills .nav-link { min-height:44px;padding:.65rem 1rem;border-radius:12px;color:#52627a;font-size:.9rem; }
+        .custom-pills .nav-link.active { background:#3b82f6;box-shadow:none;color:white; }
+        .glass-card,.dept-overview-card,.about-topic-card { border:1px solid rgba(255,255,255,.9);border-radius:var(--radius-card);background:var(--bg-card);box-shadow:var(--card-shadow);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px); }
+        .glass-card:hover,.dept-overview-card:hover,.about-topic-card:hover { box-shadow:var(--card-shadow-hover); }
+        .request-heading { margin:0;color:#0f172a;font-size:1.15rem;font-weight:700;letter-spacing:-.03em; }
+        .textarea-wrapper { border-radius:16px;background:#fff;border-color:#dbe7f7; }
+        .custom-textarea { min-height:120px;padding:1.05rem 1.1rem;font-size:1rem;color:#0f172a; }
+        .textarea-footer { padding:.6rem 1rem;background:#f9fbff; }
+        .examples-wrap { margin-top:.25rem!important;border-top:0;padding-top:.2rem; }
+        .examples-toggle { min-height:44px;padding:.6rem .2rem;color:#2563eb; }
+        .examples-toggle-action { color:#64748b; }.examples-panel-inner { padding-bottom:0; }
+        .preset-chip { min-height:44px;padding:.55rem .8rem;color:#334155;background:#f7faff;border-color:#dce8f8; }
+        .preset-chip .badge { color:#52627a!important;background:#edf4ff!important;border-color:#d7e5f8!important; }
+        .btn { min-height:44px;border-radius:12px; }.btn-modern-primary { background:#3b82f6;box-shadow:0 6px 16px rgba(59,130,246,.16); }
+        .btn-modern-primary:hover { transform:translateY(-1px);background:#2563eb;box-shadow:0 8px 18px rgba(59,130,246,.2); }
+        .btn-modern-primary:active,.btn:active,.preset-chip:active { transform:scale(.98); }
+        .form-check-input { float:none;width:1.15rem;height:1.15rem;margin:.05rem .15rem 0 0;flex:0 0 auto; }.form-check { min-height:44px;display:flex;align-items:center;gap:.35rem;padding-left:0; }
+        .result-card-container { border-radius:var(--radius-card); }.result-card-container.academic,.result-card-container.docs,.result-card-container.tech_support { border-color:rgba(59,130,246,.3);box-shadow:none; }
+        .result-card-container.finance { border-color:rgba(96,165,250,.36);box-shadow:none; }
+        .reveal-item { opacity:0;transform:translateY(12px);transition:opacity 420ms ease,transform 420ms cubic-bezier(.2,.7,.2,1); }
+        .reveal-item.is-visible { opacity:1;transform:translateY(0); }
+        .pipeline-status-bar { display:none; }
+        footer { padding:1.25rem 0; }
+        @media (min-width:1200px) { .hero-break { display:block; } }
+        @media (max-width:767.98px) {
+            .hero-banner { padding:2rem 0 1.75rem; }.hero-title { font-size:clamp(2.45rem,10vw,3.6rem); }
+            .hero-subtitle { max-width:36ch;margin-bottom:1.15rem; }.custom-pills { width:100%; }
+            .custom-pills .nav-item { flex:1 1 42%; }.custom-pills .nav-link { width:100%;padding:.55rem .5rem;font-size:.84rem; }
+            .row.g-4.mb-4 { --bs-gutter-y:1rem; }.glass-card.p-4 { padding:1.1rem!important; }
+            .toast-container-custom { left:max(12px,env(safe-area-inset-left));right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom)); }
+            .custom-toast { width:100%; }.ambient-glow { opacity:.22;filter:blur(90px); }
+        }
+        @media (max-width:359.98px) { .navbar-brand-text { font-size:1.05rem; }.hero-title { font-size:2.35rem; }.custom-pills .nav-link { font-size:.8rem; } }
+        @media (min-width:1600px) { main.container { width:min(100% - 4rem,1440px); }.hero-content { width:min(100% - 4rem,1440px); } }
+        @media (prefers-reduced-motion:reduce) {
+            html { scroll-behavior:auto; }.ambient-glow { animation:none; }
+            .hero-copy,.hero-subtitle,.hero-cta { animation:none; }
+            .reveal-item { opacity:1;transform:none;transition:none; }
+        }
     </style>
 </head>
 <body>
@@ -1083,9 +1140,6 @@
     <div class="ambient-glow glow-1"></div>
     <div class="ambient-glow glow-2"></div>
     <div class="ambient-glow glow-3"></div>
-
-    <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
-    <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
 
     <!-- Toast Notifications Container -->
     <div class="toast-container-custom" id="toastContainer"></div>
@@ -1099,18 +1153,11 @@
                 </span>
                 <div>
                     <span class="navbar-brand-text">student-support</span>
-                    <span class="badge badge-qairu-pill ms-2 d-none d-sm-inline-block">ICT1103 · QAIRU</span>
                 </div>
             </a>
 
             <!-- Right Controls -->
             <div class="d-flex align-items-center gap-2">
-                <!-- Status Badge -->
-                <div class="d-none d-md-flex align-items-center gap-2 px-3 py-1.5 rounded-pill" style="background: rgba(52, 211, 153, 0.12); border: 1px solid rgba(52, 211, 153, 0.3);">
-                    <span class="pulse-dot"></span>
-                    <span style="font-size: 0.8rem; font-weight: 700; color: #34d399;">TF-IDF + LogReg Live</span>
-                </div>
-
                 <!-- Web Audio Sound Toggle -->
                 <button class="audio-toggle-btn" id="audioToggleBtn" title="Дыбысты қосу/өшіру (UI Sound Effects)" onclick="toggleAudio()">
                     <i class="bi bi-volume-up-fill" id="audioIcon"></i>
@@ -1124,39 +1171,13 @@
         </div>
     </nav>
 
-    <!-- Hero Banner with Interactive Canvas Particles -->
+    <!-- Focused hero -->
     <header class="hero-banner">
-        <canvas id="particlesCanvas"></canvas>
         <div class="container hero-content">
-            <div class="row align-items-center g-4">
-                <div class="col-lg-7">
-                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-pill mb-3 hero-interactive" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35);">
-                        <i class="bi bi-stars" style="color: #38bdf8;"></i>
-                        <span style="font-size: 0.82rem; font-weight: 800; color: #38bdf8; letter-spacing: 0.4px;">NextGen Intelligent Student Desk · NLP</span>
-                    </div>
-                    <h1 class="hero-title">student-support</h1>
-                    <p class="hero-subtitle mb-0">
-                        Өтінішіңізді жазыңыз. Біз оны тиісті бөлімге бағыттаймыз.
-                    </p>
-                </div>
-
-                <!-- Live Animated Metric Boxes -->
-                <div class="col-lg-5 hero-interactive">
-                    <div class="d-flex flex-wrap gap-2.5 justify-content-lg-end">
-                        <div class="hero-metric-box text-center flex-fill" style="min-width: 115px;">
-                            <div class="hero-metric-number" id="datasetCountHeader" data-target="{{ dataset_size }}">0</div>
-                            <div class="hero-metric-label">Деректер көлемі</div>
-                        </div>
-                        <div class="hero-metric-box text-center flex-fill" style="min-width: 115px;">
-                            <div class="hero-metric-number" id="accMetricHeader" data-target="84.8">0%</div>
-                            <div class="hero-metric-label">Test Accuracy</div>
-                        </div>
-                        <div class="hero-metric-box text-center flex-fill" style="min-width: 115px;">
-                            <div class="hero-metric-number font-monospace" id="latencyMetricHeader">0.21ms</div>
-                            <div class="hero-metric-label">Inference Speed</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="hero-copy">
+                <h1 class="hero-title">Student support,<br class="hero-break"> made simple.</h1>
+                <p class="hero-subtitle">Describe your request. We’ll route it to the right team.</p>
+                <button type="button" class="hero-cta" onclick="focusRequest()">Write a request <i class="bi bi-arrow-down-right" aria-hidden="true"></i></button>
             </div>
         </div>
     </header>
@@ -1169,22 +1190,22 @@
             <ul class="nav custom-pills" id="mainTabs" role="tablist">
                 <li class="nav-item">
                     <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-classifier" onclick="playSoftClick()">
-                        <i class="bi bi-chat-left-dots-fill"></i> Онлайн Классификатор
+                        Онлайн Классификатор
                     </button>
                 </li>
                 <li class="nav-item">
                     <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-testcases" onclick="playSoftClick()">
-                        <i class="bi bi-check2-circle"></i> 3 Тест-кейса & Қате
+                        Тест-кейстер
                     </button>
                 </li>
                 <li class="nav-item">
                     <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-metrics" onclick="playSoftClick()">
-                        <i class="bi bi-grid-3x3-gap-fill"></i> Матрица 4x4 & Бенчмарк
+                        Метрикалар
                     </button>
                 </li>
                 <li class="nav-item">
                     <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-history" onclick="playSoftClick()">
-                        <i class="bi bi-clock-history"></i> Журнал (<span id="historyCount">0</span>)
+                        Тарих (<span id="historyCount">0</span>)
                     </button>
                 </li>
             </ul>
@@ -1197,41 +1218,12 @@
                  ========================================================= -->
             <div class="tab-pane fade show active" id="tab-classifier" role="tabpanel">
 
-                <!-- AI Pipeline Architecture Status Bar -->
-                <div class="pipeline-status-bar">
-                    <div class="pipeline-badge">
-                        <i class="bi bi-lightning-charge-fill text-warning"></i>
-                        <span>Latency: <strong>&lt;0.25 ms</strong></span>
-                    </div>
-                    <span class="text-muted d-none d-sm-inline">|</span>
-                    <div class="pipeline-badge">
-                        <i class="bi bi-translate text-info"></i>
-                        <span>Multilingual: <strong>Қазақша / Русский / English</strong></span>
-                    </div>
-                    <span class="text-muted d-none d-sm-inline">|</span>
-                    <div class="pipeline-badge">
-                        <i class="bi bi-cpu-fill text-primary"></i>
-                        <span>Model: <strong>TF-IDF (Word + Char_wb 3-5) + LogReg</strong></span>
-                    </div>
-                    <span class="text-muted d-none d-sm-inline">|</span>
-                    <div class="pipeline-badge">
-                        <i class="bi bi-shield-lock-fill text-success"></i>
-                        <span>Қауіпсіздік: <strong>ЖСН/Құпиясөзсіз (No PII)</strong></span>
-                    </div>
-                </div>
-
                 <div class="row g-4 mb-4">
                     <!-- Left Column: Input Form -->
                     <div class="col-lg-7">
                         <div class="glass-card p-4 h-100">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h5 class="fw-bold mb-0 d-flex align-items-center gap-2" style="color: var(--text-title);">
-                                    <i class="bi bi-pencil-square" style="color: var(--cat-academic);"></i>
-                                    <span>Студенттің өтінішін енгізу</span>
-                                </h5>
-                                <span class="badge border" style="background: rgba(56, 189, 248, 0.1); color: var(--cat-academic); border-color: rgba(56, 189, 248, 0.3) !important;">
-                                    Real-Time Inference
-                                </span>
+                                <h2 class="request-heading">Your request</h2>
                             </div>
 
                             <form id="classifyForm" onsubmit="event.preventDefault(); submitQuery();">
@@ -1245,8 +1237,7 @@
                                         oninput="updateCharCount()"></textarea>
                                     <div class="textarea-footer">
                                         <div class="d-flex align-items-center gap-2">
-                                            <span class="hotkey-badge"><i class="bi bi-command"></i> Ctrl + ↵</span>
-                                            <small class="text-muted d-none d-sm-inline" style="font-size: 0.75rem;">жіберу</small>
+                                            <span class="hotkey-badge">Ctrl + ↵ to submit</span>
                                         </div>
                                         <div class="char-counter">
                                             <span id="charCount">0</span> таңба
@@ -1257,29 +1248,29 @@
                             <!-- Quick Preset Samples: collapsed by default -->
                             <div class="examples-wrap mt-3">
                                 <button type="button" id="examplesToggle" class="examples-toggle" aria-expanded="false" aria-controls="examplesPanel" onclick="toggleExamples()">
-                                    <span><i class="bi bi-lightning-charge-fill me-2"></i>Мысалдар</span>
-                                    <span class="examples-toggle-action"><span id="examplesToggleLabel">Көрсету</span><i class="bi bi-chevron-down examples-chevron"></i></span>
+                                    <span>Examples</span>
+                                    <span class="examples-toggle-action"><span id="examplesToggleLabel">Show examples</span><i class="bi bi-chevron-down examples-chevron" aria-hidden="true"></i></span>
                                 </button>
                                 <div class="examples-panel" id="examplesPanel" aria-hidden="true" inert>
                                     <div class="examples-panel-inner">
                                 <div class="d-flex flex-wrap gap-2">
                                     <button type="button" class="preset-chip" onclick="setQuery('Не отображается оценка за лабораторную работу в LMS')">
-                                        <i class="bi bi-mortarboard-fill text-info"></i> Оценка за лабу в LMS <span class="badge border" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3) !important;">Academic</span>
+                                        Оценка в LMS
                                     </button>
                                     <button type="button" class="preset-chip" onclick="setQuery('Система тестирования зависла во время прохождения экзамена')">
-                                        <i class="bi bi-hdd-network-fill text-danger"></i> Тест завис на экзамене <span class="badge border" style="background: rgba(251, 113, 133, 0.15); color: #fb7185; border-color: rgba(251, 113, 133, 0.3) !important;">Tech</span>
+                                        Тест завис на экзамене
                                     </button>
                                     <button type="button" class="preset-chip" onclick="setQuery('Где я могу получить справку с места учебы для Egov?')">
-                                        <i class="bi bi-file-earmark-text-fill text-success"></i> Справка для Egov <span class="badge border" style="background: rgba(52, 211, 153, 0.15); color: #34d399; border-color: rgba(52, 211, 153, 0.3) !important;">Docs</span>
+                                        Справка для Egov
                                     </button>
                                     <button type="button" class="preset-chip" onclick="setQuery('Kaspi арқылы ақша ұсталды, бірақ LMS-те төлем көрінбей тұр.')">
-                                        <i class="bi bi-credit-card-fill text-warning"></i> Kaspi төлемі түспеді <span class="badge border" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border-color: rgba(251, 191, 36, 0.3) !important;">Finance</span>
+                                        Kaspi төлемі түспеді
                                     </button>
                                     <button type="button" class="preset-chip" onclick="setQuery('How can I order an official academic transcript with university stamp?')">
-                                        <i class="bi bi-translate text-primary"></i> Official Transcript (EN) <span class="badge border" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3) !important;">Docs</span>
+                                        Official transcript
                                     </button>
                                     <button type="button" class="preset-chip border-warning-subtle" onclick="setQuery('Не могу оплатить повторный курс из-за ошибки на сайте')">
-                                        <i class="bi bi-exclamation-triangle-fill text-warning"></i> Error Case (Оплата vs Ошибка)
+                                        Ошибка оплаты
                                     </button>
                                     </div>
                                     </div>
@@ -1296,8 +1287,7 @@
 
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <button type="submit" id="btnSubmit" class="btn btn-modern-primary d-flex align-items-center gap-2">
-                                        <i class="bi bi-cpu-fill"></i>
-                                        <span>Сұрыптау / Классифицировать</span>
+                                        <span>Жіберу</span>
                                     </button>
                                     <button type="button" class="btn btn-outline-secondary btn-sm" onclick="clearInput()">
                                         <i class="bi bi-x-circle"></i> Тазалау
@@ -2071,97 +2061,6 @@
         }
 
         /* =========================================================
-           INTERACTIVE PARTICLES CANVAS (Constellation Network)
-           ========================================================= */
-        const canvas = document.getElementById('particlesCanvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        let mouse = { x: null, y: null, radius: 130 };
-
-        function resizeCanvas() {
-            if (!canvas) return;
-            canvas.width = canvas.parentElement.offsetWidth;
-            canvas.height = canvas.parentElement.offsetHeight;
-        }
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.vx = (Math.random() - 0.5) * 0.7;
-                this.vy = (Math.random() - 0.5) * 0.7;
-            }
-
-            draw() {
-                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-                ctx.fillStyle = isDark ? 'rgba(56, 189, 248, 0.8)' : 'rgba(255, 255, 255, 0.9)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.closePath();
-                ctx.fill();
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
-                if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
-
-                if (mouse.x !== null) {
-                    const dx = mouse.x - this.x;
-                    const dy = mouse.y - this.y;
-                    const distance = Math.hypot(dx, dy);
-                    if (distance < mouse.radius) {
-                        const force = (mouse.radius - distance) / mouse.radius;
-                        this.x -= (dx / distance) * force * 3;
-                        this.y -= (dy / distance) * force * 3;
-                    }
-                }
-            }
-        }
-
-        function initParticles() {
-            resizeCanvas();
-            particles = [];
-            const count = Math.floor((canvas.width * canvas.height) / 14000) || 45;
-            for (let i = 0; i < count; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        function connectParticles() {
-            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            for (let a = 0; a < particles.length; a++) {
-                for (let b = a + 1; b < particles.length; b++) {
-                    const dist = Math.hypot(particles[a].x - particles[b].x, particles[a].y - particles[b].y);
-                    if (dist < 95) {
-                        const opacity = 1 - dist / 95;
-                        ctx.strokeStyle = isDark
-                            ? `rgba(56, 189, 248, ${opacity * 0.28})`
-                            : `rgba(255, 255, 255, ${opacity * 0.28})`;
-                        ctx.lineWidth = 1;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[a].x, particles[a].y);
-                        ctx.lineTo(particles[b].x, particles[b].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].draw();
-                particles[i].update();
-            }
-            connectParticles();
-            requestAnimationFrame(animateParticles);
-        }
-
-        /* =========================================================
            PARTICLE BURST CELEBRATION (Confetti on Result)
            ========================================================= */
         const confettiCanvas = document.getElementById('confettiCanvas');
@@ -2225,29 +2124,6 @@
         /* =========================================================
            HERO STAT ROLLING COUNTERS
            ========================================================= */
-        function animateValue(id, start, end, duration, isFloat = false, suffix = '') {
-            const obj = document.getElementById(id);
-            if (!obj) return;
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                const current = isFloat ? (progress * (end - start) + start).toFixed(1) : Math.floor(progress * (end - start) + start);
-                obj.innerText = current + suffix;
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
-            };
-            window.requestAnimationFrame(step);
-        }
-
-        function runHeroCounters() {
-            const countHeader = document.getElementById('datasetCountHeader');
-            const target = countHeader ? parseInt(countHeader.getAttribute('data-target') || '293') : 293;
-            animateValue('datasetCountHeader', 0, target, 1200);
-            animateValue('accMetricHeader', 0, 84.8, 1200, true, '%');
-        }
-
         /* =========================================================
            CHARACTER COUNTER & HOTKEYS
            ========================================================= */
@@ -2531,6 +2407,13 @@
             showToast('CSV файлы жүктелді! 📥');
         }
 
+        function focusRequest() {
+            const input = document.getElementById('queryText');
+            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            input.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
+            input.focus({ preventScroll: true });
+        }
+
         function toggleExamples() {
             const button = document.getElementById('examplesToggle');
             const panel = document.getElementById('examplesPanel');
@@ -2539,32 +2422,7 @@
             panel.setAttribute('aria-hidden', String(!open));
             panel.inert = !open;
             panel.classList.toggle('is-open', open);
-            document.getElementById('examplesToggleLabel').textContent = open ? 'Жасыру' : 'Көрсету';
-        }
-
-        function initCursorInteraction() {
-            if (!window.matchMedia('(pointer:fine) and (prefers-reduced-motion: no-preference)').matches) return;
-            const dot = document.getElementById('cursorDot');
-            const ring = document.getElementById('cursorRing');
-            let x=innerWidth/2,y=innerHeight/2,rx=x,ry=y,frame=0,lastMagnetic=null;
-            document.addEventListener('pointermove', event => {
-                x=event.clientX;y=event.clientY;
-                dot.style.transform=`translate3d(${x}px,${y}px,0)`;
-                if (!frame) frame=requestAnimationFrame(function follow(){
-                    rx+=(x-rx)*.18;ry+=(y-ry)*.18;ring.style.transform=`translate3d(${rx}px,${ry}px,0)`;
-                    if(Math.abs(x-rx)+Math.abs(y-ry)>.4) frame=requestAnimationFrame(follow); else frame=0;
-                });
-                document.documentElement.style.setProperty('--parallax-x',`${(x/innerWidth-.5)*10}px`);
-                document.documentElement.style.setProperty('--parallax-y',`${(y/innerHeight-.5)*10}px`);
-                ring.classList.toggle('is-hover',Boolean(event.target.closest('button,a,.glass-card,.dept-overview-card,.about-topic-card')));
-                const magnetic=event.target.closest('.btn-modern-primary');
-                if(lastMagnetic && lastMagnetic!==magnetic) lastMagnetic.style.translate='';
-                lastMagnetic=magnetic;
-                if(magnetic){const rect=magnetic.getBoundingClientRect();magnetic.style.translate=`${(x-(rect.left+rect.width/2))*.06}px ${(y-(rect.top+rect.height/2))*.06}px`;}
-            },{passive:true});
-            document.addEventListener('pointerout',event=>{if(!event.relatedTarget)document.querySelectorAll('.btn-modern-primary').forEach(button=>button.style.translate='');});
-            document.addEventListener('pointerdown',event=>{if(event.target.closest('button'))event.target.closest('button').classList.add('cursor-press');});
-            document.addEventListener('pointerup',()=>document.querySelectorAll('.cursor-press').forEach(button=>button.classList.remove('cursor-press')));
+            document.getElementById('examplesToggleLabel').textContent = open ? 'Hide examples' : 'Show examples';
         }
 
         /* =========================================================
@@ -2573,7 +2431,6 @@
         document.addEventListener('DOMContentLoaded', async () => {
             initTheme();
             updateAudioIcon();
-            initCursorInteraction();
             if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
                 const revealTargets = document.querySelectorAll('.glass-card, .dept-overview-card, .about-topic-card, .workflow-step');
                 const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -2590,7 +2447,6 @@
                     revealObserver.observe(item);
                 });
             }
-            runHeroCounters();
 
             try {
                 const res = await fetch('/api/history');
