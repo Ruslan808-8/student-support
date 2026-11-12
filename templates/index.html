@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="dark">
+<html lang="ru" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1020,6 +1020,61 @@
             *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
             .reveal-item { opacity: 1; transform: none; }
         }
+
+        /* Premium light-blue interface */
+        :root {
+            --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Plus Jakarta Sans', sans-serif;
+            --blue: #3b82f6; --blue-bright: #60a5fa; --bg-base: #f5f9ff;
+            --bg-elevated: rgba(255,255,255,.82); --bg-card: rgba(255,255,255,.78); --bg-card-solid: #fff; --bg-card-hover: #fff; --bg-input: rgba(255,255,255,.9);
+            --border-glass: rgba(148,177,219,.28); --border-glass-hover: rgba(59,130,246,.4); --border-glow: rgba(59,130,246,.22);
+            --text-title: #0f172a; --text-primary: #17243a; --text-secondary: #52627a; --text-muted: #6b7b93;
+            --nav-bg: rgba(255,255,255,.76); --hero-gradient: linear-gradient(125deg,#eef6ff 0%,#e3efff 54%,#f8fbff 100%);
+            --aurora-1: rgba(96,165,250,.25); --aurora-2: rgba(191,219,254,.35); --aurora-3: rgba(219,234,254,.55);
+            --card-shadow: 0 12px 36px rgba(48,83,133,.08); --card-shadow-hover: 0 18px 42px rgba(48,83,133,.13);
+            --grid-dot-color: rgba(59,130,246,.055); --sample-chip-bg: #f5f9ff; --sample-chip-border: #d8e5f7; --sample-chip-hover: #eaf3ff; --kbd-bg: #eaf2ff;
+            --cat-academic: #3b82f6; --cat-academic-dark: #2563eb; --cat-academic-glow: rgba(59,130,246,.16);
+            --cat-docs: #3b82f6; --cat-docs-dark: #2563eb; --cat-docs-glow: rgba(59,130,246,.16);
+            --cat-finance: #60a5fa; --cat-finance-dark: #3b82f6; --cat-finance-glow: rgba(96,165,250,.16);
+            --cat-tech: #2563eb; --cat-tech-dark: #1d4ed8; --cat-tech-glow: rgba(37,99,235,.16);
+        }
+        html { scroll-behavior: smooth; }
+        body { background:var(--bg-base); color:var(--text-primary); letter-spacing:-.015em; }
+        body::before { content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.65;background:radial-gradient(circle at 14% 18%,rgba(255,255,255,.9),transparent 30%),radial-gradient(circle at 82% 52%,rgba(219,234,254,.62),transparent 34%); }
+        .ambient-glow { display:block;z-index:0;opacity:.55;filter:blur(100px);animation:drift 24s ease-in-out infinite alternate;transform:translate3d(var(--parallax-x,0),var(--parallax-y,0),0); }
+        .glow-1 { background:rgba(96,165,250,.26); }.glow-2 { background:rgba(191,219,254,.46);animation-delay:-8s; }.glow-3 { background:rgba(219,234,254,.75);animation-delay:-15s; }
+        @keyframes drift { from { translate:-12px -8px; } to { translate:18px 16px; } }
+        .navbar-custom { background:var(--nav-bg);border-color:var(--border-glass); }
+        .brand-logo { background:linear-gradient(145deg,#60a5fa,#3b82f6);border-radius:14px;box-shadow:0 8px 20px rgba(59,130,246,.2); }
+        .navbar-brand-text { background:none;color:var(--text-title);-webkit-text-fill-color:currentColor; }
+        .hero-banner { color:var(--text-title);background:linear-gradient(135deg,rgba(255,255,255,.62),rgba(226,239,255,.72));border-color:var(--border-glass);padding:clamp(2.6rem,6vw,4.2rem) 0; }
+        .hero-title { color:var(--text-title);letter-spacing:-.065em; }.hero-subtitle { color:var(--text-secondary); }
+        .hero-metric-box { background:rgba(255,255,255,.58);border-color:rgba(255,255,255,.9);box-shadow:0 10px 25px rgba(48,83,133,.07); }
+        .hero-metric-number { color:#2563eb; }.hero-metric-label { color:var(--text-muted); }
+        .custom-pills { border-radius:18px;padding:6px;background:rgba(255,255,255,.76);border-color:var(--border-glass); }
+        .custom-pills .nav-link { border-radius:13px; }.custom-pills .nav-link.active { background:linear-gradient(135deg,#3b82f6,#60a5fa);box-shadow:0 7px 18px rgba(59,130,246,.22); }
+        .glass-card,.dept-overview-card,.about-topic-card { background:rgba(255,255,255,.76);border:1px solid rgba(255,255,255,.9);border-radius:22px;box-shadow:var(--card-shadow);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px); }
+        .glass-card:hover,.dept-overview-card:hover,.about-topic-card:hover { box-shadow:var(--card-shadow-hover); }
+        .pipeline-status-bar { background:rgba(255,255,255,.65);border-radius:16px; }
+        .textarea-wrapper { border-radius:18px; }.textarea-wrapper:focus-within,.search-input:focus { border-color:#60a5fa;box-shadow:0 0 0 4px rgba(96,165,250,.15); }
+        .btn-modern-primary { background:linear-gradient(135deg,#3b82f6,#2563eb);border-radius:14px;box-shadow:0 8px 20px rgba(59,130,246,.2); }
+        .btn-modern-primary:hover { background:linear-gradient(135deg,#2563eb,#1d4ed8);box-shadow:0 12px 28px rgba(59,130,246,.28); }.btn-modern-primary:active,.cursor-press { scale:.97; }
+        .preset-chip,.filter-chip { border-radius:12px; }.filter-chip.active,.filter-chip:hover { background:#3b82f6;border-color:#3b82f6; }
+        .hero-banner,.navbar-custom,footer { position:relative;z-index:1; }.custom-pills,.glass-card,.pipeline-status-bar { backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px); }
+        .examples-wrap { border-top:1px solid var(--border-glass);padding-top:12px; }
+        .examples-toggle { width:100%;display:flex;align-items:center;justify-content:space-between;border:0;background:none;color:#2563eb;font:600 .9rem var(--font-main);padding:7px 2px;text-align:left; }
+        .examples-toggle:focus-visible { outline:3px solid rgba(59,130,246,.35);outline-offset:3px;border-radius:8px; }
+        .examples-toggle-action { display:flex;align-items:center;gap:9px;color:var(--text-muted);font-size:.82rem; }.examples-chevron { transition:transform 280ms ease; }
+        .examples-toggle[aria-expanded="true"] .examples-chevron { transform:rotate(180deg); }
+        .examples-panel { display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows 360ms cubic-bezier(.2,.7,.2,1),opacity 260ms ease; }
+        .examples-panel.is-open { grid-template-rows:1fr;opacity:1; }.examples-panel-inner { overflow:hidden;padding-top:0;transition:padding 360ms ease; }.examples-panel.is-open .examples-panel-inner { padding-top:10px; }
+        .reveal-item { opacity:0;transform:translateY(16px);transition:opacity 500ms ease,transform 500ms cubic-bezier(.2,.7,.2,1); }.reveal-item.is-visible { opacity:1;transform:translateY(0); }
+        .cursor-dot,.cursor-ring { position:fixed;left:0;top:0;z-index:10000;pointer-events:none;border-radius:50%;opacity:0; }
+        .cursor-dot { width:6px;height:6px;background:#2563eb;margin:-3px 0 0 -3px; }.cursor-ring { width:34px;height:34px;border:1px solid rgba(59,130,246,.5);background:rgba(96,165,250,.08);margin:-17px 0 0 -17px;transition:width 180ms ease,height 180ms ease,margin 180ms ease,background 180ms ease,border-color 180ms ease; }
+        .cursor-ring.is-hover { width:48px;height:48px;margin:-24px 0 0 -24px;background:rgba(96,165,250,.16);border-color:rgba(37,99,235,.7); }
+        @media (pointer:fine) and (prefers-reduced-motion:no-preference) { body,button,a { cursor:none; }.cursor-dot,.cursor-ring { opacity:1; } input,textarea { cursor:text; } }
+        @media (max-width:767.98px) { .hero-banner { padding:2.5rem 0; }.glass-card,.dept-overview-card,.about-topic-card { border-radius:18px; } }
+        @media (prefers-reduced-motion:reduce) { .ambient-glow { animation:none; }.reveal-item { opacity:1;transform:none; } }
     </style>
 </head>
 <body>
@@ -1028,6 +1083,9 @@
     <div class="ambient-glow glow-1"></div>
     <div class="ambient-glow glow-2"></div>
     <div class="ambient-glow glow-3"></div>
+
+    <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+    <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
 
     <!-- Toast Notifications Container -->
     <div class="toast-container-custom" id="toastContainer"></div>
@@ -1078,7 +1136,7 @@
                     </div>
                     <h1 class="hero-title">student-support</h1>
                     <p class="hero-subtitle mb-0">
-                        Студенттік өтініштерді еркін мәтін бойынша талдап, тиісті 4 бөлімге лезде (&lt;1мс) жіктейтін, SLA мерзімін және басымдықты анықтайтын онлайн сервис.
+                        Өтінішіңізді жазыңыз. Біз оны тиісті бөлімге бағыттаймыз.
                     </p>
                 </div>
 
@@ -1182,13 +1240,13 @@
                                         id="queryText" 
                                         class="custom-textarea"
                                         rows="4" 
-                                        placeholder="Студенттің сұрағын жазыңыз немесе көшіріп қойыңыз... Мысалы: «LMS жүйесінде зертханалық жұмысымның бағасы көрінбейді» немесе «Где я могу заказать транскрипт с печатью?»"
+                                        placeholder="Өтінішіңізді осында жазыңыз…"
                                         required
                                         oninput="updateCharCount()"></textarea>
                                     <div class="textarea-footer">
                                         <div class="d-flex align-items-center gap-2">
                                             <span class="hotkey-badge"><i class="bi bi-command"></i> Ctrl + ↵</span>
-                                            <small class="text-muted d-none d-sm-inline" style="font-size: 0.75rem;">пернесімен жылдам жіберу</small>
+                                            <small class="text-muted d-none d-sm-inline" style="font-size: 0.75rem;">жіберу</small>
                                         </div>
                                         <div class="char-counter">
                                             <span id="charCount">0</span> таңба
@@ -1196,12 +1254,43 @@
                                     </div>
                                 </div>
 
+                            <!-- Quick Preset Samples: collapsed by default -->
+                            <div class="examples-wrap mt-3">
+                                <button type="button" id="examplesToggle" class="examples-toggle" aria-expanded="false" aria-controls="examplesPanel" onclick="toggleExamples()">
+                                    <span><i class="bi bi-lightning-charge-fill me-2"></i>Мысалдар</span>
+                                    <span class="examples-toggle-action"><span id="examplesToggleLabel">Көрсету</span><i class="bi bi-chevron-down examples-chevron"></i></span>
+                                </button>
+                                <div class="examples-panel" id="examplesPanel" aria-hidden="true" inert>
+                                    <div class="examples-panel-inner">
+                                <div class="d-flex flex-wrap gap-2">
+                                    <button type="button" class="preset-chip" onclick="setQuery('Не отображается оценка за лабораторную работу в LMS')">
+                                        <i class="bi bi-mortarboard-fill text-info"></i> Оценка за лабу в LMS <span class="badge border" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3) !important;">Academic</span>
+                                    </button>
+                                    <button type="button" class="preset-chip" onclick="setQuery('Система тестирования зависла во время прохождения экзамена')">
+                                        <i class="bi bi-hdd-network-fill text-danger"></i> Тест завис на экзамене <span class="badge border" style="background: rgba(251, 113, 133, 0.15); color: #fb7185; border-color: rgba(251, 113, 133, 0.3) !important;">Tech</span>
+                                    </button>
+                                    <button type="button" class="preset-chip" onclick="setQuery('Где я могу получить справку с места учебы для Egov?')">
+                                        <i class="bi bi-file-earmark-text-fill text-success"></i> Справка для Egov <span class="badge border" style="background: rgba(52, 211, 153, 0.15); color: #34d399; border-color: rgba(52, 211, 153, 0.3) !important;">Docs</span>
+                                    </button>
+                                    <button type="button" class="preset-chip" onclick="setQuery('Kaspi арқылы ақша ұсталды, бірақ LMS-те төлем көрінбей тұр.')">
+                                        <i class="bi bi-credit-card-fill text-warning"></i> Kaspi төлемі түспеді <span class="badge border" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border-color: rgba(251, 191, 36, 0.3) !important;">Finance</span>
+                                    </button>
+                                    <button type="button" class="preset-chip" onclick="setQuery('How can I order an official academic transcript with university stamp?')">
+                                        <i class="bi bi-translate text-primary"></i> Official Transcript (EN) <span class="badge border" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3) !important;">Docs</span>
+                                    </button>
+                                    <button type="button" class="preset-chip border-warning-subtle" onclick="setQuery('Не могу оплатить повторный курс из-за ошибки на сайте')">
+                                        <i class="bi bi-exclamation-triangle-fill text-warning"></i> Error Case (Оплата vs Ошибка)
+                                    </button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
                                 <!-- Learning with consent checkbox -->
                                 <div class="form-check mb-3">
                                     <input class="form-check-input" type="checkbox" id="trainingOptIn">
                                     <label class="form-check-label small" for="trainingOptIn" style="color: var(--text-secondary);">
                                         <i class="bi bi-shield-check text-success me-1"></i>
-                                        Деректер базасында болашақ қайта оқыту (Active Learning) үшін сақтауға келісемін
+                                        Қайта оқыту үшін сұрағымды сақтауға келісемін
                                     </label>
                                 </div>
 
@@ -1216,34 +1305,6 @@
                                 </div>
                             </form>
 
-                            <!-- Quick Preset Samples with Vivid Chips -->
-                            <div class="mt-4 pt-3 border-top" style="border-color: var(--border-glass) !important;">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <small class="text-uppercase fw-bold" style="font-size:0.75rem; letter-spacing: 0.6px; color: var(--text-muted);">
-                                        <i class="bi bi-lightning-charge-fill text-warning me-1"></i>Жылдам сынау мысалдары (Кликните для авто-толтыру):
-                                    </small>
-                                </div>
-                                <div class="d-flex flex-wrap gap-2">
-                                    <button class="preset-chip" onclick="setQuery('Не отображается оценка за лабораторную работу в LMS')">
-                                        <i class="bi bi-mortarboard-fill text-info"></i> Оценка за лабу в LMS <span class="badge border" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3) !important;">Academic</span>
-                                    </button>
-                                    <button class="preset-chip" onclick="setQuery('Система тестирования зависла во время прохождения экзамена')">
-                                        <i class="bi bi-hdd-network-fill text-danger"></i> Тест завис на экзамене <span class="badge border" style="background: rgba(251, 113, 133, 0.15); color: #fb7185; border-color: rgba(251, 113, 133, 0.3) !important;">Tech</span>
-                                    </button>
-                                    <button class="preset-chip" onclick="setQuery('Где я могу получить справку с места учебы для Egov?')">
-                                        <i class="bi bi-file-earmark-text-fill text-success"></i> Справка для Egov <span class="badge border" style="background: rgba(52, 211, 153, 0.15); color: #34d399; border-color: rgba(52, 211, 153, 0.3) !important;">Docs</span>
-                                    </button>
-                                    <button class="preset-chip" onclick="setQuery('Kaspi арқылы ақша ұсталды, бірақ LMS-те төлем көрінбей тұр.')">
-                                        <i class="bi bi-credit-card-fill text-warning"></i> Kaspi төлемі түспеді <span class="badge border" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border-color: rgba(251, 191, 36, 0.3) !important;">Finance</span>
-                                    </button>
-                                    <button class="preset-chip" onclick="setQuery('How can I order an official academic transcript with university stamp?')">
-                                        <i class="bi bi-translate text-primary"></i> Official Transcript (EN) <span class="badge border" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3) !important;">Docs</span>
-                                    </button>
-                                    <button class="preset-chip border-warning-subtle" onclick="setQuery('Не могу оплатить повторный курс из-за ошибки на сайте')">
-                                        <i class="bi bi-exclamation-triangle-fill text-warning"></i> Error Case (Оплата vs Ошибка)
-                                    </button>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -1255,7 +1316,7 @@
                             </div>
                             <h5 class="fw-bold mb-1" style="color: var(--text-title);">Нәтиже осында шығады</h5>
                             <p class="small mb-0" style="color: var(--text-muted); max-width: 290px;">
-                                Сол жақтағы формаға сұрақ жазыңыз немесе дайын мысалдардың бірін таңдаңыз.
+                                Сұрағыңызды енгізіп, жіберіңіз.
                             </p>
                         </div>
 
@@ -1775,10 +1836,8 @@
                 <span class="small font-monospace" style="color: var(--text-muted);">QAIRU · ICT1103 (2026–2027)</span>
             </div>
 
-            <h3 class="fw-bold mb-2" style="color: var(--text-title);">Студенттік өтініштерді интеллектуалды бағыттау жүйесі</h3>
-            <p class="mb-4" style="color: var(--text-secondary); max-width: 820px; line-height: 1.65;">
-                <strong>student-support</strong> студенттер деканаты, СҚКО, бухгалтерия және IT-қолдау бөлімдеріне түсетін күнделікті жүздеген еркін мәтіндік сұраныстарды автоматты өңдеуге арналған. Қолмен сұрыптау 2-3 күнге созылса, біздің жүйе шешімді <strong>0.2 миллисекундта</strong> қабылдайды.
-            </p>
+            <h3 class="fw-bold mb-2" style="color: var(--text-title);">Студенттік өтініштерді бағыттау</h3>
+            <p class="mb-4" style="color: var(--text-secondary); max-width: 820px;">Өтініштер төрт бөлімге автоматты түрде бағытталады.</p>
 
             <!-- 4 Distinct Color-Coded Department Cards -->
             <div class="row g-3 mb-4">
@@ -1989,7 +2048,7 @@
            DARK / LIGHT THEME TOGGLE
            ========================================================= */
         function initTheme() {
-            const savedTheme = localStorage.getItem('student_support_theme') || 'dark';
+            const savedTheme = localStorage.getItem('student_support_theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
             updateThemeIcon(savedTheme);
         }
@@ -2472,12 +2531,49 @@
             showToast('CSV файлы жүктелді! 📥');
         }
 
+        function toggleExamples() {
+            const button = document.getElementById('examplesToggle');
+            const panel = document.getElementById('examplesPanel');
+            const open = button.getAttribute('aria-expanded') !== 'true';
+            button.setAttribute('aria-expanded', String(open));
+            panel.setAttribute('aria-hidden', String(!open));
+            panel.inert = !open;
+            panel.classList.toggle('is-open', open);
+            document.getElementById('examplesToggleLabel').textContent = open ? 'Жасыру' : 'Көрсету';
+        }
+
+        function initCursorInteraction() {
+            if (!window.matchMedia('(pointer:fine) and (prefers-reduced-motion: no-preference)').matches) return;
+            const dot = document.getElementById('cursorDot');
+            const ring = document.getElementById('cursorRing');
+            let x=innerWidth/2,y=innerHeight/2,rx=x,ry=y,frame=0,lastMagnetic=null;
+            document.addEventListener('pointermove', event => {
+                x=event.clientX;y=event.clientY;
+                dot.style.transform=`translate3d(${x}px,${y}px,0)`;
+                if (!frame) frame=requestAnimationFrame(function follow(){
+                    rx+=(x-rx)*.18;ry+=(y-ry)*.18;ring.style.transform=`translate3d(${rx}px,${ry}px,0)`;
+                    if(Math.abs(x-rx)+Math.abs(y-ry)>.4) frame=requestAnimationFrame(follow); else frame=0;
+                });
+                document.documentElement.style.setProperty('--parallax-x',`${(x/innerWidth-.5)*10}px`);
+                document.documentElement.style.setProperty('--parallax-y',`${(y/innerHeight-.5)*10}px`);
+                ring.classList.toggle('is-hover',Boolean(event.target.closest('button,a,.glass-card,.dept-overview-card,.about-topic-card')));
+                const magnetic=event.target.closest('.btn-modern-primary');
+                if(lastMagnetic && lastMagnetic!==magnetic) lastMagnetic.style.translate='';
+                lastMagnetic=magnetic;
+                if(magnetic){const rect=magnetic.getBoundingClientRect();magnetic.style.translate=`${(x-(rect.left+rect.width/2))*.06}px ${(y-(rect.top+rect.height/2))*.06}px`;}
+            },{passive:true});
+            document.addEventListener('pointerout',event=>{if(!event.relatedTarget)document.querySelectorAll('.btn-modern-primary').forEach(button=>button.style.translate='');});
+            document.addEventListener('pointerdown',event=>{if(event.target.closest('button'))event.target.closest('button').classList.add('cursor-press');});
+            document.addEventListener('pointerup',()=>document.querySelectorAll('.cursor-press').forEach(button=>button.classList.remove('cursor-press')));
+        }
+
         /* =========================================================
            INITIALIZATION
            ========================================================= */
         document.addEventListener('DOMContentLoaded', async () => {
             initTheme();
             updateAudioIcon();
+            initCursorInteraction();
             if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
                 const revealTargets = document.querySelectorAll('.glass-card, .dept-overview-card, .about-topic-card, .workflow-step');
                 const revealObserver = new IntersectionObserver((entries, observer) => {
