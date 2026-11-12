@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="light">
+<html lang="kk" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>student-support · AI Студенттік Сервис (ICT1103 QAIRU)</title>
+    <title>AI Студенттік Сервис · ICT1103 QAIRU</title>
+    <meta name="theme-color" content="#eaf3ff">
     <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -1133,8 +1135,94 @@
             .reveal-item { opacity:1;transform:none;transition:none; }
         }
     </style>
+<style id="aurora-theme">
+/* ===== AURORA GLOW REDESIGN (white + light blue) ===== */
+:root{--font-main:'Manrope','Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif}
+html[data-theme] body,html[data-theme] body h1,html[data-theme] body h2,html[data-theme] body h3,html[data-theme] body h4,html[data-theme] body h5,html[data-theme] body h6,html[data-theme] body .navbar-brand-text{font-family:var(--font-main)}
+html[data-theme] body{background:radial-gradient(1100px 620px at 88% -8%,rgba(96,165,250,.30),transparent 60%),radial-gradient(900px 560px at -8% 34%,rgba(125,211,252,.30),transparent 60%),linear-gradient(180deg,#fff 0%,#f0f6ff 55%,#fff 100%);background-attachment:fixed;background-size:auto;color:#13294b}
+html[data-theme] body::before{display:none}
+html[data-theme] body .ambient-glow{opacity:.9;filter:blur(110px);animation:float-orb 18s ease-in-out infinite alternate}
+html[data-theme] body .glow-1{background:rgba(96,165,250,.38)}
+html[data-theme] body .glow-2{background:rgba(147,197,253,.42);animation-duration:23s;animation-delay:-6s}
+html[data-theme] body .glow-3{background:rgba(186,230,253,.6);animation-duration:27s;animation-delay:-12s}
+@keyframes float-orb{to{transform:translate3d(46px,-56px,0) scale(1.14)}}
+@keyframes ring-spin{to{transform:rotate(360deg)}}
+@keyframes ring-orbit{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes hero-pulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.85}50%{transform:translate(-50%,-50%) scale(1.14);opacity:1}}
+@keyframes shine{0%,55%{transform:translateX(-130%)}100%{transform:translateX(130%)}}
+@keyframes pane-in{from{opacity:0;transform:translateY(24px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes curtain-up{to{transform:translateY(-100%);visibility:hidden}}
+
+/* page load curtain + scroll glow bar */
+.page-curtain{position:fixed;inset:0;z-index:5000;display:grid;place-items:center;pointer-events:none;background:linear-gradient(160deg,#fff 0%,#e6f1ff 60%,#cfe4ff 100%);animation:curtain-up .95s cubic-bezier(.76,0,.24,1) .55s forwards}
+.page-curtain span{width:84px;height:84px;border-radius:50%;border:2px solid transparent;border-top-color:#3b82f6;border-right-color:#7dd3fc;box-shadow:0 0 50px rgba(59,130,246,.55);animation:ring-spin 1s linear infinite}
+.scroll-glow{position:fixed;top:0;left:0;right:0;height:3px;z-index:4000;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#7dd3fc,#3b82f6,#60a5fa);box-shadow:0 0 14px rgba(59,130,246,.9);pointer-events:none}
+
+/* navbar: floating glass pill */
+html[data-theme] body .navbar-custom{top:.75rem;width:min(100% - 1.5rem,1120px);margin:.75rem auto 0;border-radius:999px;border:1px solid rgba(255,255,255,.95);background:rgba(255,255,255,.66);-webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%);box-shadow:0 10px 40px rgba(59,130,246,.14),inset 0 1px 0 #fff;padding:.3rem .5rem}
+html[data-theme] body .brand-logo{background:linear-gradient(135deg,#7dd3fc,#3b82f6);color:#fff;box-shadow:0 0 22px rgba(59,130,246,.55)}
+html[data-theme] body .navbar-brand-text{background:linear-gradient(90deg,#0b1b3a,#2563eb);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;font-weight:800;letter-spacing:-.02em}
+html[data-theme] body .theme-toggle-btn,html[data-theme] body .audio-toggle-btn{border-radius:50%;border:1px solid rgba(96,165,250,.3);background:rgba(255,255,255,.8);color:#2563eb;transition:box-shadow .3s,transform .3s}
+html[data-theme] body .theme-toggle-btn:hover,html[data-theme] body .audio-toggle-btn:hover{box-shadow:0 0 22px rgba(96,165,250,.6);transform:translateY(-2px)}
+
+/* hero */
+html[data-theme] body .hero-banner{position:relative;isolation:isolate;overflow:hidden;background:transparent;border:0;text-align:center;padding:clamp(3.5rem,9vw,7rem) 0 clamp(2.5rem,6vw,4.5rem)}
+html[data-theme] body .hero-banner::before{content:"";position:absolute;inset:auto;left:50%;top:48%;z-index:-1;width:min(720px,92vw);height:auto;aspect-ratio:1;border-radius:50%;border:0;background:radial-gradient(circle,rgba(96,165,250,.42) 0%,rgba(147,197,253,.24) 38%,transparent 68%);filter:blur(8px);transform:translate(-50%,-50%);animation:hero-pulse 7s ease-in-out infinite;pointer-events:none}
+html[data-theme] body .hero-banner::after{content:"";position:absolute;inset:auto;left:50%;top:48%;z-index:-1;width:min(500px,74vw);height:auto;aspect-ratio:1;border-radius:50%;background:none;border:1.5px solid transparent;border-top-color:rgba(59,130,246,.6);border-right-color:rgba(125,211,252,.4);box-shadow:0 0 60px rgba(96,165,250,.28),inset 0 0 60px rgba(96,165,250,.16);transform:translate(-50%,-50%);animation:ring-orbit 22s linear infinite;pointer-events:none}
+html[data-theme] body .hero-copy{margin-inline:auto;max-width:880px;text-align:center}
+html[data-theme] body .hero-title{max-width:none;margin:0 auto 1rem;font-size:clamp(2.4rem,7.4vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-.045em;background:linear-gradient(100deg,#0b1b3a 8%,#2563eb 55%,#38bdf8 96%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;filter:drop-shadow(0 8px 30px rgba(59,130,246,.28))}
+html[data-theme] body .hero-break{display:none}
+@media(min-width:768px){html[data-theme] body .hero-break{display:block}}
+html[data-theme] body .hero-subtitle{max-width:40ch;margin:0 auto 1.8rem;color:#4b5f84;font-size:clamp(1rem,1.6vw,1.2rem)}
+html[data-theme] body .hero-cta,html[data-theme] body .btn-modern-primary{position:relative;overflow:hidden;background:linear-gradient(135deg,#60a5fa,#2563eb);color:#fff;border:0;font-weight:700;box-shadow:inset 0 0 0 1px rgba(255,255,255,.35),0 10px 30px rgba(37,99,235,.4),0 0 50px rgba(96,165,250,.4);transition:transform .3s,box-shadow .3s}
+html[data-theme] body .hero-cta{border-radius:999px;padding:.9rem 1.8rem}
+html[data-theme] body .btn-modern-primary{border-radius:14px}
+html[data-theme] body .hero-cta:hover,html[data-theme] body .btn-modern-primary:hover{transform:translateY(-3px);background:linear-gradient(135deg,#7dd3fc,#2563eb);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.5),0 14px 40px rgba(37,99,235,.5),0 0 80px rgba(96,165,250,.65)}
+html[data-theme] body .hero-cta::after,html[data-theme] body .btn-modern-primary::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-130%);animation:shine 4.5s ease-in-out infinite}
+
+/* tabs */
+html[data-theme] body .custom-pills{background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.95);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 10px 34px rgba(59,130,246,.12)}
+html[data-theme] body .custom-pills .nav-link{color:#4b5f84;font-weight:600;transition:background .35s,color .35s,box-shadow .35s,transform .25s}
+html[data-theme] body .custom-pills .nav-link:hover{color:#2563eb;background:rgba(96,165,250,.12)}
+html[data-theme] body .custom-pills .nav-link.active{background:linear-gradient(135deg,#60a5fa,#2563eb);color:#fff;box-shadow:0 6px 22px rgba(59,130,246,.5)}
+html[data-theme] body .tab-pane.active.show{animation:pane-in .7s cubic-bezier(.2,.8,.2,1)}
+
+/* cards with glow */
+html[data-theme] body .glass-card,html[data-theme] body .dept-overview-card,html[data-theme] body .about-topic-card{background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.95);border-radius:24px;-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);box-shadow:inset 0 1px 0 #fff,0 18px 50px -18px rgba(37,99,235,.28);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s}
+html[data-theme] body .glass-card:hover,html[data-theme] body .dept-overview-card:hover,html[data-theme] body .about-topic-card:hover{border-color:rgba(96,165,250,.55);box-shadow:0 0 0 1px rgba(96,165,250,.25),0 24px 60px -16px rgba(37,99,235,.38),0 0 50px rgba(96,165,250,.22)}
+html[data-theme] body .reveal-item{transform:translateY(30px) scale(.98)}
+html[data-theme] body .reveal-item.is-visible{transform:none}
+html[data-theme] body .request-heading{color:#0b1b3a;font-weight:800}
+
+/* form */
+html[data-theme] body .textarea-wrapper{background:#fff;border:1px solid rgba(96,165,250,.3);border-radius:18px;transition:box-shadow .3s,border-color .3s}
+html[data-theme] body .textarea-wrapper:focus-within{border-color:#60a5fa;box-shadow:0 0 0 4px rgba(96,165,250,.16),0 0 36px rgba(96,165,250,.4)}
+html[data-theme] body .textarea-footer{background:#f4f9ff}
+html[data-theme] body .examples-toggle{border:1px solid rgba(96,165,250,.3);border-radius:14px;background:rgba(239,246,255,.7);padding:.6rem .9rem;transition:box-shadow .3s,border-color .3s}
+html[data-theme] body .examples-toggle:hover{border-color:#60a5fa;box-shadow:0 0 24px rgba(96,165,250,.4)}
+html[data-theme] body .preset-chip,html[data-theme] body .filter-chip{border-radius:999px;background:rgba(255,255,255,.85);border:1px solid rgba(96,165,250,.28);color:#1e3a6e;transition:box-shadow .3s,border-color .3s,transform .25s}
+html[data-theme] body .preset-chip:hover,html[data-theme] body .filter-chip:hover,html[data-theme] body .filter-chip.active{border-color:#60a5fa;background:#eaf3ff;box-shadow:0 0 22px rgba(96,165,250,.45);transform:translateY(-2px)}
+html[data-theme] body .hotkey-badge{background:#eaf3ff;color:#2563eb;border:1px solid rgba(96,165,250,.3)}
+html[data-theme] body footer{background:transparent;border-top:1px solid rgba(96,165,250,.22);color:#5a6f95}
+
+/* dark theme (kept, in blue glow style) */
+html[data-theme="dark"] body{background:radial-gradient(1100px 620px at 88% -8%,rgba(59,130,246,.30),transparent 60%),radial-gradient(900px 560px at -8% 34%,rgba(56,189,248,.18),transparent 60%),#050b1a;color:#e2ecff}
+html[data-theme="dark"] body .navbar-custom,html[data-theme="dark"] body .custom-pills{background:rgba(10,20,44,.62);border-color:rgba(96,165,250,.22)}
+html[data-theme="dark"] body .glass-card,html[data-theme="dark"] body .dept-overview-card,html[data-theme="dark"] body .about-topic-card{background:rgba(12,24,52,.62);border-color:rgba(96,165,250,.2)}
+html[data-theme="dark"] body .textarea-wrapper,html[data-theme="dark"] body .preset-chip,html[data-theme="dark"] body .filter-chip{background:#0a1530;color:#dbe7ff}
+html[data-theme="dark"] body .textarea-footer,html[data-theme="dark"] body .examples-toggle{background:#0d1a3a}
+html[data-theme="dark"] body .custom-textarea,html[data-theme="dark"] body .request-heading,html[data-theme="dark"] body .custom-pills .nav-link{color:#e2ecff}
+html[data-theme="dark"] body .hero-subtitle,html[data-theme="dark"] body footer{color:#9db3dd}
+html[data-theme="dark"] body .hero-title{background:linear-gradient(100deg,#fff 8%,#93c5fd 55%,#38bdf8 96%);-webkit-background-clip:text;background-clip:text}
+html[data-theme="dark"] body .navbar-brand-text{background:linear-gradient(90deg,#fff,#93c5fd);-webkit-background-clip:text;background-clip:text}
+
+@media(max-width:767.98px){html[data-theme] body .ambient-glow{filter:blur(70px);opacity:.7}html[data-theme] body .navbar-custom{border-radius:22px}html[data-theme] body .hero-banner::after{display:none}}
+@media(prefers-reduced-motion:reduce){.page-curtain,.scroll-glow{display:none}html[data-theme] body .ambient-glow,html[data-theme] body .hero-banner::before,html[data-theme] body .hero-banner::after,html[data-theme] body .hero-cta::after,html[data-theme] body .btn-modern-primary::after,html[data-theme] body .tab-pane.active.show{animation:none}}
+</style>
 </head>
 <body>
+    <div class="page-curtain" aria-hidden="true"><span></span></div>
+    <div class="scroll-glow" id="scrollGlow" aria-hidden="true"></div>
 
     <!-- Ambient Neon Mesh Orbs -->
     <div class="ambient-glow glow-1"></div>
@@ -1152,7 +1240,7 @@
                     <i class="bi bi-headset"></i>
                 </span>
                 <div>
-                    <span class="navbar-brand-text">student-support</span>
+                    <span class="navbar-brand-text">Студенттік Сервис</span>
                 </div>
             </a>
 
@@ -1175,9 +1263,9 @@
     <header class="hero-banner">
         <div class="container hero-content">
             <div class="hero-copy">
-                <h1 class="hero-title">Student support,<br class="hero-break"> made simple.</h1>
-                <p class="hero-subtitle">Describe your request. We’ll route it to the right team.</p>
-                <button type="button" class="hero-cta" onclick="focusRequest()">Write a request <i class="bi bi-arrow-down-right" aria-hidden="true"></i></button>
+                <h1 class="hero-title">Студенттік қолдау,<br class="hero-break"> жеңіл әрі жылдам.</h1>
+                <p class="hero-subtitle">Өтінішіңізді жазыңыз — біз оны қажетті бөлімге жібереміз.</p>
+                <button type="button" class="hero-cta" onclick="focusRequest()">Өтініш жазу <i class="bi bi-arrow-down-right" aria-hidden="true"></i></button>
             </div>
         </div>
     </header>
@@ -1190,7 +1278,7 @@
             <ul class="nav custom-pills" id="mainTabs" role="tablist">
                 <li class="nav-item">
                     <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-classifier" onclick="playSoftClick()">
-                        Онлайн Классификатор
+                        Классификатор
                     </button>
                 </li>
                 <li class="nav-item">
@@ -1223,7 +1311,7 @@
                     <div class="col-lg-7">
                         <div class="glass-card p-4 h-100">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h2 class="request-heading">Your request</h2>
+                                <h2 class="request-heading">Сіздің өтінішіңіз</h2>
                             </div>
 
                             <form id="classifyForm" onsubmit="event.preventDefault(); submitQuery();">
@@ -1237,7 +1325,7 @@
                                         oninput="updateCharCount()"></textarea>
                                     <div class="textarea-footer">
                                         <div class="d-flex align-items-center gap-2">
-                                            <span class="hotkey-badge">Ctrl + ↵ to submit</span>
+                                            <span class="hotkey-badge">Ctrl + ↵ жіберу</span>
                                         </div>
                                         <div class="char-counter">
                                             <span id="charCount">0</span> таңба
@@ -1248,29 +1336,29 @@
                             <!-- Quick Preset Samples: collapsed by default -->
                             <div class="examples-wrap mt-3">
                                 <button type="button" id="examplesToggle" class="examples-toggle" aria-expanded="false" aria-controls="examplesPanel" onclick="toggleExamples()">
-                                    <span>Examples</span>
-                                    <span class="examples-toggle-action"><span id="examplesToggleLabel">Show examples</span><i class="bi bi-chevron-down examples-chevron" aria-hidden="true"></i></span>
+                                    <span>Мысалдар</span>
+                                    <span class="examples-toggle-action"><span id="examplesToggleLabel">Көрсету</span><i class="bi bi-chevron-down examples-chevron" aria-hidden="true"></i></span>
                                 </button>
                                 <div class="examples-panel" id="examplesPanel" aria-hidden="true" inert>
                                     <div class="examples-panel-inner">
                                 <div class="d-flex flex-wrap gap-2">
                                     <button type="button" class="preset-chip" onclick="setQuery('Не отображается оценка за лабораторную работу в LMS')">
-                                        Оценка в LMS
+                                        LMS-тегі баға
                                     </button>
                                     <button type="button" class="preset-chip" onclick="setQuery('Система тестирования зависла во время прохождения экзамена')">
-                                        Тест завис на экзамене
+                                        Емтиханда тест қатып қалды
                                     </button>
                                     <button type="button" class="preset-chip" onclick="setQuery('Где я могу получить справку с места учебы для Egov?')">
-                                        Справка для Egov
+                                        Egov үшін анықтама
                                     </button>
                                     <button type="button" class="preset-chip" onclick="setQuery('Kaspi арқылы ақша ұсталды, бірақ LMS-те төлем көрінбей тұр.')">
                                         Kaspi төлемі түспеді
                                     </button>
                                     <button type="button" class="preset-chip" onclick="setQuery('How can I order an official academic transcript with university stamp?')">
-                                        Official transcript
+                                        Ресми транскрипт
                                     </button>
                                     <button type="button" class="preset-chip border-warning-subtle" onclick="setQuery('Не могу оплатить повторный курс из-за ошибки на сайте')">
-                                        Ошибка оплаты
+                                        Төлем қатесі
                                     </button>
                                     </div>
                                     </div>
@@ -1377,7 +1465,7 @@
                                 </div>
                                 <div>
                                     <div class="d-flex justify-content-between small mb-1">
-                                        <span style="color: var(--text-secondary);"><i class="bi bi-hdd-network-fill me-1" style="color: var(--cat-tech);"></i> IT Helpdesk / Техподдержка</span>
+                                        <span style="color: var(--text-secondary);"><i class="bi bi-hdd-network-fill me-1" style="color: var(--cat-tech);"></i> IT Helpdesk / Техникалық қолдау</span>
                                         <span id="probTech" class="fw-bold font-monospace" style="color: var(--cat-tech);">0%</span>
                                     </div>
                                     <div class="prob-bar-container">
@@ -1488,7 +1576,7 @@
                             <i class="bi bi-check2-square text-success"></i>
                             <span>Міндетті 3 Тексеру Мысалы (Mandatory Test Cases)</span>
                         </h5>
-                        <span class="badge bg-success-subtle text-success border">100% Passed</span>
+                        <span class="badge bg-success-subtle text-success border">100% өтті</span>
                     </div>
                     <p class="small" style="color: var(--text-secondary);">
                         Тапсырма талаптарына сәйкес дайындалған сынақ кейстері. Түймені басып, онлайн тестілеуге болады:
@@ -1500,7 +1588,7 @@
                             <div class="about-topic-card about-card-academic">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <span class="badge bg-primary">1-Тест: Оқу мәселесі</span>
-                                    <span class="badge bg-success-subtle text-success border"><i class="bi bi-check-lg"></i> PASSED</span>
+                                    <span class="badge bg-success-subtle text-success border"><i class="bi bi-check-lg"></i> ӨТТІ</span>
                                 </div>
                                 <h6 class="fw-bold mb-1" style="color: var(--text-title);">«Не отображается оценка за лабораторную работу в LMS»</h6>
                                 <p class="small mb-3" style="color: var(--text-secondary);">Студенттің оқу жүйесіндегі бағасын тексеру сұрағы.</p>
@@ -1518,12 +1606,12 @@
                             <div class="about-topic-card about-card-tech">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <span class="badge bg-danger">2-Тест: Техникалық қате</span>
-                                    <span class="badge bg-success-subtle text-success border"><i class="bi bi-check-lg"></i> PASSED</span>
+                                    <span class="badge bg-success-subtle text-success border"><i class="bi bi-check-lg"></i> ӨТТІ</span>
                                 </div>
                                 <h6 class="fw-bold mb-1" style="color: var(--text-title);">«Система тестирования зависла во время прохождения экзамена»</h6>
                                 <p class="small mb-3" style="color: var(--text-secondary);">Емтихан кезінде бағдарламаның қатып қалуы.</p>
                                 <div class="mt-auto pt-2 border-top d-flex justify-content-between align-items-center" style="border-color: rgba(255,255,255,0.1) !important;">
-                                    <small style="color: var(--text-muted);">Болжам: <strong style="color: var(--cat-tech);">Tech Support</strong></small>
+                                    <small style="color: var(--text-muted);">Болжам: <strong style="color: var(--cat-tech);">Техникалық қолдау</strong></small>
                                     <button class="btn btn-sm btn-outline-danger" onclick="runTestCase('Система тестирования зависла во время прохождения экзамена')">
                                         <i class="bi bi-play-fill"></i> Сынап көру
                                     </button>
@@ -1536,7 +1624,7 @@
                             <div class="about-topic-card about-card-docs">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <span class="badge bg-success">3-Тест: Анықтама алу</span>
-                                    <span class="badge bg-success-subtle text-success border"><i class="bi bi-check-lg"></i> PASSED</span>
+                                    <span class="badge bg-success-subtle text-success border"><i class="bi bi-check-lg"></i> ӨТТІ</span>
                                 </div>
                                 <h6 class="fw-bold mb-1" style="color: var(--text-title);">«Где я могу получить справку с места учебы для Egov?»</h6>
                                 <p class="small mb-3" style="color: var(--text-secondary);">Мемлекеттік мекемелерге ресми құжат сұрату.</p>
@@ -1617,7 +1705,7 @@
                     <div class="col-6 col-md-3">
                         <div class="glass-card p-3 text-center">
                             <div class="hero-metric-number font-monospace" style="color: var(--cat-academic);">84.8%</div>
-                            <div class="hero-metric-label">Test Accuracy</div>
+                            <div class="hero-metric-label">Тест дәлдігі</div>
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
@@ -1635,7 +1723,7 @@
                     <div class="col-6 col-md-3">
                         <div class="glass-card p-3 text-center">
                             <div class="hero-metric-number font-monospace" style="color: var(--cat-tech);">0.21 ms</div>
-                            <div class="hero-metric-label">Inference Latency</div>
+                            <div class="hero-metric-label">Жауап кідірісі</div>
                         </div>
                     </div>
 
@@ -1821,7 +1909,7 @@
         <section class="glass-card p-4 my-4" id="about">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <span class="badge border" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border-color: rgba(56, 189, 248, 0.3) !important;">
-                    Жоба туралы · Executive Architecture
+                    Жоба туралы · Жүйе архитектурасы
                 </span>
                 <span class="small font-monospace" style="color: var(--text-muted);">QAIRU · ICT1103 (2026–2027)</span>
             </div>
@@ -1940,7 +2028,7 @@
         <div class="container text-center">
             <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
                 <div>
-                    <strong style="color: var(--text-title);">student-support</strong> · QAIRU (2026–2027) · ICT1103 Group Project
+                    <strong style="color: var(--text-title);">Студенттік Сервис</strong> · QAIRU (2026–2027) · ICT1103 топтық жобасы
                 </div>
                 <div class="font-monospace small" style="color: var(--text-muted);">
                     TF-IDF + Logistic Regression · REST API: <code>/api/predict</code> · SQLite Active Learning
@@ -2267,7 +2355,7 @@
             const priority = document.getElementById('resPriority').innerText;
             const text = document.getElementById('queryText').value;
 
-            const summary = `[student-support] ${lastTicketId}\nТекст: ${text}\nСанат: ${category}\n${dept}\nПриоритет: ${priority}`;
+            const summary = `[QAIRU] ${lastTicketId}\nТекст: ${text}\nСанат: ${category}\n${dept}\nПриоритет: ${priority}`;
             navigator.clipboard.writeText(summary).then(() => {
                 showToast('Нәтиже буферге көшірілді! 📋');
                 playSoftClick();
@@ -2370,7 +2458,7 @@
         }
 
         async function clearHistory() {
-            if (!confirm('Барлық тарихты өшіру керек пе? / Удалить всю историю?')) return;
+            if (!confirm('Барлық тарихты өшіру керек пе?')) return;
             playSoftClick();
             sessionTickets = [];
             filteredTickets = [];
@@ -2422,7 +2510,7 @@
             panel.setAttribute('aria-hidden', String(!open));
             panel.inert = !open;
             panel.classList.toggle('is-open', open);
-            document.getElementById('examplesToggleLabel').textContent = open ? 'Hide examples' : 'Show examples';
+            document.getElementById('examplesToggleLabel').textContent = open ? 'Жасыру' : 'Көрсету';
         }
 
         /* =========================================================
@@ -2462,5 +2550,15 @@
             }
         });
     </script>
+<script>
+(function(){
+  var bar=document.getElementById('scrollGlow'),busy=false;
+  function upd(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight;if(bar)bar.style.transform='scaleX('+(m>0?h.scrollTop/m:0)+')';busy=false}
+  addEventListener('scroll',function(){if(!busy){busy=true;requestAnimationFrame(upd)}},{passive:true});upd();
+  var c=document.querySelector('.page-curtain');
+  if(c)c.addEventListener('animationend',function(e){if(e.animationName==='curtain-up')c.remove()});
+  document.addEventListener('shown.bs.tab',function(){var m=document.querySelector('main');if(m&&m.getBoundingClientRect().top<-40)m.scrollIntoView({behavior:'smooth',block:'start'})});
+})();
+</script>
 </body>
 </html>
