@@ -1,659 +1,1218 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Опишите вопрос — student-support подскажет направление и приоритет обращения в университете.">
-    <meta name="theme-color" content="#f7f8fa">
-    <title>student-support — поддержка студентов</title>
+    <title>student-support · AI Студенттік Сервис (ICT1103 QAIRU)</title>
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     <style>
+        /* =========================================================
+           MODERN THEME VARIABLES & AURORA GRADIENTS
+           ========================================================= */
         :root {
-            --primary-accent: #1e40af;
-            --primary-gradient: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-            --academic-color: #2563eb;
-            --docs-color: #059669;
-            --finance-color: #d97706;
-            --tech-color: #dc2626;
-            --bg-light: #f8fafc;
-            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            --card-shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
+            /* Category Identity Colors */
+            --cat-academic: #3b82f6;
+            --cat-academic-glow: rgba(59, 130, 246, 0.45);
+            --cat-docs: #10b981;
+            --cat-docs-glow: rgba(16, 185, 129, 0.45);
+            --cat-finance: #f59e0b;
+            --cat-finance-glow: rgba(245, 158, 11, 0.45);
+            --cat-tech: #ef4444;
+            --cat-tech-glow: rgba(239, 68, 68, 0.45);
+
+            /* Transitions */
+            --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-bounce: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Dark Mode (Default) */
+        [data-theme="dark"] {
+            --bg-base: #090d16;
+            --bg-elevated: rgba(17, 24, 39, 0.72);
+            --bg-card: rgba(15, 23, 42, 0.78);
+            --bg-card-hover: rgba(30, 41, 59, 0.85);
+            --bg-input: rgba(15, 23, 42, 0.9);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --border-glass-hover: rgba(255, 255, 255, 0.18);
+            --border-glow: rgba(59, 130, 246, 0.3);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --nav-bg: rgba(9, 13, 22, 0.82);
+            --hero-gradient: linear-gradient(135deg, rgba(30, 58, 138, 0.35) 0%, rgba(88, 28, 135, 0.25) 50%, rgba(15, 23, 42, 0.6) 100%);
+            --aurora-1: rgba(59, 130, 246, 0.15);
+            --aurora-2: rgba(168, 85, 247, 0.12);
+            --aurora-3: rgba(16, 185, 129, 0.1);
+            --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+            --card-shadow-hover: 0 20px 40px -12px rgba(0, 0, 0, 0.7), 0 0 20px rgba(59, 130, 246, 0.2);
+            --sample-pill-bg: rgba(30, 41, 59, 0.7);
+            --sample-pill-border: rgba(255, 255, 255, 0.08);
+            --sample-pill-hover: rgba(59, 130, 246, 0.18);
+            --table-hover-bg: rgba(30, 41, 59, 0.5);
+            --kbd-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Light Mode */
+        [data-theme="light"] {
+            --bg-base: #f8fafc;
+            --bg-elevated: rgba(255, 255, 255, 0.88);
+            --bg-card: rgba(255, 255, 255, 0.92);
+            --bg-card-hover: #ffffff;
+            --bg-input: #ffffff;
+            --border-glass: rgba(226, 232, 240, 0.9);
+            --border-glass-hover: rgba(203, 213, 225, 1);
+            --border-glow: rgba(37, 99, 235, 0.3);
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --hero-gradient: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
+            --aurora-1: rgba(59, 130, 246, 0.08);
+            --aurora-2: rgba(168, 85, 247, 0.06);
+            --aurora-3: rgba(16, 185, 129, 0.05);
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 0 1px 1px rgba(0, 0, 0, 0.04);
+            --card-shadow-hover: 0 20px 35px -8px rgba(37, 99, 235, 0.12), 0 0 1px 1px rgba(37, 99, 235, 0.2);
+            --sample-pill-bg: #f1f5f9;
+            --sample-pill-border: #e2e8f0;
+            --sample-pill-hover: #e0e7ff;
+            --table-hover-bg: #f1f5f9;
+            --kbd-bg: #e2e8f0;
+        }
+
+        /* =========================================================
+           GLOBAL RESET & LAYOUT
+           ========================================================= */
+        * {
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg-light);
-            color: #1e293b;
+            font-family: var(--font-main);
+            background-color: var(--bg-base);
+            color: var(--text-primary);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        .navbar-brand {
-            font-weight: 800;
-            letter-spacing: -0.5px;
+        /* Ambient Background Mesh Blobs */
+        .ambient-glow {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.65;
+            transition: opacity 0.5s ease;
+        }
+        .glow-1 {
+            width: 500px;
+            height: 500px;
+            top: -150px;
+            right: -100px;
+            background: var(--aurora-1);
+        }
+        .glow-2 {
+            width: 450px;
+            height: 450px;
+            bottom: 10%;
+            left: -150px;
+            background: var(--aurora-2);
+        }
+        .glow-3 {
+            width: 350px;
+            height: 350px;
+            top: 45%;
+            right: 25%;
+            background: var(--aurora-3);
         }
 
-        .badge-qairu {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
+        /* =========================================================
+           NAVBAR (GLASSMORPHIC)
+           ========================================================= */
+        .navbar-custom {
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glass);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.8rem 0;
+            transition: var(--transition-smooth);
         }
 
-        .hero-banner {
-            background: var(--primary-gradient);
-            color: white;
-            padding: 2.5rem 0 2rem;
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.6rem;
+            height: 2.6rem;
+            border-radius: 0.75rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            color: #ffffff;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
             position: relative;
             overflow: hidden;
         }
 
-        .hero-banner::after {
+        .brand-logo::after {
             content: '';
             position: absolute;
             top: -50%;
-            right: -10%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-            border-radius: 50%;
-            pointer-events: none;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(60deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(30deg);
+            animation: logoShine 6s infinite;
         }
 
-        .custom-card {
-            border: none;
-            border-radius: 1rem;
-            background: white;
-            box-shadow: var(--card-shadow);
-            transition: all 0.25s ease;
+        @keyframes logoShine {
+            0% { transform: translate(-100%, -100%) rotate(30deg); }
+            20% { transform: translate(100%, 100%) rotate(30deg); }
+            100% { transform: translate(100%, 100%) rotate(30deg); }
         }
 
-        .custom-card:hover {
-            box-shadow: var(--card-shadow-hover);
-        }
-
-        .nav-pills .nav-link {
-            border-radius: 0.75rem;
-            padding: 0.65rem 1.25rem;
-            font-weight: 600;
-            color: #64748b;
-            transition: all 0.2s;
-        }
-
-        .nav-pills .nav-link.active {
-            background-color: #1e3a8a;
-            color: white;
-            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
-        }
-
-        .sample-pill {
-            font-size: 0.82rem;
-            padding: 0.4rem 0.85rem;
-            border-radius: 2rem;
-            background: #f1f5f9;
-            border: 1px solid #e2e8f0;
-            color: #334155;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: left;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .sample-pill:hover {
-            background: #e2e8f0;
-            transform: translateY(-1px);
-        }
-
-        .result-box {
-            border-radius: 1rem;
-            border-left: 6px solid #cbd5e1;
-            background: #ffffff;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .result-box.academic { border-left-color: var(--academic-color); }
-        .result-box.docs { border-left-color: var(--docs-color); }
-        .result-box.finance { border-left-color: var(--finance-color); }
-        .result-box.tech_support { border-left-color: var(--tech-color); }
-
-        .progress-bar-prob {
-            height: 8px;
-            border-radius: 4px;
-            transition: width 0.6s ease;
-        }
-
-        .metric-card {
-            border-radius: 0.75rem;
-            padding: 1.25rem;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            text-align: center;
-        }
-
-        .metric-val {
-            font-size: 1.85rem;
+        .navbar-brand-text {
             font-weight: 800;
-            color: #1e3a8a;
-            line-height: 1.2;
+            font-size: 1.2rem;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #60a5fa 0%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        [data-theme="light"] .navbar-brand-text {
+            background: linear-gradient(135deg, #1e40af 0%, #6b21a8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .metric-lbl {
-            font-size: 0.8rem;
+        .badge-qairu-pill {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-glass);
+            color: var(--text-secondary);
+            font-size: 0.72rem;
             font-weight: 600;
-            text-transform: uppercase;
-            color: #64748b;
+            padding: 0.25rem 0.6rem;
+            border-radius: 2rem;
             letter-spacing: 0.5px;
         }
 
-        .matrix-table th, .matrix-table td {
-            text-align: center;
-            vertical-align: middle;
-            font-size: 0.85rem;
-            padding: 0.6rem;
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #10b981;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            animation: pulseWave 2s infinite;
         }
 
-        .matrix-diag {
-            background-color: #dcfce7 !important;
+        @keyframes pulseWave {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .theme-toggle-btn, .audio-toggle-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            color: var(--text-secondary);
+            width: 2.3rem;
+            height: 2.3rem;
+            border-radius: 0.65rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .theme-toggle-btn:hover, .audio-toggle-btn:hover {
+            color: var(--text-primary);
+            border-color: var(--border-glass-hover);
+            transform: translateY(-2px);
+        }
+
+        /* =========================================================
+           HERO SECTION WITH INTERACTIVE PARTICLES CANVAS
+           ========================================================= */
+        .hero-banner {
+            position: relative;
+            background: var(--hero-gradient);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 3.5rem 0 3rem;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        [data-theme="light"] .hero-banner {
+            color: #ffffff;
+        }
+
+        #particlesCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: auto;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .hero-interactive {
+            pointer-events: auto;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.15;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            max-width: 620px;
+        }
+        [data-theme="light"] .hero-subtitle {
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Hero Glass Metric Counter Cards */
+        .hero-metric-box {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 1rem;
+            padding: 0.85rem 1.4rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: var(--transition-bounce);
+        }
+
+        .hero-metric-box:hover {
+            transform: translateY(-4px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.25);
+        }
+
+        .hero-metric-number {
+            font-family: var(--font-mono);
+            font-size: 1.75rem;
+            font-weight: 800;
+            line-height: 1.1;
+            color: #ffffff;
+        }
+
+        .hero-metric-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
+        }
+
+        /* =========================================================
+           NAV TABS (MODERN PILLS WITH GLOW)
+           ========================================================= */
+        .custom-pills {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: 1.1rem;
+            padding: 0.4rem;
+            backdrop-filter: blur(16px);
+            display: inline-flex;
+            box-shadow: var(--card-shadow);
+        }
+
+        .custom-pills .nav-link {
+            border-radius: 0.8rem;
+            padding: 0.65rem 1.25rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: var(--transition-smooth);
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .custom-pills .nav-link:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .custom-pills .nav-link.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.45);
+        }
+
+        /* =========================================================
+           GLASS CARDS & INTERACTIVE CONTAINERS
+           ========================================================= */
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: 1.25rem;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .glass-card:hover {
+            border-color: var(--border-glass-hover);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        /* Shimmer border highlight */
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+            pointer-events: none;
+        }
+
+        /* Textarea Container with Live Counters */
+        .textarea-wrapper {
+            position: relative;
+            border-radius: 1rem;
+            background: var(--bg-input);
+            border: 1.5px solid var(--border-glass);
+            transition: var(--transition-smooth);
+            overflow: hidden;
+        }
+
+        .textarea-wrapper:focus-within {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+        }
+
+        .custom-textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            font-size: 0.98rem;
+            padding: 1rem 1.2rem;
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .custom-textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .textarea-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem 0.65rem;
+            background: rgba(0, 0, 0, 0.03);
+            border-top: 1px solid var(--border-glass);
+        }
+        [data-theme="dark"] .textarea-footer {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .hotkey-badge {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            background: var(--kbd-bg);
+            border-radius: 0.35rem;
+            padding: 0.2rem 0.45rem;
+            color: var(--text-secondary);
+        }
+
+        .char-counter {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Glowing Primary Button */
+        .btn-modern-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 0.85rem;
             font-weight: 700;
-            color: #166534;
+            padding: 0.75rem 1.6rem;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 18px rgba(59, 130, 246, 0.35);
+            transition: var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
         }
 
-        .feedback-section {
-            border-top: 1px dashed #e2e8f0;
-            padding-top: 0.75rem;
-            margin-top: 0.75rem;
+        .btn-modern-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.5);
+            color: #ffffff;
+        }
+
+        .btn-modern-primary:active {
+            transform: translateY(0);
+        }
+
+        /* Preset Chips */
+        .preset-chip {
+            background: var(--sample-pill-bg);
+            border: 1px solid var(--sample-pill-border);
+            color: var(--text-secondary);
+            font-size: 0.82rem;
+            font-weight: 500;
+            border-radius: 2rem;
+            padding: 0.45rem 0.9rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .preset-chip:hover {
+            background: var(--sample-pill-hover);
+            color: var(--text-primary);
+            border-color: rgba(59, 130, 246, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* =========================================================
+           RESULT CARD & NEON DYNAMIC GLOW
+           ========================================================= */
+        .result-card-container {
+            border-radius: 1.25rem;
+            position: relative;
+            transition: var(--transition-smooth);
+        }
+
+        .result-card-container.academic {
+            border: 1.5px solid var(--cat-academic);
+            box-shadow: 0 0 35px -5px var(--cat-academic-glow);
+        }
+        .result-card-container.docs {
+            border: 1.5px solid var(--cat-docs);
+            box-shadow: 0 0 35px -5px var(--cat-docs-glow);
+        }
+        .result-card-container.finance {
+            border: 1.5px solid var(--cat-finance);
+            box-shadow: 0 0 35px -5px var(--cat-finance-glow);
+        }
+        .result-card-container.tech_support {
+            border: 1.5px solid var(--cat-tech);
+            box-shadow: 0 0 35px -5px var(--cat-tech-glow);
+        }
+
+        @keyframes resultPop {
+            0% { transform: scale(0.96) translateY(8px); opacity: 0; }
+            100% { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .animate-result {
+            animation: resultPop 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Sparkle / Confetti Canvas */
+        #confettiCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Probability Bars */
+        .prob-bar-container {
+            height: 7px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+        }
+        [data-theme="light"] .prob-bar-container {
+            background: #e2e8f0;
+        }
+
+        .prob-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Feedback Section */
+        .feedback-section-box {
+            background: rgba(0, 0, 0, 0.03);
+            border: 1px dashed var(--border-glass);
+            border-radius: 1rem;
+            padding: 0.9rem;
+        }
+        [data-theme="dark"] .feedback-section-box {
+            background: rgba(0, 0, 0, 0.25);
         }
 
         .feedback-btn {
             font-size: 0.78rem;
-            padding: 0.25rem 0.6rem;
-            border-radius: 1rem;
-        }
-
-        .feedback-success {
-            color: #059669;
-            font-size: 0.82rem;
             font-weight: 600;
+            border-radius: 1.5rem;
+            padding: 0.3rem 0.75rem;
+            transition: var(--transition-smooth);
         }
 
-        .db-badge {
-            font-size: 0.7rem;
-            padding: 0.2rem 0.5rem;
+        .feedback-btn:hover {
+            transform: translateY(-2px);
         }
 
+        /* =========================================================
+           TEST CASES & ERROR CASE VISUALS
+           ========================================================= */
+        .test-case-card {
+            border-radius: 1rem;
+            border: 1px solid var(--border-glass);
+            padding: 1.25rem;
+            background: var(--bg-card);
+            transition: var(--transition-smooth);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .test-case-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--border-glass-hover);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .run-test-btn {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            color: #60a5fa;
+            font-size: 0.78rem;
+            font-weight: 600;
+            border-radius: 0.6rem;
+            padding: 0.35rem 0.75rem;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .run-test-btn:hover {
+            background: #3b82f6;
+            color: #ffffff;
+            border-color: #3b82f6;
+            transform: translateY(-1px);
+        }
+
+        /* Conflict Visualizer for Error Case */
+        .conflict-bar-wrapper {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 0.75rem;
+            padding: 0.85rem;
+            border: 1px solid var(--border-glass);
+        }
+
+        /* =========================================================
+           BENCHMARK & 4x4 MATRIX
+           ========================================================= */
+        .matrix-table {
+            border-collapse: separate;
+            border-spacing: 4px;
+        }
+
+        .matrix-cell {
+            padding: 0.75rem 0.5rem;
+            text-align: center;
+            border-radius: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
+            font-weight: 700;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .matrix-diag {
+            background: rgba(16, 185, 129, 0.18) !important;
+            border: 1px solid rgba(16, 185, 129, 0.4) !important;
+            color: #10b981 !important;
+        }
+
+        .matrix-off {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            color: var(--text-muted);
+        }
+
+        .matrix-cell:hover {
+            transform: scale(1.08);
+            z-index: 2;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* =========================================================
+           HISTORY LOG WITH INSTANT SEARCH & FILTER
+           ========================================================= */
+        .filter-chip {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            color: var(--text-secondary);
+            font-size: 0.78rem;
+            font-weight: 600;
+            border-radius: 2rem;
+            padding: 0.3rem 0.75rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .filter-chip.active, .filter-chip:hover {
+            background: #3b82f6;
+            color: #ffffff;
+            border-color: #3b82f6;
+        }
+
+        .search-input {
+            background: var(--bg-input);
+            border: 1px solid var(--border-glass);
+            color: var(--text-primary);
+            border-radius: 0.75rem;
+            font-size: 0.85rem;
+            padding: 0.4rem 0.85rem 0.4rem 2.2rem;
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .search-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+        }
+
+        /* Floating Toasts */
+        .toast-container-custom {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .custom-toast {
+            background: var(--bg-elevated);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: 1rem;
+            padding: 0.75rem 1.2rem;
+            color: var(--text-primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.88rem;
+            animation: toastSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes toastSlide {
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Footer */
         footer {
             margin-top: auto;
-            background: white;
-            border-top: 1px solid #e2e8f0;
-            padding: 1.5rem 0;
+            background: var(--nav-bg);
+            border-top: 1px solid var(--border-glass);
+            padding: 1.8rem 0;
             font-size: 0.85rem;
-            color: #64748b;
-        }
-
-        :root {
-            --ink: #172033;
-            --muted: #667085;
-            --line: #e8ebf0;
-            --paper: #f7f8fa;
-            --brand: #365cf5;
-            --brand-dark: #2648d8;
-            --soft-blue: #edf2ff;
-            --surface-shadow: 0 18px 50px rgba(20, 32, 60, .07);
-        }
-
-        html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
-        :focus-visible { outline: 3px solid rgba(54,92,245,.45); outline-offset: 3px; }
-        body {
-            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: var(--paper);
-            color: var(--ink);
-            min-height: 100vh;
-        }
-        .site-nav {
-            background: #fff;
-            border-bottom: 1px solid rgba(232, 235, 240, .9);
-        }
-        .navbar-brand { color: var(--ink) !important; font-weight: 750; letter-spacing: -.04em; }
-        .brand-mark {
-            width: 2rem; height: 2rem; display: inline-grid; place-items: center;
-            border-radius: .7rem; background: var(--soft-blue); color: var(--brand); font-size: 1rem;
-        }
-        .service-status { color: #475467; font-size: .82rem; }
-        .status-dot { width: .48rem; height: .48rem; border-radius: 50%; background: #2baa75; display: inline-block; }
-        .hero-banner {
-            color: var(--ink);
-            padding: clamp(3.5rem, 9vw, 7rem) 0 clamp(2.5rem, 6vw, 4.5rem);
-            background: radial-gradient(ellipse at 82% 18%, rgba(83, 119, 255, .12), transparent 36%),
-                        linear-gradient(180deg, #fff 0%, #f7f8fa 100%);
-        }
-        .hero-banner::after { display: none; }
-        .hero-layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(250px, .7fr); gap: 3rem; align-items: end; }
-        .hero-kicker {
-            display: inline-flex; align-items: center; gap: .55rem; color: var(--brand);
-            font-size: .75rem; font-weight: 750; letter-spacing: .13em; text-transform: uppercase;
-        }
-        .hero-title { max-width: 760px; font-size: clamp(2.5rem, 6vw, 5.1rem); line-height: .98; letter-spacing: -.065em; font-weight: 760; margin: 1.25rem 0 1rem; }
-        .hero-title span { color: var(--brand); }
-        .hero-copy { max-width: 640px; color: var(--muted); font-size: clamp(1rem, 1.5vw, 1.15rem); line-height: 1.7; }
-        .hero-cta { display: inline-flex; align-items: center; gap: .6rem; margin-top: 1rem; padding: .82rem 1.15rem; border-radius: .8rem; color: #fff; background: var(--brand); font-weight: 650; text-decoration: none; transition: background-color .2s ease, transform .2s ease; }
-        .hero-cta:hover { color: #fff; background: var(--brand-dark); transform: translateY(-2px); }
-        .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
-        .hero-stat { padding: 1.15rem; border: 1px solid var(--line); border-radius: 1rem; background: rgba(255,255,255,.82); }
-        .hero-stat strong { display: block; font-size: 1.45rem; letter-spacing: -.04em; color: var(--ink); }
-        .hero-stat span { display: block; margin-top: .2rem; color: var(--muted); font-size: .76rem; }
-        .main-shell { max-width: 1160px; }
-        .history-count { min-width: 1.35rem; padding: .08rem .35rem; border-radius: 99px; background: rgba(255,255,255,.18); font-size: .75rem; text-align: center; }
-        .classifier-intro { margin: .6rem 0 1.45rem; }
-        .classifier-intro h2 { margin: .4rem 0; font-size: clamp(1.65rem, 3vw, 2.2rem); font-weight: 740; letter-spacing: -.05em; }
-        .classifier-intro p { margin: 0; color: var(--muted); }
-        .nav-pills {
-            display: flex; flex-wrap: nowrap; justify-content: flex-start !important; gap: .35rem !important;
-            overflow-x: auto; padding: .35rem; margin: 0 auto 1.5rem !important;
-            border: 1px solid var(--line); border-radius: .95rem; background: #fff; scrollbar-width: thin;
-        }
-        .nav-pills .nav-item { flex: 0 0 auto; }
-        .nav-pills .nav-link { color: #667085; padding: .65rem .95rem; white-space: nowrap; font-size: .88rem; }
-        .nav-pills .nav-link:hover { color: var(--brand); background: #f6f8ff; }
-        .nav-pills .nav-link.active { color: #fff; background: var(--ink); box-shadow: none; }
-        .custom-card { border: 1px solid rgba(232, 235, 240, .9); border-radius: 1.15rem; box-shadow: var(--surface-shadow); transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
-        .custom-card:hover { transform: translateY(-2px); box-shadow: 0 22px 55px rgba(20,32,60,.09); }
-        .result-box { border-left-width: 4px; border-radius: 1.15rem; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
-        .form-control { border-color: #dfe3eb; }
-        .form-control:focus { border-color: #91a8ff; box-shadow: 0 0 0 .22rem rgba(54,92,245,.12); }
-        .alert-info { color: #344e9a; background: #f0f4ff; border-color: #e0e8ff; }
-        .btn-primary { --bs-btn-bg: var(--brand); --bs-btn-border-color: var(--brand); --bs-btn-hover-bg: var(--brand-dark); --bs-btn-hover-border-color: var(--brand-dark); }
-        .sample-pill { background: #fff; border-color: var(--line); transition: background-color .18s ease, border-color .18s ease, color .18s ease, transform .18s ease; }
-        .sample-pill:hover { color: var(--brand); background: #f6f8ff; border-color: #cbd6ff; }
-        .about-section { margin: 4.5rem 0 2rem; padding: clamp(1.5rem, 4vw, 3rem); border: 1px solid var(--line); border-radius: 1.3rem; background: #fff; box-shadow: var(--surface-shadow); }
-        .about-eyebrow { color: var(--brand); font-size: .74rem; font-weight: 750; letter-spacing: .14em; text-transform: uppercase; }
-        .about-title { margin: .55rem 0 1rem; font-size: clamp(1.7rem, 3vw, 2.5rem); font-weight: 740; letter-spacing: -.055em; }
-        .about-copy { max-width: 700px; color: var(--muted); line-height: 1.75; }
-        .about-point { height: 100%; padding: 1rem 0 0; border-top: 1px solid var(--line); }
-        .about-point strong { display: block; margin-bottom: .3rem; font-size: .95rem; }
-        .about-point span { color: var(--muted); font-size: .88rem; line-height: 1.6; }
-        footer { background: transparent; border-top-color: var(--line); }
-        .motion-ready [data-reveal] { opacity: 0; transform: translateY(14px); transition: opacity .48s ease, transform .48s ease; }
-        .motion-ready [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
-        .motion-ready [data-reveal="delay"] { transition-delay: .08s; }
-
-        @media (max-width: 767.98px) {
-            .hero-layout { grid-template-columns: 1fr; gap: 1.7rem; }
-            .hero-banner { padding-top: 3.25rem; }
-            .hero-stats { max-width: 440px; }
-            .main-shell { padding-left: 1rem; padding-right: 1rem; }
-            .custom-card { border-radius: 1rem; }
-            .about-section { margin-top: 3rem; }
-        }
-        @media (max-width: 575.98px) {
-            .navbar .container { padding-left: 1rem; padding-right: 1rem; }
-            .brand-word { font-size: .98rem; }
-            .service-status { font-size: .72rem; }
-            .hero-title { max-width: 12ch; }
-            .hero-stat { padding: .9rem; }
-            .hero-stat strong { font-size: 1.2rem; }
-            .nav-pills .nav-link { padding: .58rem .78rem; font-size: .82rem; }
-            .feedback-btn { font-size: .74rem; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
-            *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-            .motion-ready [data-reveal] { opacity: 1; transform: none; }
+            color: var(--text-muted);
+            backdrop-filter: blur(16px);
         }
     </style>
 </head>
 <body>
 
+    <!-- Ambient Mesh Gradients in Background -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container-custom" id="toastContainer"></div>
+
     <!-- Top Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top site-nav">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center gap-2" href="#top">
-                <span class="brand-mark"><i class="bi bi-chat-square-text"></i></span>
-                <span class="brand-word">student-support</span>
+    <nav class="navbar navbar-custom">
+        <div class="container d-flex align-items-center justify-content-between">
+            <a class="navbar-brand d-flex align-items-center gap-2.5 text-decoration-none" href="#">
+                <span class="brand-logo">
+                    <i class="bi bi-headset"></i>
+                </span>
+                <div>
+                    <span class="navbar-brand-text">student-support</span>
+                    <span class="badge badge-qairu-pill ms-1.5 d-none d-sm-inline-block">ICT1103 · QAIRU</span>
+                </div>
             </a>
-            <div class="ms-auto d-flex align-items-center gap-2">
-                <span class="service-status d-flex align-items-center gap-2"><span class="status-dot"></span>Сервис активен</span>
+
+            <!-- Right Controls: Status & Theme/Audio Switches -->
+            <div class="d-flex align-items-center gap-2">
+                <!-- Live Status Pill -->
+                <div class="d-none d-md-flex align-items-center gap-2 px-3 py-1.5 rounded-pill" style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.25);">
+                    <span class="pulse-dot"></span>
+                    <span style="font-size: 0.78rem; font-weight: 600; color: #10b981;">TF-IDF + LogReg Live</span>
+                </div>
+
+                <!-- Web Audio Sound Toggle -->
+                <button class="audio-toggle-btn" id="audioToggleBtn" title="Дыбысты қосу/өшіру (UI Sound Effects)" onclick="toggleAudio()">
+                    <i class="bi bi-volume-up-fill" id="audioIcon"></i>
+                </button>
+
+                <!-- Dark / Light Theme Toggle -->
+                <button class="theme-toggle-btn" id="themeToggleBtn" title="Тақырыпты ауыстыру (Dark / Light Theme)" onclick="toggleTheme()">
+                    <i class="bi bi-moon-stars-fill" id="themeIcon"></i>
+                </button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="hero-banner" id="top">
-        <div class="container hero-layout">
-            <div data-reveal>
-                <span class="hero-kicker"><span class="status-dot"></span>Поддержка студентов · ICT1103</span>
-                <h1 class="hero-title">Опишите вопрос.<br><span>Мы найдём нужный отдел.</span></h1>
-                <p class="hero-copy mb-0">Учёба, документы, финансы или IT — определим направление и срочность обращения.</p>
-                <a class="hero-cta" href="#online-classifier">Начать <i class="bi bi-arrow-down-right"></i></a>
-            </div>
-            <div class="hero-stats" data-reveal="delay" aria-label="Показатели сервиса">
-                <div class="hero-stat"><strong id="datasetCountHeader">{{ dataset_size }}</strong><span>примеров в наборе</span></div>
-                <div class="hero-stat"><strong>4</strong><span>направления поддержки</span></div>
-                <div class="hero-stat"><strong>3</strong><span>языка обращений</span></div>
-                <div class="hero-stat"><strong>84.8%</strong><span>точность на тесте</span></div>
+    <!-- Hero Banner with Interactive Canvas Particles -->
+    <header class="hero-banner">
+        <canvas id="particlesCanvas"></canvas>
+        <div class="container hero-content">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-7">
+                    <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill mb-3 hero-interactive" style="background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3);">
+                        <i class="bi bi-stars text-primary"></i>
+                        <span style="font-size: 0.8rem; font-weight: 700; color: #60a5fa;">Intelligent Student Desk · NLP & Текст</span>
+                    </div>
+                    <h1 class="hero-title">student-support</h1>
+                    <p class="hero-subtitle mb-0">
+                        Студенттік өтініштерді 4 негізгі бағытқа лезде (&lt;1мс) автоматты классификациялау, басымдықты (SLA) анықтау және тиісті бөлімге маршрутизациялау.
+                    </p>
+                </div>
+
+                <!-- Dynamic Counter Stats -->
+                <div class="col-lg-5 hero-interactive">
+                    <div class="d-flex flex-wrap gap-2.5 justify-content-lg-end">
+                        <div class="hero-metric-box text-center flex-fill" style="min-width: 110px;">
+                            <div class="hero-metric-number" id="datasetCountHeader" data-target="{{ dataset_size }}">0</div>
+                            <div class="hero-metric-label">Датасет (RU/KK/EN)</div>
+                        </div>
+                        <div class="hero-metric-box text-center flex-fill" style="min-width: 110px;">
+                            <div class="hero-metric-number" id="accMetricHeader" data-target="84.8">0%</div>
+                            <div class="hero-metric-label">Test Accuracy</div>
+                        </div>
+                        <div class="hero-metric-box text-center flex-fill" style="min-width: 110px;">
+                            <div class="hero-metric-number" id="latencyMetricHeader">0.21ms</div>
+                            <div class="hero-metric-label">Inference Speed</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Container -->
-    <main class="container main-shell my-4 flex-grow-1">
+    <!-- Main Workspace Container -->
+    <main class="container my-4 flex-grow-1 position-relative" style="z-index: 2;">
 
-        <!-- Navigation Tabs -->
-        <ul class="nav nav-pills justify-content-center gap-2 mb-4" id="mainTabs" role="tablist">
-            <li class="nav-item">
-                <button class="nav-link active d-flex align-items-center gap-2" data-bs-toggle="pill" data-bs-target="#tab-classifier">
-                    <i class="bi bi-chat-square-text"></i> Онлайн-классификатор
-                </button>
-            </li>
-            <li class="nav-item">
-                <button class="nav-link d-flex align-items-center gap-2" data-bs-toggle="pill" data-bs-target="#tab-testcases">
-                    <i class="bi bi-check2-circle"></i> Примеры
-                </button>
-            </li>
-            <li class="nav-item">
-                <button class="nav-link d-flex align-items-center gap-2" data-bs-toggle="pill" data-bs-target="#tab-metrics">
-                    <i class="bi bi-grid-3x3-gap"></i> Метрики
-                </button>
-            </li>
-            <li class="nav-item">
-                <button class="nav-link d-flex align-items-center gap-2" data-bs-toggle="pill" data-bs-target="#tab-history">
-                    <i class="bi bi-clock-history"></i> История <span class="history-count" id="historyCount">0</span>
-                </button>
-            </li>
-        </ul>
+        <!-- Modern Nav Tabs -->
+        <div class="d-flex justify-content-center mb-4">
+            <ul class="nav custom-pills" id="mainTabs" role="tablist">
+                <li class="nav-item">
+                    <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-classifier" onclick="playSoftClick()">
+                        <i class="bi bi-chat-left-dots-fill"></i> Классификатор
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-testcases" onclick="playSoftClick()">
+                        <i class="bi bi-check2-circle"></i> 3 Тест-кейса & Қате
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-metrics" onclick="playSoftClick()">
+                        <i class="bi bi-grid-3x3-gap-fill"></i> Матрица 4x4 & Бенчмарк
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-history" onclick="playSoftClick()">
+                        <i class="bi bi-clock-history"></i> Журнал (<span id="historyCount">0</span>)
+                    </button>
+                </li>
+            </ul>
+        </div>
 
         <div class="tab-content" id="mainTabContent">
 
-            <!-- TAB 1: CLASSIFIER -->
+            <!-- =========================================================
+                 TAB 1: CLASSIFIER (Interactive Input & Result)
+                 ========================================================= -->
             <div class="tab-pane fade show active" id="tab-classifier" role="tabpanel">
-                <div class="classifier-intro" id="online-classifier" data-reveal>
-                    <span class="about-eyebrow">Онлайн-сервис</span>
-                    <h2>Куда направить обращение?</h2>
-                    <p>Введите вопрос — мы определим тему, срочность и подходящий отдел.</p>
-                </div>
                 <div class="row g-4">
                     <!-- Left Column: Input Form -->
-                    <div class="col-lg-7" data-reveal>
-                        <div class="custom-card p-4 p-lg-5 h-100">
-                            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4">
-                                <h5 class="fw-bold mb-0 text-dark">Ваш вопрос</h5>
-                                <span class="badge bg-light text-secondary border rounded-pill px-3 py-2">Қазақша · Русский · English</span>
+                    <div class="col-lg-7">
+                        <div class="glass-card p-4 h-100">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="fw-bold mb-0 d-flex align-items-center gap-2">
+                                    <i class="bi bi-pencil-square text-primary"></i>
+                                    <span>Студент өтінішін енгізу</span>
+                                </h5>
+                                <span class="badge bg-secondary-subtle text-secondary border">3 тілде: KK / RU / EN</span>
                             </div>
 
                             <form id="classifyForm" onsubmit="event.preventDefault(); submitQuery();">
-                                <div class="mb-3">
+                                <div class="textarea-wrapper mb-3">
                                     <textarea 
                                         id="queryText" 
-                                        class="form-control" 
+                                        class="custom-textarea" 
                                         rows="4" 
-                                        maxlength="2000"
-                                        placeholder="Например: не отображается оценка за лабораторную в LMS" 
+                                        placeholder="Студент сұрағын жазыңыз... Мысалы: «LMS-те зертханалық бағасы көрінбей тұр» немесе «Где получить справку с места учебы?»" 
                                         required
-                                        style="border-radius: 0.9rem; font-size: 1rem; resize: vertical; min-height: 150px;"></textarea>
+                                        oninput="updateCharCount()"></textarea>
+                                    <div class="textarea-footer">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <span class="hotkey-badge"><i class="bi bi-command"></i> Ctrl + ↵</span>
+                                            <small class="text-muted d-none d-sm-inline" style="font-size: 0.72rem;">жылдам жіберу</small>
+                                        </div>
+                                        <div class="char-counter">
+                                            <span id="charCount">0</span> таңба
+                                        </div>
+                                    </div>
                                 </div>
 
+                                <!-- Learning with consent checkbox -->
                                 <div class="form-check mb-3">
                                     <input class="form-check-input" type="checkbox" id="trainingOptIn">
-                                    <label class="form-check-label small" for="trainingOptIn">
-                                    Разрешаю использовать это обращение для обучения модели (необязательно).
+                                    <label class="form-check-label text-muted small" for="trainingOptIn">
+                                        <i class="bi bi-shield-check text-success me-1"></i>
+                                        Деректер базасында болашақ қайта оқыту (Active Learning) үшін сақтауға келісемін
                                     </label>
                                 </div>
-                                <div class="text-muted small mb-3">
-                                    Модель обновляется автоматически после подтверждения категории, если качество не ухудшается.
-                                </div>
-                                <div class="alert alert-light border py-2 px-3 mb-3 small">
-                                    Обращение сохраняется в истории. Для обучения нужны согласие и подтверждённая категория. Не вводите личные данные.
-                                </div>
 
-                                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
-                                    <button type="submit" id="btnSubmit" class="btn btn-primary px-4 py-2 fw-semibold d-flex align-items-center gap-2" style="border-radius: 0.8rem;">
-                                        <span>Определить направление</span>
-                                        <i class="bi bi-arrow-right"></i>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <button type="submit" id="btnSubmit" class="btn btn-modern-primary d-flex align-items-center gap-2">
+                                        <i class="bi bi-cpu-fill"></i>
+                                        <span>Сұрыптау / Классифицировать</span>
                                     </button>
-                                    <button type="button" class="btn btn-link text-secondary text-decoration-none btn-sm" onclick="clearInput()">
-                                        Очистить текст
+                                    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="clearInput()">
+                                        <i class="bi bi-x-circle"></i> Тазалау
                                     </button>
                                 </div>
                             </form>
 
-                            <!-- Quick Preset Samples -->
-                            <div class="mt-4 pt-3 border-top">
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <small class="fw-semibold text-muted">Попробуйте пример</small>
+                            <!-- Quick Preset Samples with Department Badges -->
+                            <div class="mt-4 pt-3 border-top" style="border-color: var(--border-glass) !important;">
+                                <div class="d-flex justify-content-between align-items-center mb-2.5">
+                                    <small class="text-uppercase fw-bold text-muted" style="font-size:0.75rem; letter-spacing: 0.5px;">
+                                        <i class="bi bi-lightning-charge-fill text-warning me-1"></i>Жылдам сынау мысалдары (Кликните для ввода):
+                                    </small>
                                 </div>
                                 <div class="d-flex flex-wrap gap-2">
-                                    <button class="sample-pill" onclick="setQuery('Не отображается оценка за лабораторную работу в LMS')">
-                                        Оценка в LMS
+                                    <button class="preset-chip" onclick="setQuery('Не отображается оценка за лабораторную работу в LMS')">
+                                        <i class="bi bi-mortarboard-fill text-primary"></i> Оценка за лабу в LMS <span class="badge bg-primary-subtle text-primary border" style="font-size:0.65rem;">Academic</span>
                                     </button>
-                                    <button class="sample-pill" onclick="setQuery('Система тестирования зависла во время прохождения экзамена')">
-                                        Сбой на экзамене
+                                    <button class="preset-chip" onclick="setQuery('Система тестирования зависла во время прохождения экзамена')">
+                                        <i class="bi bi-hdd-network-fill text-danger"></i> Тест завис на экзамене <span class="badge bg-danger-subtle text-danger border" style="font-size:0.65rem;">Tech</span>
                                     </button>
-                                    <button class="sample-pill" onclick="setQuery('Где я могу получить справку с места учебы для Egov?')">
-                                        Справка для Egov
+                                    <button class="preset-chip" onclick="setQuery('Где я могу получить справку с места учебы для Egov?')">
+                                        <i class="bi bi-file-earmark-text-fill text-success"></i> Справка для Egov <span class="badge bg-success-subtle text-success border" style="font-size:0.65rem;">Docs</span>
                                     </button>
-                                    <button class="sample-pill" onclick="setQuery('Kaspi арқылы ақша ұсталды, бірақ LMS-те төлем көрінбей тұр.')">
-                                        Платёж Kaspi
+                                    <button class="preset-chip" onclick="setQuery('Kaspi арқылы ақша ұсталды, бірақ LMS-те төлем көрінбей тұр.')">
+                                        <i class="bi bi-credit-card-fill text-warning"></i> Kaspi төлемі түспеді <span class="badge bg-warning-subtle text-warning border" style="font-size:0.65rem;">Finance</span>
+                                    </button>
+                                    <button class="preset-chip" onclick="setQuery('How can I order an official academic transcript with university stamp?')">
+                                        <i class="bi bi-translate text-info"></i> Official Transcript (EN) <span class="badge bg-info-subtle text-info border" style="font-size:0.65rem;">Docs</span>
+                                    </button>
+                                    <button class="preset-chip border-warning-subtle bg-warning-subtle text-warning" onclick="setQuery('Не могу оплатить повторный курс из-за ошибки на сайте')">
+                                        <i class="bi bi-exclamation-triangle-fill"></i> Error Case (Оплата vs Ошибка)
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right Column: Result Card -->
-                    <div class="col-lg-5" data-reveal="delay">
-                        <div id="resultPlaceholder" class="custom-card p-4 text-center h-100 d-flex flex-column justify-content-center align-items-center text-muted">
-                            <span class="brand-mark mb-3" style="width:3rem;height:3rem;font-size:1.35rem;"><i class="bi bi-arrow-up-right"></i></span>
-                            <h6 class="fw-bold text-dark">Результат появится здесь</h6>
-                            <p class="small mb-0">Напишите вопрос или выберите пример.</p>
+                    <!-- Right Column: Result Card with Neon Glow & Sparkles -->
+                    <div class="col-lg-5">
+                        <div id="resultPlaceholder" class="glass-card p-4 text-center h-100 d-flex flex-column justify-content-center align-items-center text-muted">
+                            <div class="mb-3 p-3 rounded-circle" style="background: rgba(59, 130, 246, 0.1); width: 4.5rem; height: 4.5rem; display: flex; align-items: center; justify-content: center;">
+                                <i class="bi bi-headset fs-1 text-primary"></i>
+                            </div>
+                            <h6 class="fw-bold mb-1">Нәтиже осында шығады</h6>
+                            <p class="small text-muted mb-0" style="max-width: 280px;">Сол жақтағы формаға сұрақ жазыңыз немесе жылдам мысалдардың бірін таңдаңыз.</p>
                         </div>
 
-                        <div id="resultCard" class="custom-card p-4 h-100 d-none">
+                        <!-- Real Classification Result Card (Initially hidden) -->
+                        <div id="resultCard" class="glass-card result-card-container p-4 h-100 d-none">
+                            <canvas id="confettiCanvas"></canvas>
+
                             <div class="d-flex justify-content-between align-items-start mb-2">
-                                <div>
+                                <div class="d-flex align-items-center gap-1.5">
                                     <span id="resBadge" class="badge bg-primary px-2.5 py-1 text-uppercase fw-bold" style="letter-spacing:0.5px;"></span>
-                                    <span id="resLang" class="badge bg-light text-dark border ms-1"></span>
+                                    <span id="resLang" class="badge bg-secondary-subtle text-secondary border"></span>
                                 </div>
-                                <small class="text-muted" id="resLatency"></small>
+                                <div class="d-flex align-items-center gap-2">
+                                    <button class="btn btn-sm btn-outline-secondary py-0 px-2" title="Нәтижені көшіру (Copy Ticket Summary)" onclick="copyResultSummary()">
+                                        <i class="bi bi-clipboard"></i>
+                                    </button>
+                                    <small class="text-muted font-monospace" id="resLatency" style="font-size:0.75rem;"></small>
+                                </div>
                             </div>
 
                             <h4 id="resCategoryName" class="fw-bold mt-2 mb-1"></h4>
                             <p id="resDept" class="text-muted small mb-3"></p>
 
                             <!-- Priority & SLA Box -->
-                            <div class="p-3 bg-light rounded-3 mb-3 border">
+                            <div class="p-3 rounded-3 mb-3 border" style="background: rgba(0, 0, 0, 0.04); border-color: var(--border-glass) !important;">
                                 <div class="d-flex justify-content-between align-items-center mb-1">
                                     <span class="small fw-bold text-muted">Приоритет:</span>
                                     <span id="resPriority" class="badge bg-danger"></span>
                                 </div>
                                 <div class="small text-secondary mb-2" id="resPriorityReason"></div>
-                                <div class="d-flex justify-content-between align-items-center pt-2 border-top">
-                                    <span class="small fw-bold text-muted">Срок ответа:</span>
-                                    <span id="resSla" class="small fw-bold text-dark"></span>
+                                <div class="d-flex justify-content-between align-items-center pt-2 border-top" style="border-color: var(--border-glass) !important;">
+                                    <span class="small fw-bold text-muted">Нормативтік SLA:</span>
+                                    <span id="resSla" class="small fw-bold"></span>
                                 </div>
                             </div>
 
                             <!-- Confidence Bars -->
-                            <h6 class="small fw-bold text-muted mb-2">Возможные направления</h6>
-                            <div class="d-flex flex-column gap-2 mb-3">
+                            <h6 class="small fw-bold text-uppercase text-muted mb-2.5" style="letter-spacing: 0.5px;">
+                                Ықтималдық үлесі (Confidence distribution):
+                            </h6>
+                            <div class="d-flex flex-column gap-2.5 mb-3">
                                 <div>
                                     <div class="d-flex justify-content-between small mb-1">
-                                        <span><i class="bi bi-mortarboard-fill text-primary me-1"></i> Учёба и оценки</span>
-                                        <span id="probAcademic" class="fw-bold">0%</span>
+                                        <span><i class="bi bi-mortarboard-fill text-primary me-1"></i> Академикалық (Деканат)</span>
+                                        <span id="probAcademic" class="fw-bold font-monospace">0%</span>
                                     </div>
-                                    <div class="progress" style="height: 6px;">
-                                        <div id="barAcademic" class="progress-bar bg-primary" style="width: 0%"></div>
+                                    <div class="prob-bar-container">
+                                        <div id="barAcademic" class="prob-bar-fill bg-primary" style="width: 0%"></div>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="d-flex justify-content-between small mb-1">
-                                        <span><i class="bi bi-file-earmark-text-fill text-success me-1"></i> Документы</span>
-                                        <span id="probDocs" class="fw-bold">0%</span>
+                                        <span><i class="bi bi-file-earmark-text-fill text-success me-1"></i> Құжаттар / ЦОС</span>
+                                        <span id="probDocs" class="fw-bold font-monospace">0%</span>
                                     </div>
-                                    <div class="progress" style="height: 6px;">
-                                        <div id="barDocs" class="progress-bar bg-success" style="width: 0%"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="d-flex justify-content-between small mb-1">
-                                        <span><i class="bi bi-credit-card-fill text-warning me-1"></i> Финансы</span>
-                                        <span id="probFinance" class="fw-bold">0%</span>
-                                    </div>
-                                    <div class="progress" style="height: 6px;">
-                                        <div id="barFinance" class="progress-bar bg-warning" style="width: 0%"></div>
+                                    <div class="prob-bar-container">
+                                        <div id="barDocs" class="prob-bar-fill bg-success" style="width: 0%"></div>
                                     </div>
                                 </div>
                                 <div>
                                     <div class="d-flex justify-content-between small mb-1">
-                                        <span><i class="bi bi-hdd-network-fill text-danger me-1"></i> Техподдержка</span>
-                                        <span id="probTech" class="fw-bold">0%</span>
+                                        <span><i class="bi bi-credit-card-fill text-warning me-1"></i> Қаржы / Бухгалтерия</span>
+                                        <span id="probFinance" class="fw-bold font-monospace">0%</span>
                                     </div>
-                                    <div class="progress" style="height: 6px;">
-                                        <div id="barTech" class="progress-bar bg-danger" style="width: 0%"></div>
+                                    <div class="prob-bar-container">
+                                        <div id="barFinance" class="prob-bar-fill bg-warning" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="d-flex justify-content-between small mb-1">
+                                        <span><i class="bi bi-hdd-network-fill text-danger me-1"></i> IT Helpdesk / Техподдержка</span>
+                                        <span id="probTech" class="fw-bold font-monospace">0%</span>
+                                    </div>
+                                    <div class="prob-bar-container">
+                                        <div id="barTech" class="prob-bar-fill bg-danger" style="width: 0%"></div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Routing Recommendation -->
-                            <div class="alert alert-info py-2 px-3 mb-3 small rounded-3">
-                                <i class="bi bi-signpost-2-fill me-1"></i>
-                                <strong>Рекомендуемый отдел:</strong> Проверьте направление перед отправкой обращения.
-                            </div>
-
-                            <!-- Feedback Section -->
-                            <div class="feedback-section" id="feedbackSection">
-                                <div class="d-flex align-items-center gap-2 mb-2">
-                                    <i class="bi bi-chat-square-heart text-muted"></i>
-                                    <small class="fw-bold text-muted">Верно выбрано направление?</small>
+                            <!-- Feedback Section (Active Learning) -->
+                            <div class="feedback-section-box mt-3" id="feedbackSection">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <div class="d-flex align-items-center gap-1.5">
+                                        <i class="bi bi-chat-square-heart text-primary"></i>
+                                        <small class="fw-bold">Бағыт дұрыс таңдалды ма? / Верно?</small>
+                                    </div>
+                                    <small class="text-muted" style="font-size:0.7rem;">Feedback</small>
                                 </div>
                                 <div id="feedbackButtons" class="d-flex flex-wrap gap-1">
                                     <button class="btn btn-outline-success feedback-btn" onclick="sendFeedback(lastTicketCategory)">
-                                        <i class="bi bi-check2"></i> Да
+                                        <i class="bi bi-check2"></i> Иә (Дұрыс)
                                     </button>
                                     <button class="btn btn-outline-primary feedback-btn" onclick="sendFeedback('academic')">
-                                        <i class="bi bi-mortarboard-fill"></i> Учёба
+                                        Academic
                                     </button>
                                     <button class="btn btn-outline-success feedback-btn" onclick="sendFeedback('docs')">
-                                        <i class="bi bi-file-earmark-text-fill"></i> Документы
+                                        Docs
                                     </button>
                                     <button class="btn btn-outline-warning feedback-btn" onclick="sendFeedback('finance')">
-                                        <i class="bi bi-credit-card-fill"></i> Финансы
+                                        Finance
                                     </button>
                                     <button class="btn btn-outline-danger feedback-btn" onclick="sendFeedback('tech_support')">
-                                        <i class="bi bi-hdd-network-fill"></i> IT
+                                        Tech
                                     </button>
                                 </div>
-                                <div id="feedbackSuccess" class="feedback-success d-none mt-2">
-                                    <i class="bi bi-check-circle-fill"></i> <span id="feedbackStatusText">Спасибо! Подтверждённая категория сохранена.</span>
+                                <div id="feedbackSuccess" class="d-none mt-2 text-success small fw-bold">
+                                    <i class="bi bi-check-circle-fill me-1"></i>
+                                    <span id="feedbackStatusText">Пікіріңіз сақталды! Рақмет!</span>
                                 </div>
-                                <div id="feedbackError" class="text-danger small d-none mt-2">Не удалось сохранить оценку. Попробуйте ещё раз.</div>
+                                <div id="feedbackError" class="d-none mt-2 text-danger small">
+                                    Қате орын алды. Қайталап көріңіз.
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- TAB 2: TEST CASES & ERROR CASE -->
+            <!-- =========================================================
+                 TAB 2: TEST CASES & ERROR CASE
+                 ========================================================= -->
             <div class="tab-pane fade" id="tab-testcases" role="tabpanel">
-                <div class="custom-card p-4 mb-4">
-                    <h5 class="fw-bold mb-3 text-dark">
-                        <i class="bi bi-check2-square text-success me-2"></i>Міндетті 3 Тексеру Мысалы (Mandatory Test Cases)
-                    </h5>
+                <div class="glass-card p-4 mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0 d-flex align-items-center gap-2">
+                            <i class="bi bi-check2-square text-success"></i>
+                            <span>Міндетті 3 Тексеру Мысалы (Mandatory Test Cases)</span>
+                        </h5>
+                        <span class="badge bg-success-subtle text-success border">100% Passed</span>
+                    </div>
                     <p class="text-muted small">
-                        Тапсырма талабы бойынша модельдің жұмысы 3 нақты мысалмен тексеріліп, нәтижелері бекітілген:
+                        Тапсырма талаптарына сәйкес дайындалған сынақ кейстері. Түймені басып, онлайн тестілеуге болады:
                     </p>
 
                     <div class="row g-3">
                         <!-- Case 1 -->
                         <div class="col-md-4">
-                            <div class="card h-100 border-primary border-opacity-25 bg-primary bg-opacity-10 p-3 rounded-3">
+                            <div class="test-case-card">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <span class="badge bg-primary">1-Тест: Оқу мәселесі</span>
-                                    <span class="badge bg-success"><i class="bi bi-check-lg"></i> PASSED</span>
+                                    <span class="badge bg-success-subtle text-success border"><i class="bi bi-check-lg"></i> PASSED</span>
                                 </div>
                                 <h6 class="fw-bold mb-1">«Не отображается оценка за лабораторную работу в LMS»</h6>
-                                <p class="small text-muted mb-2">Студенттің оқу жүйесіндегі бағасын тексеру сұрағы.</p>
-                                <div class="mt-auto pt-2 border-top border-primary border-opacity-25 small">
-                                    <strong>Болжам:</strong> Academic (49.5%)<br>
-                                    <strong>Бағыты:</strong> Деканат / Эдвайзер
+                                <p class="small text-muted mb-3">Студенттің оқу жүйесіндегі бағасын тексеру сұрағы.</p>
+                                <div class="mt-auto pt-2 border-top d-flex justify-content-between align-items-center" style="border-color: var(--border-glass) !important;">
+                                    <small class="text-muted">Болжам: <strong>Academic</strong></small>
+                                    <button class="run-test-btn" onclick="runTestCase('Не отображается оценка за лабораторную работу в LMS')">
+                                        <i class="bi bi-play-fill"></i> Сынап көру
+                                    </button>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Case 2 -->
                         <div class="col-md-4">
-                            <div class="card h-100 border-danger border-opacity-25 bg-danger bg-opacity-10 p-3 rounded-3">
+                            <div class="test-case-card">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <span class="badge bg-danger">2-Тест: Техникалық қате</span>
-                                    <span class="badge bg-success"><i class="bi bi-check-lg"></i> PASSED</span>
+                                    <span class="badge bg-success-subtle text-success border"><i class="bi bi-check-lg"></i> PASSED</span>
                                 </div>
                                 <h6 class="fw-bold mb-1">«Система тестирования зависла во время прохождения экзамена»</h6>
-                                <p class="small text-muted mb-2">Емтихан кезінде бағдарламалық жасақтаманың қатып қалуы.</p>
-                                <div class="mt-auto pt-2 border-top border-danger border-opacity-25 small">
-                                    <strong>Болжам:</strong> Tech Support (52.8%)<br>
-                                    <strong>Бағыты:</strong> IT Helpdesk L1
+                                <p class="small text-muted mb-3">Емтихан кезінде бағдарламаның қатып қалуы.</p>
+                                <div class="mt-auto pt-2 border-top d-flex justify-content-between align-items-center" style="border-color: var(--border-glass) !important;">
+                                    <small class="text-muted">Болжам: <strong>Tech Support</strong></small>
+                                    <button class="run-test-btn" onclick="runTestCase('Система тестирования зависла во время прохождения экзамена')">
+                                        <i class="bi bi-play-fill"></i> Сынап көру
+                                    </button>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Case 3 -->
                         <div class="col-md-4">
-                            <div class="card h-100 border-success border-opacity-25 bg-success bg-opacity-10 p-3 rounded-3">
+                            <div class="test-case-card">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <span class="badge bg-success">3-Тест: Анықтама алу</span>
-                                    <span class="badge bg-success"><i class="bi bi-check-lg"></i> PASSED</span>
+                                    <span class="badge bg-success-subtle text-success border"><i class="bi bi-check-lg"></i> PASSED</span>
                                 </div>
                                 <h6 class="fw-bold mb-1">«Где я могу получить справку с места учебы для Egov?»</h6>
-                                <p class="small text-muted mb-2">Мемлекеттік мекемелерге ресми құжат сұрату.</p>
-                                <div class="mt-auto pt-2 border-top border-success border-opacity-25 small">
-                                    <strong>Болжам:</strong> Docs (73.0%)<br>
-                                    <strong>Бағыты:</strong> ЦОС / СҚКО
+                                <p class="small text-muted mb-3">Мемлекеттік мекемелерге ресми құжат сұрату.</p>
+                                <div class="mt-auto pt-2 border-top d-flex justify-content-between align-items-center" style="border-color: var(--border-glass) !important;">
+                                    <small class="text-muted">Болжам: <strong>Docs (ЦОС)</strong></small>
+                                    <button class="run-test-btn" onclick="runTestCase('Где я могу получить справку с места учебы для Egov?')">
+                                        <i class="bi bi-play-fill"></i> Сынап көру
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Error Case & Limitation Analysis -->
+                <!-- Error Case & Limitations Analysis -->
                 <div class="row g-4">
                     <div class="col-lg-6">
-                        <div class="custom-card p-4 h-100 border-start border-4 border-warning">
-                            <div class="d-flex align-items-center gap-2 mb-2">
-                                <i class="bi bi-exclamation-triangle-fill text-warning fs-4"></i>
-                                <h5 class="fw-bold mb-0">Қате жағдайды талдау (Error Case Analysis)</h5>
+                        <div class="glass-card p-4 h-100" style="border-left: 4px solid #f59e0b !important;">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <h5 class="fw-bold mb-0 text-warning d-flex align-items-center gap-2">
+                                    <i class="bi bi-exclamation-triangle-fill"></i>
+                                    <span>Қате жағдайды талдау (Error Case)</span>
+                                </h5>
+                                <button class="run-test-btn" onclick="runTestCase('Не могу оплатить повторный курс из-за ошибки на сайте')">
+                                    <i class="bi bi-play-fill"></i> Тексеру
+                                </button>
                             </div>
-                            <div class="p-3 bg-light rounded-3 my-2 border">
-                                <strong class="text-danger">Мысал мәтіні:</strong><br>
-                                <em>«Не могу оплатить повторный курс из-за ошибки на сайте»</em>
+                            <div class="p-3 rounded-3 my-2 border" style="background: rgba(245, 158, 11, 0.08); border-color: rgba(245, 158, 11, 0.25) !important;">
+                                <strong>Мәтін:</strong> <em>«Не могу оплатить повторный курс из-за ошибки на сайте»</em>
                             </div>
-                            <ul class="small text-muted ps-3 mb-3">
-                                <li><strong>Модель болжамы:</strong> <code>finance</code> (35.1%) [Техподдержка: 24.7%]</li>
-                                <li><strong>Себебі (Conflict Root):</strong> Өтініште екі санаттың маркерлері қатар келген: «оплатить», «повторный курс» (қаржылық) және «ошибки на сайте» (техникалық). Сөздер жиілігі бойынша «оплатить» салмағы басым түскен.</li>
-                                <li><strong>Шешім жолы:</strong> Multi-label classification (тикетті бір мезетте әрі IT-ге, әрі Бухгалтерияға жолдау) немесе жүйелік қате маркерлеріне арнайы фильтр енгізу.</li>
+                            <div class="conflict-bar-wrapper my-3">
+                                <div class="d-flex justify-content-between small mb-1">
+                                    <span class="text-warning fw-bold">Қаржы маркері («оплатить»): 35.1%</span>
+                                    <span class="text-danger fw-bold">Техникалық маркер («ошибка»): 24.7%</span>
+                                </div>
+                                <div class="progress" style="height: 10px; background: rgba(255,255,255,0.08);">
+                                    <div class="progress-bar bg-warning" style="width: 58.7%">35.1%</div>
+                                    <div class="progress-bar bg-danger" style="width: 41.3%">24.7%</div>
+                                </div>
+                            </div>
+                            <ul class="small text-muted ps-3 mb-0">
+                                <li><strong>Себебі:</strong> Сұраныста бір мезетте екі санаттың маркері қатар келген. TF-IDF сөздігінде «оплатить» салмағы басым түскен.</li>
+                                <li><strong>Шешімі:</strong> Multi-label classification (өтінішті әрі IT, әрі Бухгалтерияға жолдау) немесе жүйелік қате фильтрі.</li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="col-lg-6">
-                        <div class="custom-card p-4 h-100 border-start border-4 border-secondary">
-                            <div class="d-flex align-items-center gap-2 mb-2">
-                                <i class="bi bi-cone-striped text-secondary fs-4"></i>
-                                <h5 class="fw-bold mb-0">Жүйелік шектеулер (Limitations)</h5>
-                            </div>
-                            <div class="d-flex flex-column gap-2 mt-2">
-                                <div class="p-2 bg-light rounded border small">
-                                    <strong>1. Сленг пен опечаткалар:</strong> Студенттік бейресми жаргон («препод», «скиньте», «бағам түспеді») мен ауыр қателер TF-IDF сөздігіне (vocabulary) ілінбей қалады.
+                        <div class="glass-card p-4 h-100" style="border-left: 4px solid #64748b !important;">
+                            <h5 class="fw-bold mb-3 d-flex align-items-center gap-2">
+                                <i class="bi bi-cone-striped text-secondary"></i>
+                                <span>Жүйелік шектеулер (Model Limitations)</span>
+                            </h5>
+                            <div class="d-flex flex-column gap-2.5">
+                                <div class="p-2.5 rounded border small" style="background: rgba(0,0,0,0.02); border-color: var(--border-glass) !important;">
+                                    <strong>1. Сленг пен опечаткалар:</strong> Студенттік жаргон («препод», «скиньте», «бағам түспеді») TF-IDF сөздігінде танылмай қалуы мүмкін.
                                 </div>
-                                <div class="p-2 bg-light rounded border small">
-                                    <strong>2. Контекстсіз тым қысқа өтініштер:</strong> «Бағам жоқ», «Қашан болады?», «Сәлеметсіз бе» секілді 1-2 сөздік сұрақтарда мағыналық белгілер жеткіліксіз.
+                                <div class="p-2.5 rounded border small" style="background: rgba(0,0,0,0.02); border-color: var(--border-glass) !important;">
+                                    <strong>2. Тым қысқа өтініштер:</strong> «Бағам жоқ», «Қашан?», «Сәлеметсіз бе» секілді 1-2 сөздік өтініштерде ақпарат жеткіліксіз.
                                 </div>
-                                <div class="p-2 bg-light rounded border small">
-                                    <strong>3. Семантикалық түсінік:</strong> Модель n-gram статистикасына сүйенеді, сөздердің терең мәтіндік мағынасын (contextual embeddings) толық талдамайды.
+                                <div class="p-2.5 rounded border small" style="background: rgba(0,0,0,0.02); border-color: var(--border-glass) !important;">
+                                    <strong>3. Терең семантика:</strong> n-gram статистикалық моделі мәтіннің контекстік байланысын Transformer моделі сияқты терең сезінбейді.
                                 </div>
                             </div>
                         </div>
@@ -661,115 +1220,119 @@
                 </div>
             </div>
 
-            <!-- TAB 3: CONFUSION MATRIX & BENCHMARK -->
+            <!-- =========================================================
+                 TAB 3: CONFUSION MATRIX & BENCHMARK
+                 ========================================================= -->
             <div class="tab-pane fade" id="tab-metrics" role="tabpanel">
                 <div class="row g-4">
                     <!-- Metric Cards Row -->
-                    <div class="col-md-3">
-                        <div class="metric-card custom-card">
-                            <div class="metric-val">84.8%</div>
-                            <div class="metric-lbl">Accuracy (Test Set)</div>
+                    <div class="col-6 col-md-3">
+                        <div class="glass-card p-3 text-center">
+                            <div class="hero-metric-number text-primary">84.8%</div>
+                            <div class="hero-metric-label">Test Accuracy</div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="metric-card custom-card">
-                            <div class="metric-val">0.846</div>
-                            <div class="metric-lbl">Macro F1-Score</div>
+                    <div class="col-6 col-md-3">
+                        <div class="glass-card p-3 text-center">
+                            <div class="hero-metric-number text-success">0.846</div>
+                            <div class="hero-metric-label">Macro F1-Score</div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="metric-card custom-card">
-                            <div class="metric-val" id="datasetCountMetric">{{ dataset_size }}</div>
-                            <div class="metric-lbl">Деректер көлемі</div>
+                    <div class="col-6 col-md-3">
+                        <div class="glass-card p-3 text-center">
+                            <div class="hero-metric-number text-warning" id="datasetCountMetric">{{ dataset_size }}</div>
+                            <div class="hero-metric-label">Деректер көлемі</div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="metric-card custom-card">
-                            <div class="metric-val">0.21 ms</div>
-                            <div class="metric-lbl">Inference Latency</div>
+                    <div class="col-6 col-md-3">
+                        <div class="glass-card p-3 text-center">
+                            <div class="hero-metric-number text-info">0.21 ms</div>
+                            <div class="hero-metric-label">Inference Latency</div>
                         </div>
                     </div>
 
-                    <!-- 4x4 Confusion Matrix -->
+                    <!-- 4x4 Confusion Matrix with Heatmap Cells -->
                     <div class="col-lg-6">
-                        <div class="custom-card p-4 h-100">
-                            <h5 class="fw-bold mb-3 text-dark">
-                                <i class="bi bi-grid-3x3 text-primary me-2"></i>4x4 Қателер матрицасы (Confusion Matrix)
+                        <div class="glass-card p-4 h-100">
+                            <h5 class="fw-bold mb-2 d-flex align-items-center gap-2">
+                                <i class="bi bi-grid-3x3 text-primary"></i>
+                                <span>4x4 Қателер матрицасы (Confusion Matrix)</span>
                             </h5>
-                            <p class="text-muted small">
+                            <p class="text-muted small mb-3">
                                 Тестілік 59 мысал бойынша нақты (True) және болжанған (Predicted) кластар:
                             </p>
                             <div class="table-responsive">
-                                <table class="table table-bordered matrix-table align-middle">
-                                    <thead class="table-light">
+                                <table class="table matrix-table align-middle">
+                                    <thead>
                                         <tr>
-                                            <th>True \ Pred</th>
-                                            <th class="text-primary">Academic</th>
-                                            <th class="text-success">Docs</th>
-                                            <th class="text-warning">Finance</th>
-                                            <th class="text-danger">Tech</th>
+                                            <th class="small text-muted">True \ Pred</th>
+                                            <th class="small text-primary text-center">Academic</th>
+                                            <th class="small text-success text-center">Docs</th>
+                                            <th class="small text-warning text-center">Finance</th>
+                                            <th class="small text-danger text-center">Tech</th>
                                         </tr>
                                     </thead>
                                     <tbody id="cmBody">
                                         <tr>
-                                            <th class="table-light">Academic</th>
-                                            <td class="matrix-diag">13</td>
-                                            <td>1</td>
-                                            <td>0</td>
-                                            <td>1</td>
+                                            <th class="small text-muted">Academic</th>
+                                            <td class="matrix-cell matrix-diag" title="13 дұрыс болжанған Academic">13</td>
+                                            <td class="matrix-cell matrix-off">1</td>
+                                            <td class="matrix-cell matrix-off">0</td>
+                                            <td class="matrix-cell matrix-off">1</td>
                                         </tr>
                                         <tr>
-                                            <th class="table-light">Docs</th>
-                                            <td>0</td>
-                                            <td class="matrix-diag">14</td>
-                                            <td>1</td>
-                                            <td>0</td>
+                                            <th class="small text-muted">Docs</th>
+                                            <td class="matrix-cell matrix-off">0</td>
+                                            <td class="matrix-cell matrix-diag" title="14 дұрыс болжанған Docs">14</td>
+                                            <td class="matrix-cell matrix-off">1</td>
+                                            <td class="matrix-cell matrix-off">0</td>
                                         </tr>
                                         <tr>
-                                            <th class="table-light">Finance</th>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td class="matrix-diag">13</td>
-                                            <td>2</td>
+                                            <th class="small text-muted">Finance</th>
+                                            <td class="matrix-cell matrix-off">0</td>
+                                            <td class="matrix-cell matrix-off">0</td>
+                                            <td class="matrix-cell matrix-diag" title="13 дұрыс болжанған Finance">13</td>
+                                            <td class="matrix-cell matrix-off">2</td>
                                         </tr>
                                         <tr>
-                                            <th class="table-light">Tech Support</th>
-                                            <td>1</td>
-                                            <td>2</td>
-                                            <td>1</td>
-                                            <td class="matrix-diag">10</td>
+                                            <th class="small text-muted">Tech</th>
+                                            <td class="matrix-cell matrix-off">1</td>
+                                            <td class="matrix-cell matrix-off">2</td>
+                                            <td class="matrix-cell matrix-off">1</td>
+                                            <td class="matrix-cell matrix-diag" title="10 дұрыс болжанған Tech">10</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <small class="text-muted d-block mt-2">
-                                <i class="bi bi-info-circle me-1"></i> Диагональдағы жасыл ұяшықтар — дәл табылған өтініштер саны.
+                                <i class="bi bi-info-circle me-1"></i> Жасыл диагональдағы ұяшықтар — дәл табылған өтініштер (50/59 = 84.75%).
                             </small>
                         </div>
                     </div>
 
-                    <!-- Model Comparison Table -->
+                    <!-- Model Comparison Benchmark -->
                     <div class="col-lg-6">
-                        <div class="custom-card p-4 h-100">
-                            <h5 class="fw-bold mb-3 text-dark">
-                                <i class="bi bi-bar-chart-line text-success me-2"></i>Модельдерді салыстыру (Benchmark)
+                        <div class="glass-card p-4 h-100">
+                            <h5 class="fw-bold mb-2 d-flex align-items-center gap-2">
+                                <i class="bi bi-bar-chart-line text-success"></i>
+                                <span>Модельдерді салыстыру (Benchmark)</span>
                             </h5>
-                            <p class="text-muted small">
-                                Баламалы әдістер арасындағы сынақ нәтижелері (TF-IDF негізінде):
+                            <p class="text-muted small mb-3">
+                                3 баламалы классификатор нәтижесі (Word 1-2 + Char_wb 3-5):
                             </p>
                             <div class="table-responsive">
-                                <table class="table table-hover align-middle small">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th>Модель (ML Method)</th>
+                                <table class="table align-middle small">
+                                    <thead>
+                                        <tr class="text-muted">
+                                            <th>Метод</th>
                                             <th>Accuracy</th>
                                             <th>Macro F1</th>
                                             <th>Latency</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="table-primary fw-bold">
-                                            <td><i class="bi bi-check-circle-fill text-primary me-1"></i> Logistic Regression</td>
+                                        <tr style="background: rgba(59, 130, 246, 0.12); font-weight: 700;">
+                                            <td class="text-primary"><i class="bi bi-check-circle-fill me-1"></i> Logistic Regression</td>
                                             <td>84.75%</td>
                                             <td>0.8463</td>
                                             <td>0.21 ms</td>
@@ -789,50 +1352,71 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="alert alert-light border small mt-2">
+                            <div class="p-3 rounded-3 mt-3 border small" style="background: rgba(0,0,0,0.02); border-color: var(--border-glass) !important;">
                                 <strong>Неге Logistic Regression таңдалды?</strong><br>
-                                Жоғары дәлдікпен (84.8%) қатар, сенімді ықтималдықтар үлестірімін (calibrated predict_proba) береді. Бұл жүйеге күмәнді тикеттерді адам-модераторға бағыттауға мүмкіндік береді.
+                                Дәлдікпен (84.8%) бірге калибрленген ықтималдықтарды (predict_proba) береді, бұл сенімділік төмен болғанда модераторға бағыттауға мүмкіндік береді.
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- TAB 4: HISTORY LOG -->
+            <!-- =========================================================
+                 TAB 4: PERSISTENT HISTORY LOG
+                 ========================================================= -->
             <div class="tab-pane fade" id="tab-history" role="tabpanel">
-                <div class="custom-card p-4">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="fw-bold mb-0"><i class="bi bi-clock-history text-primary me-2"></i>История обращений</h5>
+                <div class="glass-card p-4">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+                        <div>
+                            <h5 class="fw-bold mb-1 d-flex align-items-center gap-2">
+                                <i class="bi bi-clock-history text-primary"></i>
+                                <span>Өтініштер тарихы (SQLite + Cookies)</span>
+                            </h5>
+                            <small class="text-muted">Браузерді жапсаңыз да жеке өтініштеріңіз сақталады.</small>
+                        </div>
                         <div class="d-flex gap-2 align-items-center">
                             <button class="btn btn-outline-primary btn-sm" onclick="exportHistoryCSV()">
-                                <i class="bi bi-download"></i> Экспорт
+                                <i class="bi bi-download"></i> CSV Экспорт
                             </button>
                             <button class="btn btn-outline-danger btn-sm" onclick="clearHistory()">
-                                <i class="bi bi-trash"></i> Очистить
+                                <i class="bi bi-trash"></i> Тазалау
                             </button>
                         </div>
                     </div>
-                    <p class="text-muted small mb-3">
-                        <i class="bi bi-info-circle me-1"></i>
-                        Здесь собраны последние обращения и выбранные для них направления.
-                    </p>
+
+                    <!-- Search & Filter Controls -->
+                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 pt-2 border-top" style="border-color: var(--border-glass) !important;">
+                        <div class="d-flex flex-wrap gap-1.5 align-items-center">
+                            <small class="text-muted me-1 fw-bold">Фильтр:</small>
+                            <span class="filter-chip active" onclick="filterHistory('all', this)">Барлығы</span>
+                            <span class="filter-chip" onclick="filterHistory('academic', this)">Academic</span>
+                            <span class="filter-chip" onclick="filterHistory('docs', this)">Docs</span>
+                            <span class="filter-chip" onclick="filterHistory('finance', this)">Finance</span>
+                            <span class="filter-chip" onclick="filterHistory('tech_support', this)">Tech</span>
+                        </div>
+                        <div class="position-relative">
+                            <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-2.5 text-muted small"></i>
+                            <input type="text" id="historySearchInput" class="search-input" placeholder="Іздеу / Поиск..." oninput="searchHistory(this.value)">
+                        </div>
+                    </div>
+
                     <div class="table-responsive">
-                        <table class="table table-hover align-middle small" id="historyTable">
-                            <thead class="table-light">
-                                <tr>
+                        <table class="table align-middle small" id="historyTable">
+                            <thead>
+                                <tr class="text-muted border-bottom" style="border-color: var(--border-glass) !important;">
                                     <th>ID</th>
-                                    <th>Время</th>
-                                    <th>Обращение</th>
-                                    <th>Направление</th>
+                                    <th>Уақыты</th>
+                                    <th>Өтініш мәтіні</th>
+                                    <th>Бағыты</th>
                                     <th>Приоритет</th>
-                                    <th>Уверенность</th>
-                                    <th>Язык</th>
+                                    <th>Сенімділік</th>
+                                    <th>Тіл</th>
                                 </tr>
                             </thead>
                             <tbody id="historyTableBody">
                                 <tr>
                                     <td colspan="7" class="text-center text-muted py-4">
-                                        <span class="spinner-border spinner-border-sm me-1"></span> Жүктелуде... / Загрузка...
+                                        <span class="spinner-border spinner-border-sm me-1"></span> Жүктелуде...
                                     </td>
                                 </tr>
                             </tbody>
@@ -843,30 +1427,45 @@
 
         </div>
 
-        <section class="about-section" id="about" data-reveal aria-labelledby="about-title">
-            <span class="about-eyebrow">Жоба туралы · About</span>
-            <h2 class="about-title" id="about-title">Понятный маршрут для каждого обращения</h2>
-            <p class="about-copy mb-4">
-                Student-support помогает быстро определить, какая команда университета должна ответить на вопрос. Сервис объединяет классификацию текста, оценку срочности и подсказку по дальнейшим действиям.
+        <!-- Project About Section -->
+        <section class="glass-card p-4 my-4" id="about">
+            <span class="badge bg-primary-subtle text-primary border mb-2">Жоба туралы · About</span>
+            <h4 class="fw-bold mb-2">Студенттік өтініштерді интеллектуалды бағыттау</h4>
+            <p class="text-muted small mb-4">
+                <strong>student-support</strong> деканат, ЦОС, бухгалтерия және IT-қолдау бөлімдерінің күнделікті жүктемесін жеңілдетеді. 293 шынайы сұраныс негізінде жасалған NLP моделі мәтінді талдап, жауапты бөлімді анықтайды.
             </p>
-            <p class="small text-muted mb-4">В основе — 293 примера; с проверенными обращениями: <strong id="datasetCountAbout">{{ dataset_size }}</strong>.</p>
-            <div class="row g-4">
-                <div class="col-md-4" data-reveal><div class="about-point"><strong>Учёба и документы</strong><span>Вопросы по оценкам, расписанию, справкам и транскриптам.</span></div></div>
-                <div class="col-md-4" data-reveal="delay"><div class="about-point"><strong>Платежи и финансы</strong><span>Оплата обучения, стипендии, рассрочка и квитанции.</span></div></div>
-                <div class="col-md-4" data-reveal="delay"><div class="about-point"><strong>Техническая помощь</strong><span>Доступ к LMS, корпоративной почте, Wi-Fi и кампусным сервисам.</span></div></div>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border h-100" style="background: rgba(0,0,0,0.02); border-color: var(--border-glass) !important;">
+                        <strong class="text-primary d-block mb-1"><i class="bi bi-mortarboard me-1"></i> Оқу және құжаттар</strong>
+                        <span class="text-muted small">Бағалар, транскрипт, емтихан кестесі, әскери 26-анықтама.</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border h-100" style="background: rgba(0,0,0,0.02); border-color: var(--border-glass) !important;">
+                        <strong class="text-warning d-block mb-1"><i class="bi bi-credit-card me-1"></i> Төлемдер мен қаржы</strong>
+                        <span class="text-muted small">Kaspi төлемдері, оқу ақысын бөліп төлеу, стипендия, жеңілдіктер.</span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 rounded-3 border h-100" style="background: rgba(0,0,0,0.02); border-color: var(--border-glass) !important;">
+                        <strong class="text-danger d-block mb-1"><i class="bi bi-hdd-network me-1"></i> Техникалық қолдау</strong>
+                        <span class="text-muted small">LMS қателері, пошта паролін қайта орнату, кампус Wi-Fi жүйесі.</span>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
+    <!-- Modern Glass Footer -->
     <footer>
         <div class="container text-center">
             <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
                 <div>
-                    <strong>student-support</strong> · QAIRU (2026–2027) · ICT1103
+                    <strong>student-support</strong> · QAIRU (2026–2027) · ICT1103 Group Project
                 </div>
-                <div class="text-muted small">
-                    Онлайн-сервис поддержки студентов
+                <div class="text-muted font-monospace small">
+                    TF-IDF + Logistic Regression · REST API: <code>/api/predict</code> · SQLite Active Learning
                 </div>
             </div>
         </div>
@@ -875,98 +1474,390 @@
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom Frontend JavaScript -->
+    <!-- Custom Modern JavaScript Engine -->
     <script>
+        /* =========================================================
+           STATE & CONFIGURATION
+           ========================================================= */
         let sessionTickets = [];
-        let lastTicketId = null;  // Track last classified ticket for feedback
+        let filteredTickets = [];
+        let activeFilter = 'all';
+        let lastTicketId = null;
         let lastTicketCategory = null;
+        let audioEnabled = localStorage.getItem('student_support_audio') !== 'false';
+        let audioCtx = null;
 
-        // On page load: fetch history from DB (cookie-scoped)
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                const res = await fetch('/api/history');
-                if (res.ok) {
-                    const data = await res.json();
-                    sessionTickets = data.tickets || [];
-                    document.getElementById('historyCount').innerText = sessionTickets.length;
-                    renderHistoryTable();
-                }
-            } catch (err) {
-                console.warn('Could not load history from DB:', err);
-                renderHistoryTable();
+        /* =========================================================
+           WEB AUDIO SYNTHESIZER (Modern Micro-Interactions)
+           ========================================================= */
+        function getAudioContext() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) audioCtx = new AudioContext();
             }
-            refreshDatasetCount();
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function playSoftClick() {
+            if (!audioEnabled) return;
+            try {
+                const ctx = getAudioContext();
+                if (!ctx) return;
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(600, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.04);
+                gain.gain.setValueAtTime(0.04, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.04);
+            } catch (e) {}
+        }
+
+        function playSuccessChime() {
+            if (!audioEnabled) return;
+            try {
+                const ctx = getAudioContext();
+                if (!ctx) return;
+                const now = ctx.currentTime;
+                [523.25, 659.25, 783.99].forEach((freq, i) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, now + i * 0.06);
+                    gain.gain.setValueAtTime(0.05, now + i * 0.06);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.06 + 0.25);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(now + i * 0.06);
+                    osc.stop(now + i * 0.06 + 0.25);
+                });
+            } catch (e) {}
+        }
+
+        function toggleAudio() {
+            audioEnabled = !audioEnabled;
+            localStorage.setItem('student_support_audio', audioEnabled);
+            updateAudioIcon();
+            showToast(audioEnabled ? 'Дыбыс қосылды 🔊' : 'Дыбыс өшірілді 🔇');
+            if (audioEnabled) playSoftClick();
+        }
+
+        function updateAudioIcon() {
+            const icon = document.getElementById('audioIcon');
+            if (icon) {
+                icon.className = audioEnabled ? 'bi bi-volume-up-fill' : 'bi bi-volume-mute-fill';
+            }
+        }
+
+        /* =========================================================
+           DARK / LIGHT THEME TOGGLE
+           ========================================================= */
+        function initTheme() {
+            const savedTheme = localStorage.getItem('student_support_theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme') || 'dark';
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('student_support_theme', next);
+            updateThemeIcon(next);
+            playSoftClick();
+            showToast(next === 'dark' ? 'Dark Mode қосылды 🌙' : 'Light Mode қосылды ☀️');
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.className = theme === 'dark' ? 'bi bi-moon-stars-fill' : 'bi bi-sun-fill text-warning';
+            }
+        }
+
+        /* =========================================================
+           INTERACTIVE PARTICLES CANVAS (Constellation Network)
+           ========================================================= */
+        const canvas = document.getElementById('particlesCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null, radius: 120 };
+
+        function resizeCanvas() {
+            if (!canvas) return;
+            canvas.width = canvas.parentElement.offsetWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.baseX = this.x;
+                this.baseY = this.y;
+                this.density = Math.random() * 15 + 5;
+                this.vx = (Math.random() - 0.5) * 0.7;
+                this.vy = (Math.random() - 0.5) * 0.7;
+            }
+
+            draw() {
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                ctx.fillStyle = isDark ? 'rgba(96, 165, 250, 0.75)' : 'rgba(255, 255, 255, 0.85)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
+                if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
+
+                // Mouse interaction
+                if (mouse.x !== null) {
+                    const dx = mouse.x - this.x;
+                    const dy = mouse.y - this.y;
+                    const distance = Math.hypot(dx, dy);
+                    if (distance < mouse.radius) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouse.radius - distance) / mouse.radius;
+                        this.x -= forceDirectionX * force * 3;
+                        this.y -= forceDirectionY * force * 3;
+                    }
+                }
+            }
+        }
+
+        function initParticles() {
+            resizeCanvas();
+            particles = [];
+            const count = Math.floor((canvas.width * canvas.height) / 14000) || 40;
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function connectParticles() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a + 1; b < particles.length; b++) {
+                    const dist = Math.hypot(particles[a].x - particles[b].x, particles[a].y - particles[b].y);
+                    if (dist < 90) {
+                        const opacity = 1 - dist / 90;
+                        ctx.strokeStyle = isDark
+                            ? `rgba(59, 130, 246, ${opacity * 0.25})`
+                            : `rgba(255, 255, 255, ${opacity * 0.25})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].draw();
+                particles[i].update();
+            }
+            connectParticles();
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
         });
 
-        function updateDatasetCount(count) {
-            ['datasetCountHeader', 'datasetCountMetric', 'datasetCountAbout'].forEach(id => {
-                const element = document.getElementById(id);
-                if (element && Number.isFinite(Number(count))) element.textContent = count;
-            });
-        }
+        canvas.addEventListener('mousemove', e => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+        });
 
-        async function refreshDatasetCount() {
-            try {
-                const response = await fetch('/api/metrics');
-                if (response.ok) {
-                    const metrics = await response.json();
-                    updateDatasetCount(metrics.dataset?.total_samples);
-                }
-            } catch (err) {
-                console.warn('Could not refresh dataset count:', err);
-            }
-        }
+        canvas.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
 
-        function initScrollReveal() {
-            const targets = document.querySelectorAll('[data-reveal]');
-            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (reduceMotion || !('IntersectionObserver' in window)) return;
+        /* =========================================================
+           PARTICLE BURST / CELEBRATION EFFECT (Confetti on Result)
+           ========================================================= */
+        const confettiCanvas = document.getElementById('confettiCanvas');
+        const cCtx = confettiCanvas.getContext('2d');
+        let burstParticles = [];
 
-            document.documentElement.classList.add('motion-ready');
-            const observer = new IntersectionObserver((entries, activeObserver) => {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) return;
-                    entry.target.classList.add('is-visible');
-                    activeObserver.unobserve(entry.target);
+        function triggerSparkleBurst(category) {
+            confettiCanvas.width = confettiCanvas.parentElement.offsetWidth;
+            confettiCanvas.height = confettiCanvas.parentElement.offsetHeight;
+            burstParticles = [];
+
+            const colors = {
+                academic: ['#3b82f6', '#60a5fa', '#93c5fd'],
+                docs: ['#10b981', '#34d399', '#6ee7b7'],
+                finance: ['#f59e0b', '#fbbf24', '#fde68a'],
+                tech_support: ['#ef4444', '#f87171', '#fca5a5']
+            }[category] || ['#3b82f6', '#8b5cf6', '#ffffff'];
+
+            for (let i = 0; i < 45; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 5 + 2;
+                burstParticles.push({
+                    x: confettiCanvas.width / 2,
+                    y: confettiCanvas.height / 3,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    size: Math.random() * 4 + 2,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    alpha: 1,
+                    decay: Math.random() * 0.025 + 0.015
                 });
-            }, { threshold: 0.12, rootMargin: '0px 0px -24px 0px' });
-
-            targets.forEach(target => observer.observe(target));
+            }
+            animateBurst();
         }
-        document.addEventListener('DOMContentLoaded', initScrollReveal, { once: true });
 
+        function animateBurst() {
+            cCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            let active = false;
+
+            burstParticles.forEach(p => {
+                if (p.alpha > 0) {
+                    active = true;
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.1; // gravity
+                    p.alpha -= p.decay;
+
+                    cCtx.save();
+                    cCtx.globalAlpha = Math.max(p.alpha, 0);
+                    cCtx.fillStyle = p.color;
+                    cCtx.beginPath();
+                    cCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    cCtx.fill();
+                    cCtx.restore();
+                }
+            });
+
+            if (active) requestAnimationFrame(animateBurst);
+        }
+
+        /* =========================================================
+           HERO STAT COUNTER ROLLING ANIMATION
+           ========================================================= */
+        function animateValue(id, start, end, duration, isFloat = false, suffix = '') {
+            const obj = document.getElementById(id);
+            if (!obj) return;
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const current = isFloat ? (progress * (end - start) + start).toFixed(1) : Math.floor(progress * (end - start) + start);
+                obj.innerText = current + suffix;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        function runHeroCounters() {
+            const countHeader = document.getElementById('datasetCountHeader');
+            const target = countHeader ? parseInt(countHeader.getAttribute('data-target') || '293') : 293;
+            animateValue('datasetCountHeader', 0, target, 1200);
+            animateValue('accMetricHeader', 0, 84.8, 1200, true, '%');
+        }
+
+        /* =========================================================
+           CHARACTER COUNTER & HOTKEY LISTENERS
+           ========================================================= */
+        function updateCharCount() {
+            const text = document.getElementById('queryText').value;
+            document.getElementById('charCount').innerText = text.length;
+        }
+
+        document.getElementById('queryText').addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                submitQuery();
+            }
+        });
+
+        /* =========================================================
+           TOAST SYSTEM
+           ========================================================= */
+        function showToast(message, icon = 'bi-check2-circle') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'custom-toast';
+            toast.innerHTML = `<i class="bi ${icon} text-primary fs-5"></i><span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.transition = 'all 0.4s ease';
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(10px)';
+                setTimeout(() => toast.remove(), 400);
+            }, 3000);
+        }
+
+        /* =========================================================
+           CLASSIFICATION SUBMISSION
+           ========================================================= */
         function setQuery(text) {
             document.getElementById('queryText').value = text;
+            updateCharCount();
+            playSoftClick();
             submitQuery();
         }
 
         function clearInput() {
             document.getElementById('queryText').value = '';
+            updateCharCount();
             document.getElementById('queryText').focus();
+            playSoftClick();
+        }
+
+        function runTestCase(text) {
+            // Switch to Classifier Tab
+            const triggerEl = document.querySelector('#mainTabs button[data-bs-target="#tab-classifier"]');
+            const tab = bootstrap.Tab.getOrCreateInstance(triggerEl);
+            tab.show();
+            setQuery(text);
         }
 
         async function submitQuery() {
             const query = document.getElementById('queryText').value.trim();
             if (!query) return;
 
+            playSoftClick();
             const btn = document.getElementById('btnSubmit');
             const originalBtn = btn.innerHTML;
-            btn.innerHTML = `<span class="spinner-border spinner-border-sm"></span> Обрабатываем…`;
+            btn.innerHTML = `<span class="spinner-border spinner-border-sm"></span> Сұрыптауда...`;
             btn.disabled = true;
 
             try {
+                const optIn = document.getElementById('trainingOptIn').checked;
                 const response = await fetch('/api/predict', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        text: query,
-                        training_opt_in: document.getElementById('trainingOptIn').checked
-                    })
+                    body: JSON.stringify({ text: query, training_opt_in: optIn })
                 });
 
-                if (!response.ok) {
-                    throw new Error('Сервер қатесі');
-                }
+                if (!response.ok) throw new Error('Сервер қатесі');
 
                 const data = await response.json();
                 displayResult(data);
@@ -974,6 +1865,10 @@
                 lastTicketId = data.id;
                 lastTicketCategory = data.category;
                 document.getElementById('trainingOptIn').checked = false;
+
+                // Sparkle particles & Chime
+                triggerSparkleBurst(data.category);
+                playSuccessChime();
 
                 // Reset feedback UI
                 document.getElementById('feedbackButtons').classList.remove('d-none');
@@ -991,10 +1886,13 @@
             document.getElementById('resultPlaceholder').classList.add('d-none');
             const card = document.getElementById('resultCard');
             card.classList.remove('d-none');
+            card.classList.remove('animate-result');
+            void card.offsetWidth; // trigger reflow
+            card.classList.add('animate-result');
 
-            // Set Category
-            document.getElementById('resCategoryName').innerText = data.category_name_ru;
-            document.getElementById('resDept').innerText = `Ответственный отдел: ${data.department_ru}`;
+            // Category Details
+            document.getElementById('resCategoryName').innerText = (data.category_name_kk || '') + ' / ' + (data.category_name_ru || '');
+            document.getElementById('resDept').innerText = `Жауапты бөлім: ${data.department_kk} (${data.department_ru})`;
 
             const badge = document.getElementById('resBadge');
             badge.innerText = data.category.toUpperCase();
@@ -1004,27 +1902,23 @@
             const langLabels = { kk: '🇰🇿 Қазақша', ru: '🇷🇺 Русский', en: '🇬🇧 English' };
             document.getElementById('resLang').innerText = langLabels[data.language] || data.language.toUpperCase();
 
-            // Latency
-            document.getElementById('resLatency').innerText = `Өңдеу: ${data.latency_ms} ms`;
-
-            // Priority
+            // Latency & Priority
+            document.getElementById('resLatency').innerText = `Latency: ${data.latency_ms} ms`;
             const pBadge = document.getElementById('resPriority');
             pBadge.innerText = data.priority_label;
             pBadge.className = `badge bg-${data.priority_badge}`;
             document.getElementById('resPriorityReason').innerText = data.priority_reason;
-
-            // SLA
             document.getElementById('resSla').innerText = data.sla;
 
-            // Probabilities
-            const probs = data.probabilities;
+            // Animate Confidence Bars
+            const probs = data.probabilities || {};
             updateProbBar('Academic', probs.academic || 0);
             updateProbBar('Docs', probs.docs || 0);
             updateProbBar('Finance', probs.finance || 0);
             updateProbBar('Tech', probs.tech_support || 0);
 
-            // Card border accent
-            card.className = `custom-card p-4 h-100 result-box ${data.category}`;
+            // Dynamic Neon Glow Accent
+            card.className = `glass-card result-card-container p-4 h-100 animate-result ${data.category}`;
         }
 
         function updateProbBar(name, value) {
@@ -1032,83 +1926,26 @@
             document.getElementById(`bar${name}`).style.width = `${value}%`;
         }
 
-        function addTicketToHistory(ticket) {
-            sessionTickets.unshift(ticket);
-            document.getElementById('historyCount').innerText = sessionTickets.length;
-            renderHistoryTable();
-        }
+        function copyResultSummary() {
+            if (!lastTicketId) return;
+            const category = document.getElementById('resCategoryName').innerText;
+            const dept = document.getElementById('resDept').innerText;
+            const priority = document.getElementById('resPriority').innerText;
+            const text = document.getElementById('queryText').value;
 
-        function renderHistoryTable() {
-            const tbody = document.getElementById('historyTableBody');
-            tbody.replaceChildren();
-            if (sessionTickets.length === 0) {
-                const row = document.createElement('tr');
-                const cell = document.createElement('td');
-                cell.colSpan = 7;
-                cell.className = 'text-center text-muted py-4';
-                cell.textContent = 'Журнал пуст. Введите обращение, чтобы начать.';
-                row.appendChild(cell);
-                tbody.appendChild(row);
-                return;
-            }
-
-            sessionTickets.forEach(t => {
-                const badgeClass = {academic:'primary', docs:'success', finance:'warning', tech_support:'danger'}[t.category] || 'secondary';
-                const priorityBadge = {high:'danger', medium:'info', low:'secondary'}[t.priority] || 'secondary';
-                const row = document.createElement('tr');
-                const addCell = (value, className = '') => {
-                    const cell = document.createElement('td');
-                    cell.className = className;
-                    cell.textContent = value == null ? '' : String(value);
-                    row.appendChild(cell);
-                    return cell;
-                };
-                addCell(t.id, 'fw-bold');
-                addCell(t.timestamp, 'text-muted');
-                const textCell = addCell(t.text);
-                textCell.style.maxWidth = '280px';
-                textCell.classList.add('text-truncate');
-                textCell.title = t.text || '';
-                const categoryCell = addCell('');
-                const categoryBadge = document.createElement('span');
-                categoryBadge.className = `badge bg-${badgeClass}`;
-                categoryBadge.textContent = t.category;
-                categoryCell.appendChild(categoryBadge);
-                const priorityCell = addCell('');
-                const priorityBadgeElement = document.createElement('span');
-                priorityBadgeElement.className = `badge bg-${priorityBadge}`;
-                priorityBadgeElement.textContent = t.priority;
-                priorityCell.appendChild(priorityBadgeElement);
-                addCell(`${t.confidence}%`, 'fw-bold');
-                const languageCell = addCell('');
-                const languageBadge = document.createElement('span');
-                languageBadge.className = 'badge bg-light text-dark border';
-                languageBadge.textContent = String(t.language || '').toUpperCase();
-                languageCell.appendChild(languageBadge);
-                tbody.appendChild(row);
+            const summary = `[student-support] ${lastTicketId}\nТекст: ${text}\nСанат: ${category}\n${dept}\nПриоритет: ${priority}`;
+            navigator.clipboard.writeText(summary).then(() => {
+                showToast('Нәтиже буферге көшірілді! 📋');
+                playSoftClick();
             });
         }
 
-        async function clearHistory() {
-            if (!confirm('Барлық тарихты өшіру керек пе? / Удалить всю историю?')) return;
-            sessionTickets = [];
-            lastTicketId = null;
-            lastTicketCategory = null;
-            document.getElementById('feedbackButtons').classList.add('d-none');
-            document.getElementById('feedbackSuccess').classList.add('d-none');
-            document.getElementById('historyCount').innerText = 0;
-            renderHistoryTable();
-            try {
-                await fetch('/api/history/clear', { method: 'POST' });
-            } catch (err) {
-                console.warn('Clear history API error:', err);
-            }
-        }
-
+        /* =========================================================
+           FEEDBACK (Active Learning)
+           ========================================================= */
         async function sendFeedback(correctCategory) {
             if (!lastTicketId) return;
-            const feedbackButtons = Array.from(document.querySelectorAll('#feedbackButtons button'));
-            feedbackButtons.forEach(button => { button.disabled = true; });
+            playSoftClick();
 
             try {
                 const response = await fetch('/api/feedback', {
@@ -1119,42 +1956,113 @@
                         correct_category: correctCategory
                     })
                 });
-                if (!response.ok) throw new Error('Feedback was rejected');
+
+                if (!response.ok) throw new Error('Feedback failure');
                 const data = await response.json();
-                updateDatasetCount(data.dataset_size);
-                const trainingStatus = data.training && data.training.status;
-                const statusMessages = {
-                    model_updated: 'Категория подтверждена, модель обновлена.',
-                    candidate_rejected: 'Категория записана; текущая версия модели сохранена.',
-                    collecting_examples: 'Оценка записана. Набор обучающих примеров пополняется.',
-                    not_consented: 'Оценка сохранена; без согласия она не используется для обучения.'
-                };
-                document.getElementById('feedbackStatusText').textContent =
-                    statusMessages[trainingStatus] || 'Спасибо! Категория сохранена.';
+
                 document.getElementById('feedbackButtons').classList.add('d-none');
                 document.getElementById('feedbackSuccess').classList.remove('d-none');
                 document.getElementById('feedbackError').classList.add('d-none');
+                showToast('Бағалауыңыз сақталды! Рақмет! ✨');
             } catch (err) {
-                console.warn('Feedback API error:', err);
                 document.getElementById('feedbackError').classList.remove('d-none');
-                feedbackButtons.forEach(button => { button.disabled = false; });
             }
+        }
+
+        /* =========================================================
+           HISTORY & FILTERING ENGINE
+           ========================================================= */
+        function addTicketToHistory(ticket) {
+            sessionTickets.unshift(ticket);
+            document.getElementById('historyCount').innerText = sessionTickets.length;
+            applyHistoryFilter();
+        }
+
+        function filterHistory(cat, element) {
+            activeFilter = cat;
+            document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+            if (element) element.classList.add('active');
+            playSoftClick();
+            applyHistoryFilter();
+        }
+
+        function searchHistory(term) {
+            applyHistoryFilter(term.toLowerCase().trim());
+        }
+
+        function applyHistoryFilter(searchQuery = '') {
+            filteredTickets = sessionTickets.filter(t => {
+                const matchCategory = activeFilter === 'all' || t.category === activeFilter;
+                const matchSearch = !searchQuery ||
+                    t.text.toLowerCase().includes(searchQuery) ||
+                    t.id.toLowerCase().includes(searchQuery) ||
+                    t.category.toLowerCase().includes(searchQuery);
+                return matchCategory && matchSearch;
+            });
+            renderHistoryTable();
+        }
+
+        function renderHistoryTable() {
+            const tbody = document.getElementById('historyTableBody');
+            tbody.replaceChildren();
+
+            if (filteredTickets.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td colspan="7" class="text-center text-muted py-4">
+                    <i class="bi bi-inbox fs-4 d-block mb-1 opacity-50"></i>
+                    ${sessionTickets.length === 0 ? 'Журнал бос. Сынау үшін бірнеше сұрақ енгізіңіз!' : 'Сүзгіге сәйкес өтініш табылмады.'}
+                </td>`;
+                tbody.appendChild(row);
+                return;
+            }
+
+            filteredTickets.forEach(t => {
+                const badgeClass = {academic:'primary', docs:'success', finance:'warning', tech_support:'danger'}[t.category] || 'secondary';
+                const priorityBadge = {high:'danger', medium:'info', low:'secondary'}[t.priority] || 'secondary';
+                const row = document.createElement('tr');
+                row.style.borderBottom = '1px solid var(--border-glass)';
+
+                row.innerHTML = `
+                    <td class="font-monospace fw-bold text-primary">${t.id}</td>
+                    <td class="text-muted" style="white-space:nowrap;">${t.timestamp}</td>
+                    <td style="max-width: 260px;" class="text-truncate" title="${t.text.replace(/"/g, '&quot;')}">${t.text}</td>
+                    <td><span class="badge bg-${badgeClass}">${t.category}</span></td>
+                    <td><span class="badge bg-${priorityBadge}">${t.priority}</span></td>
+                    <td class="fw-bold font-monospace">${t.confidence}%</td>
+                    <td><span class="badge bg-secondary-subtle text-secondary border">${String(t.language || '').toUpperCase()}</span></td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        async function clearHistory() {
+            if (!confirm('Барлық тарихты өшіру керек пе? / Удалить всю историю?')) return;
+            playSoftClick();
+            sessionTickets = [];
+            filteredTickets = [];
+            lastTicketId = null;
+            document.getElementById('historyCount').innerText = 0;
+            renderHistoryTable();
+            try {
+                await fetch('/api/history/clear', { method: 'POST' });
+                showToast('Журнал тазартылды 🗑️');
+            } catch (err) {}
         }
 
         function exportHistoryCSV() {
             if (sessionTickets.length === 0) {
-                alert('Журнал бос, экспорттайтын дерек жоқ.');
+                showToast('Журнал бос, экспорттайтын дерек жоқ ⚠️');
                 return;
             }
+            playSoftClick();
             const csvField = value => {
-                let safeValue = String(value == null ? '' : value);
-                if (/^[=+\-@]/.test(safeValue)) safeValue = "'" + safeValue;
-                return '"' + safeValue.replace(/"/g, '""') + '"';
+                let safe = String(value == null ? '' : value);
+                if (/^[=+\-@]/.test(safe)) safe = "'" + safe;
+                return '"' + safe.replace(/"/g, '""') + '"';
             };
             let csv = "ID,Timestamp,Text,Category,Priority,Confidence,Language\n";
             sessionTickets.forEach(t => {
-                csv += [t.id, t.timestamp, t.text, t.category, t.priority,
-                    `${t.confidence}%`, t.language].map(csvField).join(',') + '\n';
+                csv += [t.id, t.timestamp, t.text, t.category, t.priority, `${t.confidence}%`, t.language].map(csvField).join(',') + '\n';
             });
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const url = URL.createObjectURL(blob);
@@ -1162,7 +2070,33 @@
             a.href = url;
             a.download = `student_support_tickets_${Date.now()}.csv`;
             a.click();
+            showToast('CSV файлы жүктелді! 📥');
         }
+
+        /* =========================================================
+           INITIALIZATION ON DOM LOAD
+           ========================================================= */
+        document.addEventListener('DOMContentLoaded', async () => {
+            initTheme();
+            updateAudioIcon();
+            initParticles();
+            animateParticles();
+            runHeroCounters();
+
+            // Fetch history from server (cookie-scoped)
+            try {
+                const res = await fetch('/api/history');
+                if (res.ok) {
+                    const data = await res.json();
+                    sessionTickets = data.tickets || [];
+                    filteredTickets = [...sessionTickets];
+                    document.getElementById('historyCount').innerText = sessionTickets.length;
+                    renderHistoryTable();
+                }
+            } catch (err) {
+                renderHistoryTable();
+            }
+        });
     </script>
 </body>
 </html>
